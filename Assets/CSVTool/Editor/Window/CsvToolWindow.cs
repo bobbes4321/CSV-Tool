@@ -24,7 +24,12 @@ namespace CsvTool.Editor
         private const string WorkspaceAssetPref = "CsvTool.Editor.WorkspaceAsset";
         private const string ViewModePref = "CsvTool.Editor.ViewMode";
         private const string QuickInspectorPref = "CsvTool.Editor.QuickInspector";
+        private const string QuickInspectorWidthPref = "CsvTool.Editor.QuickInspectorWidth";
         private const float SidebarWidth = 190f;
+        private const float MinimumGridWidth = 120f;
+        private const float MinimumInspectorWidth = 210f;
+        private const float InspectorSplitterWidth = 6f;
+        private const float DefaultInspectorWidth = 340f;
 
         private CsvWorkspaceController workspace;
         private CsvTableController current;
@@ -275,7 +280,7 @@ namespace CsvTool.Editor
                 // A column chosen explicitly from Ctrl/Cmd+G should be comfortably visible.
                 // Minimal reveal can leave a distant column flush against the clipped pane edge,
                 // which makes it look missing when a frozen column is present.
-                horizontal = source == NavigationSource.Column
+                horizontal = source == NavigationSource.Column || source == NavigationSource.Change
                     ? CsvGridRevealMode.Center : CsvGridRevealMode.Minimal;
             }
             else if (source == NavigationSource.Reference)
@@ -286,7 +291,8 @@ namespace CsvTool.Editor
             else
             {
                 vertical = wasVisible ? CsvGridRevealMode.Minimal : CsvGridRevealMode.Center;
-                horizontal = CsvGridRevealMode.Minimal;
+                horizontal = source == NavigationSource.Change
+                    ? CsvGridRevealMode.Center : CsvGridRevealMode.Minimal;
             }
 
             recordMode = false;
@@ -521,12 +527,21 @@ namespace CsvTool.Editor
                 }
 
                 EnsureQuickInspector();
-                float inspectorWidth = Mathf.Min(340f, Mathf.Max(210f, rect.width * 0.4f));
-                Rect gridRect = new Rect(rect.x, rect.y,
-                    Mathf.Max(120f, rect.width - inspectorWidth - 4f), rect.height);
-                Rect inspectorRect = new Rect(gridRect.xMax + 4f, rect.y,
-                    Mathf.Max(1f, rect.xMax - gridRect.xMax - 4f), rect.height);
+                float availableWidth = Mathf.Max(1f, rect.width - InspectorSplitterWidth);
+                float maxInspectorWidth = Mathf.Max(MinimumInspectorWidth,
+                    availableWidth - MinimumGridWidth);
+                float defaultInspectorWidth = Mathf.Min(DefaultInspectorWidth,
+                    Mathf.Max(MinimumInspectorWidth, rect.width * 0.4f));
+                float inspectorWidth = EditorPrefs.GetFloat(QuickInspectorWidthPref,
+                    defaultInspectorWidth);
+                inspectorWidth = Mathf.Clamp(inspectorWidth, MinimumInspectorWidth, maxInspectorWidth);
+                float gridWidth = Mathf.Max(MinimumGridWidth, availableWidth - inspectorWidth);
+                Rect gridRect = new Rect(rect.x, rect.y, gridWidth, rect.height);
+                Rect splitterRect = new Rect(gridRect.xMax, rect.y, InspectorSplitterWidth, rect.height);
+                Rect inspectorRect = new Rect(splitterRect.xMax, rect.y,
+                    Mathf.Max(1f, rect.xMax - splitterRect.xMax), rect.height);
                 DrawGrid(gridRect);
+                DrawInspectorSplitter(splitterRect, rect, inspectorWidth, maxInspectorWidth);
                 if (quickInspector != null) quickInspector.Draw(inspectorRect);
                 return;
             }
@@ -534,6 +549,38 @@ namespace CsvTool.Editor
             Rect viewport = new Rect(rect.x + 4f, rect.y + 4f,
                 Mathf.Max(1f, rect.width - 8f), Mathf.Max(1f, rect.height - 8f));
             recordView.Draw(viewport);
+        }
+
+        private void DrawInspectorSplitter(Rect splitterRect, Rect contentRect,
+            float inspectorWidth, float maxInspectorWidth)
+        {
+            EditorGUIUtility.AddCursorRect(splitterRect, MouseCursor.ResizeHorizontal);
+            EditorGUI.DrawRect(splitterRect, new Color(0f, 0f, 0f, 0.18f));
+
+            int controlId = GUIUtility.GetControlID(FocusType.Passive, splitterRect);
+            Event currentEvent = Event.current;
+            if (currentEvent.type == EventType.MouseDown && currentEvent.button == 0 &&
+                splitterRect.Contains(currentEvent.mousePosition))
+            {
+                GUIUtility.hotControl = controlId;
+                currentEvent.Use();
+            }
+            else if (currentEvent.type == EventType.MouseDrag && GUIUtility.hotControl == controlId)
+            {
+                float newInspectorWidth = Mathf.Clamp(contentRect.xMax - currentEvent.mousePosition.x,
+                    MinimumInspectorWidth, maxInspectorWidth);
+                if (!Mathf.Approximately(newInspectorWidth, inspectorWidth))
+                {
+                    EditorPrefs.SetFloat(QuickInspectorWidthPref, newInspectorWidth);
+                    Repaint();
+                }
+                currentEvent.Use();
+            }
+            else if (currentEvent.type == EventType.MouseUp && GUIUtility.hotControl == controlId)
+            {
+                GUIUtility.hotControl = 0;
+                currentEvent.Use();
+            }
         }
 
         private void DrawGrid(Rect rect)
