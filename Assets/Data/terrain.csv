@@ -1,0 +1,225 @@
+name,id,featureflag,bumps,bumpoffset,traits,splats,splats2
+//,,,,,,,
+,,,,,,,
+// DESERT,,,,,,,
+Sand,2,,,,dusty,0 = 100,
+Pebbles,12,,,,dusty,2 = 100,
+Dunes,0,,,,dusty,1 = 100,
+Cracks,8,,,,dusty,4 = 100,
+Pavement,3,,,,flat; pavement,5 = 100,
+Rocks,4,,,,,3 = 100,
+Tiles,7,,,,square; flat; pavement,6 = 100,
+Platform,11,,,,square; flat; pavement,7 = 100,
+,,,,,,,
+Sandy_Dunes,13,,,,dusty,0 = 40,1 = 60
+Sandy_Pebbles,26,,,,dusty,1 = 50,2 = 50
+Pebble_Dunes,25,,,,dusty,0 = 50,2 = 50
+Flat_Sand,14,,,,dusty,1 = 100,
+Flat_Rocks,27,,,,,3 = 100,
+Rocky_Sand,15,,,,,1 = 57,3 = 43
+Rocky_Pebbles,21,,,,,2 = 70,3 = 30
+Sandy_Concrete,16,,,,flat; pavement,5 = 50,1 = 50
+Sandy_Tiles,22,,,,flat; pavement,6 = 50,1 = 50
+Cracked_Rocks,17,,,,,3 = 80,4 = 20
+Cracked_Sand,18,,,,,1 = 80,4 = 20
+,,,,,,,
+Sidewalk,23,,,,square; flat; pavement,6 = 100,
+Sandy_Sidewalk,24,,,,flat; pavement,6 = 50,1 = 50
+,,,,,,,
+// SPECIAL,,,,,,,
+Black,20,,,,square; flat; blockMovement; isUndergroundBlackTop,7 = 100,
+,,,,,,,
+// HUMID,,,,,,,
+Grass,1,,,,,2 = 100,
+Forest,6,,,,,1 = 100,
+Swamp,5,,,,,4 = 100,
+Rubble,9,,,,,5 = 100,
+Beach,10,,,,,0 = 50,3 = 50
+,,,,,,,
+// OBSOLETE but used accidentally used,,,,,,,
+Obsolete,19,,,,,6 = 100,
+,,,,,,,
+// PURPLE,,LabDLC,,,,,
+Moon_Sand,28,LabDLC,,,dusty,0 = 100,
+Moon_Cracks,30,LabDLC,,,dusty,1 = 100,
+Moon_Rough,29,LabDLC,,,dusty,2 = 100,
+Moon_Rocks,33,LabDLC,,,,3 = 100,
+Moon_Hexagons,31,LabDLC,,,flat; pavement,4 = 100,
+Moon_Pavement,32,LabDLC,,,flat; pavement,5 = 100,
+Moon_Tiles,34,LabDLC,,,flat; pavement,6 = 100,
+Moon_Platform,35,LabDLC,,,flat; pavement,7 = 100,
+,,,,,,,
+Moon_Rough_Sandy,36,LabDLC,,,,0 = 50,2 = 50
+Moon_Sandy_Pavement,37,LabDLC,,,,0 = 50,5 = 50
+Moon_Sandy_Platform,38,LabDLC,,,flat; pavement,0 = 50,7 = 50
+Moon_Sandy_Hexagons,39,LabDLC,,,flat; pavement,0 = 50,4 = 50
+Moon_Sandy_Cracks,40,LabDLC,,,,0 = 50,1 = 50
+Rocky_Sand2,41,LabDLC,,,,1 = 30,3 = 70
+Rocky_Pebbles2,42,LabDLC,,,,2 = 50,3 = 50
+Sandy_Concrete2,43,LabDLC,,,,5 = 50,1 = 50
+Sandy_Tiles2,44,LabDLC,,,,6 = 50,1 = 50
+Cracked_Rocks2,45,LabDLC,,,,3 = 80,4 = 20
+Cracked_Sand2,46,LabDLC,,,,1 = 80,4 = 20
+,,,,,,,
+// CHEMICAL,,,,,,,
+Chemical_Sand,47,,,,dusty,0 = 100,
+Chemical_Dunes,49,,,,dusty,1 = 100,
+Chemical_Pebbles,48,,,,dusty,2 = 100,
+Chemical_Cliffs,52,,,,dusty,3 = 100,
+Chemical_Dry_Sand,54,,,,dusty,4 = 100,
+Chemical_Concrete,51,,,, flat; pavement,5 = 100,
+Chemical_Tiles,53,,,,square; flat; pavement,6 = 100,
+Chemical_Platform,50,,,,square; flat; pavement,7 = 100,
+,,,,,,,
+Chemical_Sandy_Concrete,63,,,, flat; dusty,0 =50,5 = 50
+Chemical_Sandy_Platform,67,,,, flat; dusty,7 = 65,0 =35
+Chemical_Cliffs_Sand,65,,,,dusty,0 = 50,3 = 50
+Chemical_Sand_Pebbles,62,,,,dusty,0 = 60,2 = 40
+Chemical_Cliffs_Pebbles,64,,,,,2 = 45,3 = 55
+Chemical_Sandy_Dunes,66,,,,dusty,0 = 50,1 = 50
+Chemical_Sandy_Tiles,68,,,, flat; dusty,0 = 50,6 = 50
+,,,,,,,
+Chemical_Waste_Black,69,,,,,4 = 100,
+Chemical_Waste_Black2,71,,,,,6 = 100,
+Chemical_Waste_Green,70,,,,,0 = 100,
+,,,,,,,
+Chemical_Waste_Concrete,72,,,, flat,0 =50,5 = 50
+Chemical_Waste_Platform,73,,,, flat,7 = 50,0 =50
+Chemical_Dunes_Pebbles,74,,,,dusty,1= 55,2 = 45
+Chemical_Cliffs_Waste,75,,,,dusty,0 = 50,3 = 50
+Chemical_Black_Waste_Mixed,76,,,,,4 = 50,6= 50
+Chemical_Waste_Dunes,77,,,,dusty,0 = 50,1 = 50
+Chemical_Waste_Pebbles,78,,,,dusty,0 = 60,2 = 40
+Chemical_Waste_Black_Platforms,79,,,, flat,4 = 50,7 = 50
+Chemical_Waste_Black_Green,55,,,,,4=50,0=50
+Chemical_Polluted_Sandy_Concrete,56,,,, flat,5=60,1=40
+Chemical_Dunes_Black,60,,,,,4= 55,1 = 45
+Chemical_Cliffs_Black,61,,,,,4=55,3 = 45
+Chemical_Pebbles_Black,95,,,,,4=55,2 = 45
+,,,,,,,
+// LAVA,,,,,,,
+Ash_Flat,80,,0.25,,dusty,0 = 100,
+Ash_Bumps,94,,0.5,,dusty,0 = 100,
+Ash_Soft_Bumps,82,,0.25,,dusty,1 = 100,
+Dry_Lava,81,,,,dusty,2 = 100,
+Lava_Rocks,85,,0.5,,,3 = 100,
+Lava_Veins,83,,,,blockMovement,4 = 100,
+Lava_Pool,84,,,,blockMovement,5 = 100,
+Lava_Blobs,86,,,,,7 = 100,
+Lava_Platform,87,,,,square; flat; pavement,6 = 100,
+Lava_Metal_Grid,88,,,,square; flat; pavement,1 = 100,
+Ashy_Platform,89,,,,flat; pavement,6 = 70,0 = 30
+Veined_Platform,90,,,,flat; pavement,6 = 70,4 = 30
+Dry_Lava_Platform,91,,,,flat; pavement,6 = 70,2 = 30
+Veined_Rocks,92,,0.25,,blockMovement,3 = 50,4 = 50
+Ashy_Rocks,93,,0.35,,,3 = 70,0 = 30
+,,,,,,,
+// SPACE STATION,,,,,,,
+Station_Platform,100,,,,square; flat; pavement,0 = 100,
+Station1,101,,,,square; flat; pavement,2 = 100,
+Station2,102,,,,square; flat; pavement,1 = 100,
+Station3,103,,,,square; flat; pavement,4 = 100,
+Station4,104,,,,square; flat; pavement,5 = 100,
+Station5,105,,,,square; flat; pavement,3 = 100,
+Station6,106,,,,square; flat; pavement,6 = 100,
+Station_Sand,107,,0.5,,dusty,4 = 100,
+,,,,,,,
+// METROPOLIS,,,,,,,
+Metropolis_Pavement,120,,,,flat; pavement,0 = 100,
+Metropolis_Sidewalk,121,,,,square; flat; pavement,1 = 100,
+Metropolis_2,122,,,,square; flat; pavement,2 = 100,
+Metropolis_3,123,,,,square; flat; pavement,3 = 100,
+Metropolis_4,124,,,,square; flat; pavement,4 = 100,
+Metropolis_Sand,125,,,,dusty,5 = 100,
+Metropolis_Pebbles,126,,,,dusty,6 = 100,
+Metropolis_Grass,127,,,,dusty,7 = 100,
+Metropolis_Pavement_Sandy,129,,,,flat; pavement,0 = 50,5 = 50
+Metropolis_Sidewalk_Sandy,128,,,,flat; pavement,1 = 50,5 = 50
+Metropolis_Sidewalk_Pavement,130,,,,flat; pavement,1 = 50,0 = 50
+Metropolis_Rocks,131,,,,dusty,6 = 100,
+Metropolis_Rocks_Sandy,132,,0.25,,dusty,6 = 40,5 = 60
+Metropolis_Rock_Slopes,133,,,,dusty,6 = 70,5 = 30
+Metropolis_Grid_Rocks,134,,,,,3=30,6=70
+Metropolis_Grid_Sand,135,,,,dusty,3=30,5=70
+Metropolis_Tiles_Rocks,136,,,,pavement,2 = 45,5=55
+,,,,,,,
+,,,,,,,
+// TERRA,,StormDLC,,,,,
+Terra_Grass,150,StormDLC,,,,0 = 100,
+Terra_Grassy_Sand,151,StormDLC,,,dusty,1 = 100,
+Terra_Ground,152,StormDLC,,,dusty,2 = 100,
+Terra_Ground_Cracks,153,StormDLC,,,,3 = 100,
+Terra_Pavement3,154,StormDLC,,,,4 = 100,
+Terra_Rocks,155,StormDLC,,,,5 = 100,
+Terra_Tiles,156,StormDLC,,,,6 = 100,
+Terra_Platform,157,StormDLC,,,square; flat; pavement,7 = 100,
+,,,,,,,
+Terra_Grass_Ground,158,StormDLC,,,dusty,0 = 50,1 = 50
+Terra_Soil_Grass,159,StormDLC,,,dusty,2 =60,1 = 40
+Terra_Tiles_Soil,160,StormDLC,,,,2 = 50,7 = 50
+Terra_Sand_Cracks_ST,161,StormDLC,,,dusty,0 = 20,4 = 80
+Terra_Pebbles_Cracks_ST,162,StormDLC,,,dusty,2 = 20,4 = 80
+Terra_Pebbles_Rocks_ST,163,StormDLC,,,dusty,0 = 50,1 = 50
+,,,,,,,
+,,,,,,,
+// JUNGLE,,,,,,,
+Jungle_Grass,170,,,,,0 = 100,
+Jungle_Grassy_Sand,171,,,,dusty,1 = 100,
+Jungle_Ground,172,,,,dusty,2 = 100,
+Jungle_Ground_Cracks,173,,,,,3 = 100,
+Jungle_Pavement3,174,,,,,4 = 100,
+Jungle_Rocks,175,,,,,5 = 100,
+Jungle_Platform,176,,,,square; flat; pavement,6 = 100,
+Jungle_TODO,177,,,,,7 = 100,
+,,,,,,,
+Jungle_Grass_Ground,178,,,,dusty,0 = 50,1 = 50
+Jungle_Soil_Grass,179,,,,dusty,2 = 60,1 = 40
+Jungle_Tiles_Soil,180,,,,flat; pavement,2 = 50,6 = 50
+Jungle_Rocks_Grass,181,,,,flat; pavement,5 = 65,0 = 35
+Jungle_Pebbles_Cracks_ST,182,,,,dusty,2 = 20,4 = 80
+Jungle_Pebbles_Rocks_ST,183,,,,dusty,0 = 50,1 = 50
+Jungle_Grass_Flat,184,,,,,0 = 100,
+Jungle_Rockier_Grass,185,,,,dusty,5 = 80,0 = 20
+Jungle_Pavement_Grass,186,,,,,4=50,0=50
+Jungle_Grass_Red_Ground,187,,,,,0=40,2=60
+Jungle_Underground_Soil,188,,,,,2=60,3=40
+Jungle_Metal_Grid,189,,,,square; flat; pavement,5 = 100,
+Jungle_Shallow_Water,190,,0.5,-1.5,dusty,2 = 30,1 = 70
+,,,,,,,
+,,,,,,,
+,,,,,,,
+Oasis_Sand,220,,,,dusty,0 = 100,
+Oasis_Dunes,221,,,,dusty,1 = 100,
+Oasis_Ground,222,,,,dusty,2 = 100,
+Oasis_Pebbles,223,,,,dusty,3 = 100,
+Oasis_Jungle_Grass,224,,,,,4 = 100,
+Oasis_Rocks,225,,,,,5 = 100,
+Oasis_Pavement,226,,,,flat; pavement,6 = 100,
+Oasis_Platform,227,,,,square; flat; pavement,7 = 100,
+Oasis_Shallow_Water,228,,0.5,-1.5,dusty,2 =100,
+,,,,,,,
+Oasis_Rocky_Sand,229,,,,,5 = 70,0=30
+Oasis_Sand_Flat,234,,,,,0=100,
+Oasis_Pebbles_Sand,230,,,,,3 = 50,0=50
+Oasis_Dunes_Sand,231,,,,,0=30,1=70
+Oasis_Dunes_Pebbles,232,,,,,1=50,3=50
+Oasis_Grass_Pebbles,233,,,,,3=50,4=50
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+// FROST,,FrostDLC,,,,,
+Frost_Snow,200,FrostDLC,,,pavement,0 = 100,
+Frost_Snow_High,201,FrostDLC,,,dusty,1 = 100,
+Frost_Ice,202,FrostDLC,,,dusty; pavement,2 = 100,
+Frost_Rocks,203,FrostDLC,,,,3 = 100,
+Frost_Pavement,204,FrostDLC,,,pavement,4 = 100,
+Frost_Snow_Rough,205,FrostDLC,,,,5 = 100,
+Frost_Platform,206,FrostDLC,,,pavement,6 = 100,
+Frost_IDK,207,FrostDLC,,,pavement,7 = 100,
+,,,,,,,
+Frost_Snow_Blend,208,FrostDLC,,,pavement,0=40,1=60
+Frost_Snow_Rough_Blend,209,FrostDLC,,,,1=50,2=50
+Frost_Snowy_Platform,210,FrostDLC,,,pavement,5=50,1=50
+Frost_Snowy_Rocks,211,FrostDLC,,,,7=100,0=100
+Frost_Snowy_Ice,212,FrostDLC,,,pavement,3=50,4=50

@@ -1,0 +1,21 @@
+{
+    "name": "CsvTool.Schema.Tests",
+    "rootNamespace": "CsvTool.Schema.Tests",
+    "references": [
+        "CsvTool.Schema"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": true,
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ]
+}

@@ -1,0 +1,13 @@
+name,id,traits
+,,
+Foot,0,
+Mech,1,
+Wheel,2,
+Claw,8,
+Hover,3,
+Jet,4,constantMotion
+Jetpack,10,
+Rotor,5,
+Wing,6,
+Static,7,immobile
+Fundament,9,immobile

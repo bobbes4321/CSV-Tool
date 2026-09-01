@@ -1,0 +1,11 @@
+﻿name,id,icon,type,tier,factions,cost,obedience,time,traits,requires,disables,target,effect,,,,,,comment
+,,,,,,,,,,,,,,,,,,,
+// FEDERATION,,,,,,,,,,,,,,,,,,,
+Morita_MkIII,2,1,upgrade,1,federation,10,,100,,,,Infantry,rearm = Morita_MkI Morita_MkIII,,,,,,
+Fire_Rocket,1,4,ability,1,federation,10,,100,,,,Rocketeers,,,,,,,
+Grenades,0,4,ability,1,federation,10,,100,,,,Infantry,,,,,,,
+Shotgun,3,4,ability,1,federation,10,,100,,,,Infantry,,,,,,,
+Extended_Mags,4,4,ability,1,federation,10,,100,,,,Infantry,stat = Morita_MkI reload 1.3,,,,,,
+,,,,,,,,,,,,,,,,,,,
+// ARACHNID,,,,,,,,,,,,,,,,,,,
+Warrior_Size,5,4,ability,1,arachnid,10,,100,,,,Warrior_Bugs,members = 12,,,,,,

@@ -1,0 +1,6 @@
+*.csv -text
+*.meta text eol=lf
+*.asset text eol=lf
+*.cs text eol=lf
+*.json text eol=lf
+*.md text eol=lf

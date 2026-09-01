@@ -1,0 +1,867 @@
+name,id,dlc,featureflag,group,size,level,variations,scale,facing,mask,autofloodfill,traits
+//,,,,,,,,,,,,
+Light,2,base,,light,1,,3,,,,,
+Street_Light,104,base,,light; road,1,,2,,,,,
+Tent_Corridor01,128,base,,base,1,,,,,,,flatFoundation; freeFacing; freePlacing
+Tent_1x1,7,base,,base,1,1,,,5,,,blocking; flatFoundation; freeFacing
+Tent_1x2,8,base,,base,1 2,1,2,,5,,,blocking; flatFoundation
+Tent_1x4,1,base,,base,1,1,,,5,,,blocking; flatFoundation
+Tent_1x1_Burnt,9022,base,,base,1,1,,,5,,,blocking; flatFoundation; freeFacing
+Tent_1x2_Burnt,9023,base,,base,1 2,1,2,,5,,,blocking; flatFoundation
+Tent_1x4_Burnt,9024,base,,base,1,1,,,5,,,blocking; flatFoundation
+Billboard,10,base,,culture,1,,2,,5,,,blocking; freeFacing
+Traffic_Light,18,base,,road,1,,2,,,,,
+Traffic_Light_Bar,116,base,,road,2 1,,,,,,,
+Lane_Marker,3,base,,decals,1,,,,,,,bendOverTerrain; terrainObject
+Road_Crossing,5,base,,decals,1,,,,,,,bendOverTerrain; terrainObject
+Road_Decal,24,base,,decals,2 1,,5,,,,,terrainObject
+Road_Decal_Various,25,base,,decals,1,,8,,,,,terrainObject
+Curbstones,4,base,,road,1,,,,,,,bendOverTerrain; terrainObject
+Roadblocks,6,base,,road; barriers,1,,2,,,,,blocking;
+Tunnel,112,base,,road,2 1,2,4,,,,,baseHeight
+Statue,108,base,,culture,1,,4,0.8,,,,blocking;
+Supply_Crate_Large,14,base,,containers,1,1,3,,,,,blocking
+Supply_Crate_Small,15,base,,containers,1,,4,,,,,blocking
+Barrel,123,base,,containers,1,,5,,,,,freeFacing; freePlacing; randomRotation
+Barrels_2x2_1,2070,base,,containers,1,,1,,,,,freeFacing; freePlacing
+Barrels_2x2_2,2071,base,,containers,1,,1,,,,,freeFacing; freePlacing
+Barrels_2x4_1,2072,base,,containers,1,,1,,,,,
+Barrels_2x4_2,2073,base,,containers,1,,1,,,,,
+Barrels_4x4_1,2074,base,,containers,1,,1,,,,,
+Barrels_4x4_2,2075,base,,containers,1,,1,,,,,
+Barrels_4x6_1,2076,base,,containers,2 1,,1,,,,,
+Crater,27,base,,destruction,1,,2,,,,,freeFacing; freePlacing; randomRotation
+Crater_Scorched,132,base,,destruction,1,,2,,,,,freeFacing; freePlacing; randomRotation
+Tree_Dead,96,base,,plants,1,,,,,,,freeFacing; freePlacing; randomRotation
+Plant_A,97,base,,plants,1,,3,0.6 1,,,,freeFacing; freePlacing; randomRotation; terrainObject
+Plant_B,102,base,,plants,1,,3,0.6 1,,,,freeFacing; freePlacing; randomRotation; terrainObject
+Plant_C,103,base,,plants,1,,3,0.6 1,,,,freeFacing; freePlacing; randomRotation; terrainObject
+Plant_D,2023,base,,plants,1,,3,0.9 1,,,,freeFacing; freePlacing; randomRotation; terrainObject
+Rock_Small,32,base,,rocks,1,,6,,,,,freeFacing; freePlacing; randomRotation; terrainObject
+Rock_Large,33,base,,rocks,1,,3,,,,,blocking; freeFacing; adjustChildrenToTerrain
+Hatch,35,base,,base; industry; rooftop,1,,,,,,,
+Satellite_Station,37,base,,base,2,2,,,,,,blocking; flatFoundation; noEditor
+Storage_Depot,38,base,,base,2 3,1,2,,,,,blocking; flatFoundation
+Entrance,91,base,,industry; base,2 1,2,4,,,,,baseHeight
+Building_Industrial,113,base,,industry,2 1,4,,,,,,blocking; baseHeight
+Building_Sign,107,base,,culture,1,,8,,,,,baseHeight
+Cables,121,base,,power,1,,8,,,,,baseHeight; freePlacing
+Generator,48,base,,power,2,2,2,,,,,blocking
+Generator_Medium,56,base,,power,1 2,,,,,,,blocking
+Generator_Small,55,base,,power,1,,2,,,,,blocking;
+Generator_Commutator,98,base,,power,1,1,,,,,,blocking; baseHeight
+Generator_Turbine,99,base,,power,3 1,2,,,,,,blocking; baseHeight
+Generator_Commutator_Broken,100,base,,power,1,1,,,,,,blocking; baseHeight
+Generator_Turbine_Broken,101,base,,power,3 1,2,,,,,,blocking; baseHeight
+Container,13,base,,containers; industry,1 2,1,2,,10,,,blocking
+Dumpster,105,base,,containers; garbage,1,1,6,,,,,blocking;
+Airco_Small,109,base,,rooftop,1,,2,,,,,blocking;
+Airco_Large,110,base,,industry; rooftop,1 2,1,2,,,,,blocking; baseHeight
+Crane_Large,69,base,,industry; construction,2,,,,,,,blocking; freeFacing
+Pipes_Stack,70,base,,pipes,1,1,2,,10,,,blocking
+Pipes_Straight,39,base,,pipes,1,1,,,,,,blocking; baseHeight
+Pipes_Straight_Broken,117,base,,pipes,1,1,,,,,,blocking; baseHeight
+Pipes_End,40,base,,pipes,1,1,,,,,,blocking; baseHeight
+Pipes_Corner,41,base,,pipes,1,1,,,,,,blocking; baseHeight
+Pipes_T_Split,42,base,,pipes,1,1,,,,,,blocking; baseHeight
+Pipes_X_Split,43,base,,pipes,1,1,,,,,,blocking; baseHeight
+Pipes_Diagonal,51,base,,pipes,2,1,2,,,,,blocking; baseHeight
+Pipes_Thin,90,base,,pipes,1,,10,,,,,baseHeight
+Fuel_Tank,80,base,,industry,2 1,1,,,,,,blocking
+Silo_Small,53,base,,industry,1,,2,,,,,blocking;
+Silo_Medium,59,base,,industry,3,3,,,,,,blocking;
+Silo_Large,54,base,,industry,4,4,2,,,,,blocking;
+Chimney_Large,58,base,,industry,1,,2,,,,,blocking;
+Chimney_1x2,92,base,,industry,2 1,2,,,,,,blocking; baseHeight
+Corridor,81,base,,barriers,1,1,3,,,,,blocking; baseHeight
+Heavy_Wall,111,base,,barriers,1,1,5,,,,,blocking; baseHeight
+Outpost_Pillar_Small,46,base,,base,1,,,,,,,freePlacing; baseHeight
+Outpost_Pillar_Large,47,base,,base,1,,,,,,,freePlacing; baseHeight
+Rock_Spike,49,base,,rocks,3,4,2,,,,,blocking; freeFacing; baseHeight
+Rock_Arc,50,base,,rocks,3,,,,,,,freeFacing; freePlacing
+Settler_House,57,base,,settlement,2,1,2,,,,,blocking
+Settler_House_Tall,71,base,,settlement,2,2,2,,,,,blocking
+Settler_House_Fill,5073,base,,settlement,1,,2,,,,,
+Settler_House_Piece,5074,base,,settlement,,,15,,,,,freePlacing
+Settler_Shack,87,base,,settlement,1,1,,,,,,blocking
+Settlement_Wall,83,base,,settlement; barriers,1,1,,,,,,blocking; baseHeight
+Settlement_Wall_Extra,84,base,,settlement; barriers,1,1,8,,,,,blocking; baseHeight
+Settlement_Wall_Medium,94,base,,settlement; barriers,1,1,,,,,,blocking; baseHeight
+Settlement_Wall_Medium_Extra,95,base,,settlement; barriers,1,1,8,,,,,blocking; baseHeight
+Bench,88,base,,settlement,,,,1.2,,,,freePlacing
+Table,89,base,,settlement,,,,,,,,freePlacing
+Poster,120,base,,culture,1,,4,,,,,baseHeight
+Sign,72,base,,culture,1,,1,,,,,
+Decal_Federation_Logo,52,base,,decals,4,,,,,,,freeFacing; freePlacing
+Banner_Federation,106,base,,culture,1,,2,,,,,
+Decal_Painted_Line,65,base,,decals,1,,7,,,,,bendOverTerrain; freePlacing; terrainObject
+Decal_Painted_Text,66,base,,decals,1,,3,,,,,bendOverTerrain; freePlacing; terrainObject
+Concrete_Wall,85,base,,barriers,1,1,,,,,,blocking; baseHeight; noEditor
+Concrete_Wall_Extra,86,base,,barriers,1,1,,,,,,blocking; baseHeight; noEditor
+Delivery_Platform,122,base,,industry; base,2,,,,,,,noEditor
+Oil_Pump,36,base,,industry,1 2,2,,,,,,blocking; baseHeight; noEditor
+Decal_Concrete_Crack,67,base,,destruction,2 6,,1,,,,,bendOverTerrain; freePlacing; freeFacing; terrainObject
+Decal_Sand_Crack,68,base,,destruction,2 6,,1,,,,,bendOverTerrain; freePlacing; freeFacing; terrainObject
+Fire_Small,74,base,,destruction,2,,,,,,,freePlacing; randomRotation
+Fire_Medium,114,base,,destruction,3,,,,,,,freePlacing; randomRotation
+Fire_Large,115,base,,destruction,4,,,,,,,freePlacing; randomRotation
+Blood_Pool,129,base,,carnage,1,,8,,,,,freeFacing; freePlacing
+Corpse_Infantry,76,base,,carnage,1,,3,,,,,freeFacing; freePlacing
+Corpse_Civilian,77,base,,carnage,1,,6,,,,,freeFacing; freePlacing
+Corpse_Chariot,2080,base,,carnage,1,,3,,,,,freeFacing; freePlacing
+Corpse_Warrior,75,base,,carnage,1,,3,0.85 1,,,,freeFacing
+Corpse_Hopper,2081,base,,carnage,1,,2,,,,,freeFacing; freePlacing
+Corpse_Stinger,134,lava,,carnage,1,,2,,,,,freeFacing; freePlacing
+Cow_Dead01,2240,base,,carnage,1,,2,,,,,freeFacing; freePlacing; randomRotation
+Dropship_Crashed,2021,base,,destruction; vehicles,3,,2,,,,,freeFacing; freePlacing
+Tac_Fighter_Crashed01,2190,base,,destruction; vehicles,2,,1,,,,,blocking; freeFacing
+Rubble_1x1,12,base,,destruction,1,,,,,,,blocking; bendOverTerrain; terrainObject
+Debris_1x1,2006,base,,destruction,1,,3,,,,,freeFacing; freePlacing
+Debris_2x1,2007,base,,destruction,1,,2,,,,,freeFacing; freePlacing
+Debris_2x2,2008,base,,destruction,1,,2,,,,,blocking
+Debris_4x4,2011,base,,destruction,2,,2,2,,,,blocking
+Debris_single,2009,base,,destruction,1,,3,,,,,freeFacing; freePlacing
+Debris_Light_2x2_1,2160,base,,destruction,1,,1,,,,,bendOverTerrain; freePlacing; freeFacing
+Debris_Light_4x2_1,2161,base,,destruction,1,,1,,,,,bendOverTerrain; freePlacing; freeFacing
+Debris_Light_4x4_1,2162,base,,destruction,1,,2,,,,,bendOverTerrain
+Ruins_03,2170,base,,destruction,1,,1,,,,,baseHeight
+Ruins_04,2171,base,,destruction,1,,1,,,,,baseHeight
+Ruins_06,2172,base,,destruction,1,,1,,,,,baseHeight
+Ruins_07,2173,base,,destruction,1,,1,,,,,baseHeight
+Ruins_08,2174,base,,destruction,1,,1,,,,,baseHeight
+Ruins_10,2175,base,,destruction,1,,1,,,,,baseHeight
+Ruins_11,2176,base,,destruction,1,,1,,,,,baseHeight
+Smoke_Screen,130,lava,,volcanic,1,2,,,,,,randomRotation; noEditor
+Terrain_Light_Orange,131,base,,light,,,2,,,,,freePlacing
+Terrain_Light_Red,133,base,,light,,,4,,,,,freePlacing
+,,,,,,,,,,,,
+// UNDERGROUND,,base,,,,,,,,,,
+Cave_Light,500,base,,light; internal,1,,,,,,,freePlacing
+Cave_Light_Shadow,501,base,,light; internal,1,,,,,,,freePlacing
+Entrance_Light,502,base,,light; internal,1,,,,,,,freePlacing
+,,,,,,,,,,,,
+// SPECIAL,,base,,,,,,,,,,
+Tile_Blocker,22,base,,blockers,1,,,,,,,blocking; editorOnly
+Tile_Blocker_2x2,2012,base,,blockers,2,,,,,,,blocking; editorOnly
+LOS_Blocker,23,base,,blockers,1,1,,,,,,blocking; baseHeight; editorOnly
+LOS_Blocker_2,135,base,,blockers,1,2,,,,,,blocking; baseHeight; editorOnly
+LOS_Blocker_3,136,base,,blockers,1,3,,,,,,blocking; baseHeight; editorOnly
+LOS_Blocker_4,137,base,,blockers,1,4,,,,,,blocking; baseHeight; editorOnly
+LOS_Blocker_5,34,base,,blockers,1,5,,,,,,blocking; baseHeight; editorOnly
+Shadowplane,1009,base,,internal,1,,1,,,,,baseHeight
+Shadowplane_2x2,1025,base,,internal,2,,1,,,,,baseHeight
+Shadowplane_3x3,1026,base,,internal,3,,1,,,,,baseHeight
+Bug_Tunnel,79,base,,/,2,,,,,Bug_Hole_Small 2,,baseHeight; noEditor
+Bug_Cave_Sloped,1043,base,,/,3,0,1,1,,Bug_Hole_Sloped 2,,baseHeight; noEditor
+Bug_Lair,125,base,,/,2,,,,,Bug_Lair 2,,baseHeight; noEditor
+Bug_Shaft,60,base,,/,2,,,,,Bug_Shaft 50,,baseHeight; noEditor
+Bug_Metro,138,base,,/,2,,,,,Bug_Metro 2,,baseHeight; noEditor
+,,,,,,,,,,,,
+// SLOPES,,base,,,,,,,,,,
+Stairs,26,base,,slopes,1,,,,,,,baseHeight
+Slope_Ventilation,82,base,,slopes,1,,2,,,,,baseHeight
+Ramp_Edge,78,base,,slopes,1,,4,,,,,baseHeight
+,,,,,,,,,,,,
+Gas_Pump,1000,base,,city,1,0,,,,,,blocking
+Oil_Spill,1001,base,,decals,1,0,4,,,,,freeFacing; freePlacing; terrainObject
+Storage_Box,1002,base,,containers,1,0,3,0.5,,,,freeFacing; freePlacing; terrainObject
+Signal_Flare,1003,base,,/,1,0,,0.5,,,,freePlacing; terrainObject
+Metro_Entrance,1004,base,,city,2,,,,,Basement_2x2,,blocking; baseHeight
+Crystals,1006,base,,rocks,1,0,3,,,,,freeFacing; freePlacing; randomRotation; terrainObject
+Internal_Stairs,1007,base,,internal; industry; base; rooftop,1,0,7,,,,,baseHeight
+Terrain_Black,1010,base,,internal,1,,,,,,,bendOverTerrain; terrainObject; blocking; isUndergroundBlackTop
+Janitor_Bucket,1011,base,,internal,1,,1,,,,,freeFacing; freePlacing; terrainObject
+Janitor_Mop,1012,base,,internal,1,,1,,,,,freeFacing; freePlacing; terrainObject
+Janitor_Sign_wet_floor,1013,base,,internal,1,,1,,,,,freeFacing; freePlacing; terrainObject
+Table_Cantina,1014,base,,internal,1,,1,,,,,blocking
+Benchpress,1015,base,,internal,1,,1,,,,,blocking
+Benchpress_Weight_stack,1016,base,,internal,1,,1,,,,,freeFacing; freePlacing; terrainObject
+Office_Desk,1017,base,,internal,1,,1,,,,,freePlacing
+Office_Wall,1018,base,,internal,1,,2,,,,,freePlacing
+Light_Wall,1019,base,,light,1,,2,,,,,freePlacing; terrainObject
+Light_Wall_Horizontal,5207,base,,light,1,,1,,,,,freePlacing; terrainObject
+Prison_Drain,1021,base,,decals,1,,2,,,,,freePlacing; terrainObject
+Floor_Crack,1022,base,,decals,1,,2,,,,,freeFacing; freePlacing; terrainObject
+Office_Chair,1023,base,,internal,1,,,,,,,freeFacing; freePlacing
+Office_Carpet,1024,base,,internal; decals,1,,,,,,,freeFacing; freePlacing; terrainObject
+Desk,1027,base,,internal,1,,,,,,,freePlacing
+Rocks_Big_Cave_0,1036,base,,rocks; internal,2,0,1,1,,,,freeFacing
+Rocks_Big_Cave_1,1037,base,,rocks; internal,2,0,1,1,,,,freeFacing
+Rocks_Big_Cave_2,1038,base,,rocks; internal,1,0,1,1,,,,freeFacing
+Rocks_Big_Cave_3,1039,base,,rocks; internal,2,0,1,1,,,,freeFacing
+Rocks_Big_Cave_4,1040,base,,rocks; internal,2,0,1,1,,,,freeFacing
+ConcreteDamaged,1041,base,,decals,1,0,5,1,,,,freeFacing; freePlacing; terrainObject
+GroundCrack,1042,base,,decals,1,0,2,1,,,,freeFacing; freePlacing; terrainObject
+Rocks_M_0,1044,base,,rocks,2 1,0,1,1,,,,freeFacing
+Rocks_M_1,1045,base,,rocks,2,0,1,1,,,,freeFacing; baseHeight
+Rocks_M_2,1046,base,,rocks,1,0,1,1,,,,freeFacing
+Rocks_M_3,1047,base,,rocks,2 1,0,1,1,,,,freeFacing
+Rocks_M_4,1048,base,,rocks,2 1,0,1,1,,,,freeFacing
+Rocks_M_5,1049,base,,rocks,1,0,1,1,,,,freeFacing
+Rocks_M_6,1050,base,,rocks,3 2,0,1,1,,,,freeFacing
+Loudspeaker_Tower,1051,base,,base,1,0,1,1,,,,freePlacing
+Fence,1052,base,,internal; industry; base,1,0,3,1,,,,baseHeight
+Level_Wall,1053,base,,decals,1,0,9,1,,,,terrainObject; freePlacing
+,,,,,,,,,,,,
+Outpost_Tile,2000,base,,industry; base,1,,4,,,,,terrainObject; baseHeight
+Radar_Small,2001,base,,industry; base; rooftop,1,,2,,,,,blocking
+Crate_Sheeted01,2002,base,,containers,1,1,1,,5,,,blocking
+Crate_Sheeted02,2003,base,,containers,1,1,1,,5,,,blocking
+Crate_Base01,2004,base,,containers,1,,1,,5,,,freePlacing
+Crate_Base02,2005,base,,containers,1,,1,,5,,,freeFacing; freePlacing
+Corridor_Elevated_Straight,2010,base,,base; barriers,1,,1,,,,,baseHeight
+Greenhouse_Outer_1_2x2,2025,base,,base,2,,2,,,,,baseHeight
+Greenhouse_Outer_2_2x2,2026,base,,base,2,,2,,,,,baseHeight
+Greenhouse_Straight_1_1x2,2027,base,,base,1 2,,2,,,,,baseHeight
+Greenhouse_Straight_1_2x2,2028,base,,base,2,,2,,,,,baseHeight
+Greenhouse_Top_1_1x1,2031,base,,base,1,,2,,,,,baseHeight
+Greenhouse_Top_1_1x2,2032,base,,base,2 1,,2,,,,,baseHeight
+Greenhouse_Top_Outer_1_1x2,2033,base,,base,2 1,,2,,,,,baseHeight
+Greenhouse_Top_Outer_Side,2034,base,,base,,,2,,,,,
+Rooftop_Detail01,2040,base,,rooftop,1,,1,1.3,,,,freePlacing
+Rooftop_Detail02,2041,base,,rooftop,1,,1,1.3,,,,freePlacing
+Rooftop_Detail03,2042,base,,rooftop,1,,1,1.3,,,,freePlacing
+Rooftop_Detail04,2043,base,,rooftop,1,,1,1.3,,,,freePlacing
+Rooftop_Detail05,2044,base,,rooftop,2,,1,2,,,,freePlacing
+Various_Detail06,2045,base,,rooftop,1,,1,,,,,freePlacing
+Various_Entrance01,2046,base,,rooftop; base,1,1,1,1.2,,,,baseHeight
+Various_Entrance02,2047,base,,rooftop; base,1,,1,,,,,freePlacing
+New2_Road_Cross_Diagonal,2050,base,,road,4,,1,,,,,bendOverTerrain; terrainObject
+New2_Road_T_Cross_Diagonal,2051,base,,road,4,,1,,,,,bendOverTerrain; terrainObject
+New2_Road_Diagonal_Short,2052,base,,road,3,,1,,,,,bendOverTerrain; terrainObject
+New2_Road_Straight_Diagonal_A,2053,base,,road,4,,1,,,,,bendOverTerrain; terrainObject
+New2_Road_Straight_Diagonal_B,2054,base,,road,4,,1,,,,,bendOverTerrain; terrainObject
+New2_Road_Corner,2055,base,,road,2 2,,1,,,,,bendOverTerrain; terrainObject
+New2_Road_Cross,2056,base,,road,4,,1,,,,,bendOverTerrain; terrainObject
+New2_Road_Curve,2057,base,,road,5 5,,1,,,,,bendOverTerrain; terrainObject
+New2_Road_Curve_Long_A,2058,base,,road,4 6,,1,,,,,bendOverTerrain; terrainObject
+New2_Road_Curve_Long_B,2059,base,,road,4 6,,1,,,,,bendOverTerrain; terrainObject
+New2_Road_Diagonal,2060,base,,road,4,,1,,,,,bendOverTerrain; terrainObject
+New2_Road_Straight,2061,base,,road,2 4,,1,,,,,bendOverTerrain; terrainObject
+New2_Road_End,2062,base,,road,2 4,,1,,,,,bendOverTerrain; terrainObject
+New2_Road_Straight_Short,2063,base,,road,2 1,,1,,,,,bendOverTerrain; terrainObject
+New2_Road_T_Cross,2064,base,,road,3 4,,1,,,,,bendOverTerrain; terrainObject
+New2_Road_End2,2065,base,,road,4,,1,,,,,bendOverTerrain; terrainObject
+New2_Road_Straight2,2066,base,,road,2 4,,1,,,,,bendOverTerrain
+Cables_03,2090,base,,power,1,,1,,,,,freePlacing
+Crash_Barrier01,2091,base,,road; barriers,1,,1,,,,,blocking; baseHeight
+Road_Barrier01,2092,base,,road; barriers,1,,1,,,,,blocking; baseHeight
+Road_Barrier02,2093,base,,road; barriers,1 2,,1,,,,,blocking; baseHeight
+Road_Barrier03,2094,base,,road; barriers,1 2,,1,,,,,
+Road_Speed_Bump_New,5171,metro,,road; barriers,1 2 ,,1,,,,,
+Road_Speed_Bump_Diagonal,5172,metro,,road; barriers,2 2 ,,1,,,,,
+Trashcan01,2095,base,,road; city; internal,1,,1,,,,,freeFacing; freePlacing; randomRotation; terrainObject
+Plants_Bed01,2096,base,,road; city,1,,1,,,,,freeFacing; freePlacing; randomRotation; terrainObject
+Curbstone_Curve_45_a,2100,base,,road,1,,1,,,,,bendOverTerrain; terrainObject
+Curbstone_Curve_45_b,2101,base,,road,1,,1,,,,,bendOverTerrain; terrainObject
+Curbstone_Curve_90,2102,base,,road,1,,1,,,,,bendOverTerrain; terrainObject
+Curbstone_Diagonal,2103,base,,road,1,,1,,,,,bendOverTerrain; terrainObject
+Curbstone_Inner_Corner,2104,base,,road,1,,1,,,,,bendOverTerrain; terrainObject
+Curbstone_Inner_Curve,2105,base,,road,1,,1,,,,,bendOverTerrain; terrainObject
+Curbstone_Inner_Curve_2m,2106,base,,road,1,,1,,,,,bendOverTerrain; terrainObject
+Curbstone_Outer_Corner,2107,base,,road,1,,1,,,,,bendOverTerrain; terrainObject
+Curbstone_Outer_Curve,2108,base,,road,1,,1,,,,,bendOverTerrain; terrainObject
+Curbstone_Outer_Curve_2m,2109,base,,road,1,,1,,,,,bendOverTerrain; terrainObject
+Curbstone_Straight01,2110,base,,road,1,,1,,,,,bendOverTerrain; terrainObject
+Curbstone_Straight02,2111,base,,road,1,,1,,,,,bendOverTerrain; terrainObject
+Curbstone_Straight03,2112,base,,road,1,,1,,,,,bendOverTerrain; terrainObject
+Curbstone_Straight_2m,2113,base,,road,1,,1,,,,,bendOverTerrain; terrainObject
+Curbstone_Straight_8m,2114,base,,road,4 1,,1,,,,,bendOverTerrain; terrainObject
+Pipe_Small_Corner_1,2130,base,,pipes,1,,1,,,,,baseHeight
+Pipe_Small_Corner_2,2131,base,,pipes,1,,1,,,,,baseHeight
+Pipe_Small_Corner_3,2132,base,,pipes,1,,1,,,,,baseHeight
+Pipe_Small_Corner_4,2133,base,,pipes,1,,1,,,,,baseHeight
+Pipe_Small_Straight_1,2134,base,,pipes,1,,1,,,,,baseHeight
+Pipe_Small_Straight_2m_1,2135,base,,pipes,1,,1,,,,,baseHeight
+Pipe_Small_Straight_2m_2,2136,base,,pipes,1,,1,,,,,baseHeight
+Ladder_1,2140,base,,industry; base; city,1,,1,,,,,
+Ladder_Bottom_1,2141,base,,industry; base; city,1,,1,,,,,
+Ladder_Middle_1,2142,base,,industry; base; city,1,,1,,,,,
+Ladder_Top_1,2143,base,,industry; base; city,1,,1,,,,,
+Tower_Outpost1,2145,base,,base,1,,1,,,,,
+Sign01_Poster02,2149,base,,culture,1,,1,,,,,baseHeight
+Walls_Pillar_Big2,2150,base,,base,1,,1,,,,,freePlacing; baseHeight
+Walls_Pillar_Big3,2151,base,,base,1,,1,,,,,freePlacing; baseHeight
+Wall_Def_Gate01,2180,base,,barriers,4 1,2,1,,,,,blocking; baseHeight
+Wall_Def_Gate02,2181,base,,barriers,4 1,3,1,,,,,blocking; baseHeight
+Wall_Def_Straight01,2182,base,,barriers,1,2,1,,,,,blocking; baseHeight
+Wall_Def_Straight02,2183,base,,barriers,1,3,1,,,,,blocking; baseHeight
+Wall_Def_Corner01,2184,base,,barriers,1,2,1,,,,,blocking; baseHeight
+Wall_Def_Corner02,2185,base,,barriers,1,3,1,,,,,blocking; baseHeight
+Car,9,base,,vehicles,1,,7,,,,,blocking;
+Trailer_Long1,2211,base,,vehicles,1,,2,,,,,freePlacing; blocking;
+Trailer_Long2,2212,base,,vehicles,1,,2,,,,,freePlacing; blocking;
+Trailer_Short1,2213,base,,vehicles,1,,2,,,,,
+Trailer_Short2,2214,base,,vehicles,1,,2,,,,,freePlacing; blocking;
+Truck01_Alt1,2215,base,,vehicles,1,,2,,,,,blocking;
+Road_Decal_Park,2230,base,,decals,1 2,,2,,,,,terrainObject
+Support_Top01,2235,base,,industry,1,,1,,,,,
+Corridor_Ind01,2237,base,,industry,1,,1,,,,,baseHeight
+Corridor_Ind02,2238,base,,industry,1,,1,,,,,baseHeight
+Train_Front01,2250,metro,,rail; vehicles,1 5,,1,,,,,baseHeight
+Train_Wagon01,2251,metro,,rail; vehicles,1 5,,1,,,,,baseHeight
+Train_Wagon_D01,2252,metro,,rail; vehicles,1,,1,,,,,baseHeight
+Train_Wagon_D02,2253,metro,,rail; vehicles,1 2,,1,,,,,baseHeight
+Rail_Straight01,2259,metro,,rail,1 2,,4,,,,,baseHeight
+Rail_Single,2284,metro,,rail,1,,2,,,,,baseHeight
+Rail_Support_Bottom01,2260,metro,,rail,1 2,,1,,,,,baseHeight
+Rail_Support_Middle01,2261,metro,,rail,1 2,,1,,,,,baseHeight
+Rail_Support_Top01,2262,metro,,rail,1 2,,1,,,,,baseHeight
+Tunnel_Entry01,2270,metro,,rail,1,,1,,,,,baseHeight
+Tunnel01,2271,metro,,rail,1,,1,,,,,baseHeight
+Support_Straight01,2280,base,,pipes,1,,,,,,,baseHeight
+Support_Straight02,2281,base,,pipes,1,,,,,,,baseHeight
+Support_Curve01,2282,base,,pipes,1,,,,,,,baseHeight
+Support_T_Cross01,2283,base,,pipes,1,,,,,,,baseHeight
+Support_T_Cross_WoPoles,5009,base,,pipes,1,,,,,,,baseHeight
+Support_straight_WoPoles,5010,base,,pipes,1,,,,,,,baseHeight
+Support_curve_WoPoles,5011,base,,pipes,1,,,,,,,baseHeight
+,,,,,,,,,,,,
+Terrain_Light_Pink,3030,base,,light,1,,1,,,,,freePlacing
+Terrain_Light_Purple,3031,base,,light,1,,1,,,,,freePlacing
+Terrain_Light_Blue,3032,base,,light,1,,1,,,,,freePlacing
+Terrain_Light_White,3033,base,,light,1,,1,,,,,freePlacing
+Terrain_Light_Yellow,3034,base,,light,1,,1,,,,,freePlacing
+Terrain_Light_Green,3035,base,,light,1,,1,,,,,freePlacing
+Hedge01,3021,chem,,moon; plants,1,,4,1,,,,freeFacing; freePlacing; terrainObject
+Rocks_M2_0,3040,,FleetDLC,moon; rocks,2 1,0,1,1,,,,freeFacing
+Rocks_M2_1,3041,,FleetDLC,moon; rocks,2,0,1,1,,,,freeFacing
+Rocks_M2_2,3042,,FleetDLC,moon; rocks,1,0,1,1,,,,freeFacing
+Rocks_M2_3,3043,,FleetDLC,moon; rocks,2 1,0,1,1,,,,freeFacing
+Rocks_M2_4,3044,,FleetDLC,moon; rocks,2 1,0,1,1,,,,freeFacing
+Rocks_M2_5,3045,,FleetDLC,moon; rocks,1,0,1,1,,,,freeFacing
+Rocks_M2_6,3046,,FleetDLC,moon; rocks,3 2,0,1,1,,,,freeFacing
+,,,,,,,,,,,,
+// PLANET LAVA,,,,,,,,,,,,
+Lava_Medium,4007,lava,,volcanic,3,,,,,,,freePlacing; randomRotation
+Rock_Lava01a,4020,lava,,volcanic; rocks,1,0,1,1,,,,freeFacing; freePlacing
+Rock_Lava02a,4021,lava,,volcanic; rocks,1,0,1,1,,,,freeFacing; freePlacing
+Rock_Lava03a,4022,lava,,volcanic; rocks,1,0,1,1,,,,freeFacing; freePlacing
+Rock_Lava04a,4023,lava,,volcanic; rocks,1,0,1,1,,,,freeFacing; freePlacing
+Rock_Lava05a,4024,lava,,volcanic; rocks,1,0,1,1,,,,freeFacing; freePlacing
+Rock_Lava06a,4025,lava,,volcanic; rocks,1,0,1,1,,,,freeFacing; freePlacing
+Rock_Lava07a,4026,lava,,volcanic; rocks,1,0,1,1,,,,freeFacing; freePlacing
+Rock_Lava08a,4027,lava,,volcanic; rocks,1,0,1,1,,,,freeFacing; freePlacing
+Rock_Lava09a,4028,lava,,volcanic; rocks,1,0,1,1,,,,freeFacing; freePlacing
+Rock_Lava10a,4029,lava,,volcanic; rocks,1,0,1,1,,,,freeFacing; freePlacing
+Volcano_Top_01a,4050,lava,,volcanic,1,0,1,1,,,,freeFacing; freePlacing
+Volcano_Top_02a,4051,lava,,volcanic,1,0,1,1,,,,freeFacing; freePlacing
+Lava_Geyser_Hole,4065,lava,,volcanic,1,,1,,,Lava_Geyser 1,,freeFacing; freePlacing; noEditor
+Plant_Tree_Dead01,4070,lava,,volcanic,1,0,6,1,,,,freeFacing; freePlacing; randomRotation; terrainObject
+Pipes_Straight_b,4080,base,,pipes,1,1,1,,,,,blocking; baseHeight
+Pipes_Control_b,4081,base,,pipes,1,1,1,,,,,blocking; baseHeight
+Pipes_Straight_Broken_b,4082,base,,pipes,1,1,1,,,,,blocking; baseHeight
+Pipes_End_b,4083,base,,pipes,1,1,1,,,,,blocking; baseHeight
+Pipes_Corner_b,4084,base,,pipes,1,1,1,,,,,blocking; baseHeight
+Pipes_T_Split_b,4085,base,,pipes,1,1,1,,,,,blocking; baseHeight
+Pipes_X_Split_b,4086,base,,pipes,1,1,1,,,,,blocking; baseHeight
+Pipes_Diagonal_b,4087,base,,pipes,2,1,2,,,,,blocking; baseHeight
+Crate_Space01,4260,,FleetDLC,space_station,1,,1,,,,,freeFacing; freePlacing
+Crates_Space01,4261,,FleetDLC,space_station,1,,1,,,,,freeFacing; freePlacing
+Gate_Corridor01,4270,base,,space_station,1,,2,,,,,baseHeight
+Gate_Hangar01,4272,base,,space_station,1,1,2,,,,,baseHeight
+Support_Huge_Bottom01,4275,base,,space_station; internal,1,,1,,,,,baseHeight
+Support_Huge_Middle01,4276,base,,space_station; internal,1,,1,,,,,baseHeight
+Support_Huge_Top01,4277,base,,space_station; internal,1,,1,,,,,baseHeight
+Seat01,4280,metro,,space_station,1,,1,,,,,freePlacing
+Seat02,4281,metro,,space_station,1,,1,,,,,freePlacing
+Table01,4285,metro,,space_station,1,,1,,,,,freePlacing
+Table02,4286,metro,,space_station,1,,1,,,,,freePlacing
+Bed01,4295,base,,space_station,1,,1,,,,,freePlacing
+Bunkbed01,4296,base,,space_station,1,,1,,,,,freePlacing
+Houseplant01,4310,metro,,space_station,1,,2,,,,,freeFacing; freePlacing
+Gangway01,4330,base,,space_station,1,,1,,,,,baseHeight
+Skyhook01,4350,base,,space_station; vehicles,2,1,1,,,,,blocking; baseHeight
+,,,,,,,,,,,,
+// UNUSED ASSETS,,,,,,,,,,,,
+Billboard_Large,11,base,,culture,1 2,,,,5,,,blocking; noEditor
+Car_Wreck,17,base,,destruction; vehicles,1,,,,,,,noEditor
+Road_Straight,62,base,,road,2 4,,,,,,,bendOverTerrain; terrainObject; noEditor
+Road_Diagonal,63,base,,road,4,,,,,,,bendOverTerrain; terrainObject; noEditor
+Road_Corner_Straight_Diagonal_Wide,64,base,,road,4 6,,2,,,,,bendOverTerrain; terrainObject; noEditor
+Highway_Marker,19,base,,road,2,,,,,,,noEditor
+Highway_Railing,20,base,,road,1,,,,,,,noEditor
+Highway_Router,21,base,,road,2 1,,,,,,,
+Palm,61,base,,plants,1,,5,,,,,noEditor; freeFacing; freePlacing; randomRotation
+Fern_Small,29,base,,plants,1,,,,,,,noEditor; freeFacing; freePlacing; randomRotation; terrainObject
+Fern_Medium,45,base,,plants,1,,,,,,,noEditor; freeFacing; freePlacing; randomRotation; terrainObject
+Fern_Large,28,base,,plants,1,,,,,,,noEditor; freeFacing; freePlacing; randomRotation; terrainObject
+// Clover,30,base,,plants,1,,2,,,,,noEditor; bendOverTerrain; freeFacing; freePlacing; terrainObject
+// Root,31,base,,plants,1,,,,,,,noEditor; freeFacing; freePlacing; terrainObject
+Rock_3x3,44,base,,plants,3,2,,,,,,blocking; freeFacing; terrainObject; noEditor
+Stone,73,base,,plants,,,14,,,,,freeFacing; freePlacing; randomRotation; terrainObject; noEditor
+Mining_Hole,119,base,,/,4,,,,,Mining_Hole 2,,noEditor
+Drop_Site,118,base,,industry; base,3,,,,,,,terrainObject; noEditor; adjustChildrenToTerrain
+Drop_Point,124,base,,industry; base,3,,,,,,,terrainObject; noEditor
+Terminal,1028,base,,internal,1,,,,,,,blocking; freePlacing; noEditor
+Rocks_Big_0,1029,base,,plants,4,0,1,2,,,,freeFacing; noEditor
+Rocks_Big_1,1030,base,,plants,3,0,1,2,,,,freeFacing; noEditor
+Rocks_Big_2,1031,base,,plants,1,0,1,1.2,,,,freeFacing; noEditor
+Rocks_Big_3,1032,base,,plants,3,0,1,2,,,,freeFacing; noEditor
+Rocks_Big_4,1033,base,,plants,4,0,1,2,,,,freeFacing; noEditor
+Rocks_Big_5,1034,base,,plants,1,0,1,1.2,,,,freeFacing; noEditor
+Rocks_Big_6,1035,base,,plants,5,0,1,2,,,,freeFacing; noEditor
+Road_Cross_B,2013,base,,road,4,,1,,,,,bendOverTerrain; terrainObject; noEditor
+Road_Curve_B,2014,base,,road,5 5,,1,,,,,bendOverTerrain; terrainObject; noEditor
+Road_Curve_Long_a_B,2015,base,,road,4 6,,1,,,,,bendOverTerrain; terrainObject; noEditor
+Road_Curve_Long_b_B,2016,base,,road,4 6,,1,,,,,bendOverTerrain; terrainObject; noEditor
+Road_Diagonal_B,2017,base,,road,4,,1,,,,,bendOverTerrain; terrainObject; noEditor
+Road_Straight_B,2018,base,,road,4 2,,1,,,,,bendOverTerrain; terrainObject; noEditor
+Road_T_Cross_B,2019,base,,road,4 3,,1,,,,,bendOverTerrain; terrainObject; noEditor
+Road_Straight_Short_B,2020,base,,road,1 2,,1,,,,,bendOverTerrain; terrainObject; noEditor
+Crashed_Viking,93,base,,destruction; vehicles,3,,2,,,,,freeFacing; noEditor
+,,,,,,,,,,,,
+// LAVA ASSETS,,,,,,,,,,,,
+Stairs_Metal,5000,base,,slopes,1,,,,,,,baseHeight
+Alarm_Light_Ground,5001,base,,light,,,2,,,,,freePlacing
+Alarm_Light_Wall,5002,base,,light,,,2,,,,,freePlacing
+Pipes_Steel_Straight,5007,base,,pipes,1,0,,1,,,,baseHeight
+Pipes_Steel_Corner,5008,base,,pipes,1,0,2,1,,,,baseHeight
+Terminal_Broken,5013,base,,/,1,,,,,,,
+Volcanic_Small_Rock,5014,lava,,volcanic,1,,6,,,,,freeFacing; freePlacing; randomRotation; terrainObject
+Large_Vent_Pipe,5015,lava,,industry,1,,2,,,,,baseHeight
+Spaceship_Curbstones_Big,5016,base,,space_station,4 1,,3,,,,,bendOverTerrain; terrainObject
+Spaceship_Curbstones,5017,base,,space_station,2 1,,3,,,,,
+Spaceship_Curbstones_Small,5018,base,,space_station,1,,3,,,,,
+decal_HephaeStar_Logo,5057,base,,decals,1,,4,,,,,baseHeight; freeFacing; freePlacing
+,,,,,,,,,,,,
+Lab_Tank,5064,chem,,internal; lab,2,,,,,,,blocking
+Lab_Table,5066,chem,,internal; lab,1,,4,,,,,
+lab_computers,5103,chem,,internal; lab,,,5,,,,,baseHeight; freePlacing
+lab_tank_human,5105,chem,,internal; lab,,,,1.2,,,,baseHeight; blocking
+,,,,,,,,,,,,
+// XHON ASSETS,,,,,,,,,,,,
+Door_Wall,5003,base,,barriers,,,2,,,,,baseHeight
+Pipe_Thin_Slope,5004,base,,pipes,,,2,,,,,baseHeight
+Pipe_Slope,5005,base,,pipes,,,,,,,,baseHeight
+Fence_Slope,5006,base,,slopes,1,0,2,1,,,,baseHeight
+Pipe_Small_Broken,5012,base,,pipes,1,,3,,,,,baseHeight
+Cable_Small_Corner,5019,base,,pipes,1,,4,,,,,baseHeight
+Cable_Small_Straight_Long,5020,base,,pipes,1,,1,,,,,baseHeight
+Cable_Small_Straight_End,5021,base,,pipes,1,,2,,,,,baseHeight
+cable_small_straight_1,5022,base,,pipes,1,,1,,,,,baseHeight
+cable_small_straight_2,5023,base,,pipes,1,,1,,,,,baseHeight
+Gate_Hangar_Huge,5024,base,,space_station,8 1,6,2,,,,,baseHeight; blocking
+Police_Car,5025,metro,,vehicles,1,,2,,,,,freeFacing; blocking
+Barrel_Fire,5026,metro,,containers,1,,7,,,,,freeFacing; freePlacing; randomRotation
+Trash,5027,base,,garbage,1,,6,,,,,freeFacing; freePlacing; randomRotation
+Delivery_Van,5028,base,,vehicles,1,,1,,,,,blocking
+Scaffolding,5029,metro,,construction,,,,,,,,baseHeight
+Crane_Bottom,5030,metro,,construction,1,,1,1,,,,blocking; baseHeight
+Crane_Middle,5031,metro,,construction,1,,1,1,,,,blocking; baseHeight
+Crane_Top,5032,metro,,construction,1,,1,1,,,,blocking; baseHeight; freeFacing
+Dumpsters_Open,5033,base,,containers; garbage,1,1,4,,,,,blocking; freeFacing
+Car_Destroyed,5034,base,,destruction; vehicles,1,,3,,,,,blocking; freeFacing
+Construction_Fence,5035,metro,,city; construction,1,,,,,,,freePlacing;
+Fuel_Tanker,5036,metro,,vehicles,1,1,2,,,,,
+Bridge_Straight,5038,metro,,road,2 4,,1,,,,,baseHeight
+Bridge_Curve,5039,metro,,road,5 5 ,,1,,,,,baseHeight
+Bridge_Curve_Long,5163,metro,,road,6 4,,2,,,,,baseHeight
+Bridge_Raise,5041,metro,,road,2 2,,2,,,,,baseHeight
+Bridge_Corner,5167,metro,,road,2 2 ,,1,,,,,baseHeight
+Bridge_T_Cross,5042,metro,,road,4,,1,,,,,baseHeight
+Bridge_Cross,5166,metro,,road,4,,1,,,,,baseHeight
+Bridge_Diagonal,5043,metro,,road,4,,1,,,,,baseHeight
+Bridge_Higher_Diagonal,5165,metro,,road,4,,1,,,,,baseHeight
+Bridge_Straight_Diagonal,5164,metro,,road,4,,2,,,,,baseHeight
+Bridge_Destroyed,5203,metro,,road,2 4,,1,,,,,baseHeight
+Bridge_Support,5040,metro,,road,2 1,,2,,,,,baseHeight
+Slum_House,5044,metro,,settlement,1,1,,,,,,blocking
+Decal_Graffiti,5045,metro,, decals,1,,5,,,,,baseHeight; freeFacing; freePlacing
+Billboard_Assets,5046,metro,,culture,,,9,,,,,baseHeight
+Waiting_Booth,5047,metro,,city,,,4,,,,,blocking; baseHeight
+Fire_Hydrant,5048,metro,,city,,,,0.75,,,,
+Taxi,5049,metro,,vehicles,,,,,,,,blocking;
+Delivery_Scooter,5050,metro,,vehicles,,,,,,,,blocking;
+Neon_Sign,5051,metro,,culture,,,8,,,,,baseHeight
+Portable_Toilet,5052,metro,,city; construction,,,,,,,,baseHeight; freePlacing;
+City_Plant,5053,metro,,city,,,6,,,,,baseHeight
+Skyscraper,5054,metro,,city,,,,,,,,baseHeight
+Kiosk,5055,metro,,city,,1,,,,,,blocking; baseHeight
+CementMixerTruck,5056,metro,,vehicles; construction,,,,,,,,baseHeight
+Garbage_Truck,5058,metro,,vehicles; garbage,1,1,,,,,,blocking
+OfficeWall,5059,metro,,internal,1,,6,,,,,
+Black_Quad,5060,base,,internal,1,,1,,,,,isUndergroundBlackTop
+Black_Quad_Vertical,5150,base,,internal,1,,1,,,,,isUndergroundBlackTop
+Cell_Entrance,5061,metro,,internal,1,,1,,,,,
+Cell_Entrance_Side,5062,metro,,internal,1,,1,,,,,
+Building_Entrance,5063,metro,,city,1,,3,,,,,
+Car_Barrier,5065,metro,,road; barriers,2 1,,2,,,,,
+SkyScraper_B_Fill,5067,base,,rooftop,1,,2,,,,,baseHeight
+Safety_Pole,5068,metro,,city,1,,3,,,,,freePlacing
+Walking_Belt,5069,metro,,travel,1,,2,,,,,baseHeight
+Airport_Belt,5070,metro,,travel,1,,2,,,,,baseHeight
+Airport_Suitcase,5071,metro,,travel,1,,8,,,,,freePlacing; freeFacing
+Airport_Suitcase_Belt,5072,metro,,travel,1,,8,,,,,freePlacing
+Garbage_Terrain,5075,metro,,garbage,1,,2,,,,,bendOverTerrain; terrainObject
+Garbage_Terrain_Small,5076,metro,,garbage,,,3,,,,,freePlacing; freeFacing; bendOverTerrain; terrainObject
+Metal_Detector,5077,metro,,travel,,,1,,,,,
+XRay_Scanner,5078,metro,,travel,,,2,,,,,
+XRay_Scanner_Tray,5079,metro,,travel,,,,,,,,freePlacing;
+Airport_Arrival_Screen,5080,metro,,travel,,,,,,,,freePlacing
+Elevator,5081,metro,,rooftop,,,3,,,,,
+Airport_Gate,5082,metro,,travel,,,2,,,,,
+Slope_Skyscraper,5083,base,,slopes,,,2,,,,,baseHeight
+Slope_Skyscraper_Side,5084,base,,slopes,,,8,,,,,baseHeight
+Slope_Skyscraper_Top,5120,base,,rooftop,,,8,,,,,baseHeight
+Clothes_Shop,5085,metro,,shopping,,,4,,,,,freePlacing
+Clothes_Shop_Straight,5086,metro,,shopping,,,4,,,,,freePlacing
+Store_Rack,5087,metro,,shopping,,,3,,,,,
+Store_Rack_High,5088,metro,,shopping,,,3,,,,,
+Cashier_Desk,5089,metro,,shopping,,,,,,,,
+Metro_Entrance_New,5090,metro,,city,2,,1,,,Metro_Entrance_New,,blocking; baseHeight
+Wrecking_Ball,5092,metro,,construction,2,2,,,,,,blocking; freeFacing
+ShadowPlane_Broken,5093,metro,,internal,2,,,,,,,baseHeight
+Bug_Vent,5094,base,,/,2,,,,,Bug_Vent 7.5,,baseHeight; noEditor
+PD_Text,5095,metro,,city,,,2,,,,,
+Fountain_Water,5096,metro,,city; culture,,,3,,,,,
+Solar_Panel,5097,metro,,rooftop,,0,1,,,,,blocking; baseHeight
+Solar_Panel_Slope,5173,metro,,rooftop ; slopes,,,1,,,,, baseHeight
+Metro_Entrance_New_Broken,5098,metro,,travel; destruction,2,,1,,,Metro_Entrance_New,,blocking; baseHeight
+FoodStand,5099,metro,,city,,1,,,,,,blocking; baseHeight
+Construction_Office,5100,metro,,construction,1 2,1,,,,,,blocking; baseHeight
+scifi_Cone,5101,metro,,road,,,,,,,,freePlacing; freeFacing
+Road_Railing,5102,metro,,road; barriers,,,2,,,,,baseHeight
+Road_Railing_Fill,5104,metro,,road; barriers,,,2,,,,,blocking; baseHeight
+Outside_Cafe_Chair,5106,metro,,city,,,6,1.2,,,,freePlacing; freeFacing
+Outside_Cafe_Table,5107,metro,,city,,,4,,,,,freePlacing; freeFacing
+Outside_Cafe_Umbrella,5108,metro,,city,,,3,,,,,freePlacing; freeFacing
+Outside_Cafe_Menu,5109,metro,,city,,,,,,,,freePlacing; freeFacing
+Inside_Downstairs,5110,base,,internal,1 2,,,,,Downstairs,,baseHeight
+File_Cabinet,5111,base,,internal,,,7,1.3,,,,freePlacing
+Tanker_Corpse,5112,base,,carnage,1,,,,,,,freeFacing; freePlacing
+Flight_Control_Tower,5113,metro,,travel,1,,,,,,,freeFacing; freePlacing
+Satellite_Dish_Huge,5114,base,,base,,,,,,,,baseHeight
+Passenger_Plane,5115,metro,,travel; vehicles,9 1,,,,,,,
+Passenger_Plane_Destroyed,5169,metro,,travel; vehicles,9 1,,,,,,,
+Passenger_Plane_Destroyed_Wing,5170,metro,,travel; vehicles,3 4,,,,,,,
+Towing_Vehicle,5116,metro,,travel; vehicles,1 2,1,,,,,,
+Towing_Vehicle_Attachment,5117,metro,,travel; vehicles,1,1,,,,,,freeFacing
+Corpse_Body,5118,base,,carnage,,,,,,,,freeFacing; freePlacing
+Corpse_Head,5119,base,,carnage,,,,,,,,freeFacing; freePlacing
+Corpse_Leg,5125,base,,carnage,,,,,,,,freeFacing; freePlacing
+Corpse_LowerBody,5121,base,,carnage,,,,,,,,freeFacing; freePlacing
+Corpse_UpperBody,5122,base,,carnage,,,,,,,,freeFacing; freePlacing
+Alphabet,5123,base,,Alphabet,1,,26,,,,,freePlacing; noEditor
+Alphabet_A,5174,base,,Alphabet,,,,,,,,freePlacing
+Alphabet_B,5175,base,,Alphabet,,,,,,,,freePlacing
+Alphabet_C,5176,base,,Alphabet,,,,,,,,freePlacing
+Alphabet_D,5177,base,,Alphabet,,,,,,,,freePlacing
+Alphabet_E,5178,base,,Alphabet,,,,,,,,freePlacing
+Alphabet_F,5179,base,,Alphabet,,,,,,,,freePlacing
+Alphabet_G,5180,base,,Alphabet,,,,,,,,freePlacing
+Alphabet_H,5181,base,,Alphabet,,,,,,,,freePlacing
+Alphabet_I,5182,base,,Alphabet,,,,,,,,freePlacing
+Alphabet_J,5183,base,,Alphabet,,,,,,,,freePlacing
+Alphabet_K,5184,base,,Alphabet,,,,,,,,freePlacing
+Alphabet_L,5185,base,,Alphabet,,,,,,,,freePlacing
+Alphabet_M,5186,base,,Alphabet,,,,,,,,freePlacing
+Alphabet_N,5187,base,,Alphabet,,,,,,,,freePlacing
+Alphabet_O,5188,base,,Alphabet,,,,,,,,freePlacing
+Alphabet_P,5189,base,,Alphabet,,,,,,,,freePlacing
+Alphabet_Q,5190,base,,Alphabet,,,,,,,,freePlacing
+Alphabet_R,5191,base,,Alphabet,,,,,,,,freePlacing
+Alphabet_S,5192,base,,Alphabet,,,,,,,,freePlacing
+Alphabet_T,5193,base,,Alphabet,,,,,,,,freePlacing
+Alphabet_U,5194,base,,Alphabet,,,,,,,,freePlacing
+Alphabet_V,5195,base,,Alphabet,,,,,,,,freePlacing
+Alphabet_W,5196,base,,Alphabet,,,,,,,,freePlacing
+Alphabet_X,5197,base,,Alphabet,,,,,,,,freePlacing
+Alphabet_Y,5198,base,,Alphabet,,,,,,,,freePlacing
+Alphabet_Z,5199,base,,Alphabet,,,,,,,,freePlacing
+Text_Bars,5200,base,,Alphabet,,,,,,,,freePlacing
+OfficeWall_E,5124,metro,,internal,1,,8,,,,,baseHeight
+OfficeWall_E_Tops,5126,metro,,internal,1,,2,,,,,baseHeight; isUndergroundBlackTop
+Office_Door,5127,metro,,internal,,,,,,,,baseHeight
+Metro_Front,5128,metro,,rail; vehicles,1 5,,1,,,,,baseHeight
+Metro_Wagon,5129,metro,,rail; vehicles,1 5,,1,,,,,baseHeight
+Metro_Wagon_D01,5130,metro,,rail; vehicles,1,,1,,,,,baseHeight
+Metro_Wagon_D02,5131,metro,,rail; vehicles,1 2,,1,,,,,baseHeight
+support_column_base,5132,base,,internal,1,,,,,,,baseHeight; blocking
+support_column_Loop,5133,base,,internal,1,,,,,,,baseHeight; blocking
+Water_Flow,5134,base,,sewer,,,,,,,,freePlacing; baseHeight
+Water_Flow_SewerPipe,5135,base,,sewer,,,,,,,,freePlacing; baseHeight
+Water_Flow_Small,5136,base,,sewer,,,,,,,,freePlacing; baseHeight
+Water_Drip,5137,base,,sewer,,,,,,,,freePlacing; baseHeight
+Water_Drip_No_Collision,5138,base,,sewer,,,,,,,,freePlacing; baseHeight
+Bridge_Base,5139,metro,,road, 4 1,,,,,,,baseHeight
+Tile,5140,metro,,city; rooftop,1,,5,,,,,baseHeight
+Sewer_Canal,5141,base,,sewer,1,,6,,,SewerCanal,,baseHeight
+Container_Ship,5142,base,,vehicles,2 7 ,,3,,,,,
+Swat_Van,5143,metro,,vehicles,,1,,,,,,blocking
+Swat_Van_NoLight,5202,metro,,vehicles,,1,,,,,,blocking
+Terrain_Tiles,5144,base,,rooftop; base,,,3,,,,,baseHeight
+Glass_Window,5145,base,,rooftop; base,,,10,,,,,baseHeight
+Searchlight,5156,base,,rooftop; base; light,,,3,,,,,freefacing
+Water_Plane_NEW,5209,base,,water,,,,,,,enabled: true; offset: -1,baseHeight; useWaterTexture; requireSpecificRemove; isWater
+Water_Plane_NoBlocking,5210,base,,water,,,,,,,enabled: true; offset: -1,baseHeight; useWaterTexture; requireSpecificRemove
+Water_Plane,5091,base,,obsolete,1,,,,,,,baseHeight; isWater; useWaterTexture
+Water_Plane_2,5158,base,,obsolete,2,,,1,,,,baseHeight; isWater; useWaterTexture
+Water_Plane_3,5159,base,,obsolete,3,,,1,,,,baseHeight; isWater; useWaterTexture
+Water_Plane_4,5160,base,,obsolete,4,,,1,,,,baseHeight; isWater; useWaterTexture
+Water_Plane_6,5161,base,,obsolete,6,,,1,,,,baseHeight; isWater; useWaterTexture
+Water_Plane_8,5162,base,,obsolete,8,,,1,,,,baseHeight; isWater; useWaterTexture
+Water_Plane_10,5157,base,,obsolete,10,,,1,,,,baseHeight; isWater; useWaterTexture
+Sewer_Pipe_Closed,5168,base,,sewer,,,,,,,,
+Dead_Police,5201,metro,,carnage,,,3,,,,,freeFacing; freePlacing
+Bus,5204,base,,vehicles,1 3,,,,,,,
+Sewer_Wall_Piece,5205,base,,sewer,,,3,,,,,baseHeight; blocking
+Sewer_Wall_Piece_Short,5206,base,,sewer,,,3,,,,,baseHeight; blocking
+Water_Flow_Strong,5208,base,,sewer,,,,,,,,
+Ambulance,5211,metro,,vehicles,1,1,2,,,,,blocking
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+Bush_01,6000,jungle,,jungle; plants,,,,,,,,freeFacing; freePlacing
+Grass,6001,jungle,,jungle; plants,,,2,,,,,freeFacing; freePlacing; randomRotation;adjustChildrenToTerrain
+Grass_Tall,5342,jungle,,jungle; plants,,,2,,,,,freeFacing; freePlacing; randomRotation;adjustChildrenToTerrain
+Palm_Tree,6003,jungle,,jungle; plants,,,6,1 1.3,,,,freeFacing; freePlacing; randomRotation
+Jungle_Fern,6004,jungle,,jungle; plants,,,12,0.9 1.3,,,,freeFacing; freePlacing; randomRotation
+Waterfall_Start,6005,jungle,,water,,,,,,,,
+Waterfall_Middle,6006,jungle,,water,,,,,,,,
+Waterfall_Bottom,6007,jungle,,water,,,,,,,,
+Floodfill_Blocker,139,base,,blockers; water,1,,,,,,,editorOnly; blockFloodfill
+Water_Deep_Blocking,6065,jungle,,water,,,,,,,enabled: true; offset: -0.4,baseHeight; useWaterTexture; requireSpecificRemove; isWater
+Water_Deep_NoBlocking,6066,jungle,,water,,,,,,,enabled: true; offset: -0.4,baseHeight; useWaterTexture; requireSpecificRemove
+Shallow_Water_Plane,6008,jungle,,water,1,,,,,,,baseHeight; useWaterTexture
+Shallow_Water_Plane_2,6009,jungle,,water,2,,,1,,,,baseHeight; useWaterTexture
+Shallow_Water_Plane_3,6010,jungle,,water,3,,,1,,,,baseHeight; useWaterTexture
+Shallow_Water_Plane_4,6011,jungle,,water,4,,,1,,,,baseHeight; useWaterTexture
+Shallow_Water_Planel_Slope,6063,jungle,,water,,,,,,,,baseHeight; useWaterTexture
+Shallow_Water_Planel_Slope_FX,6064,jungle,,water,,,,,,,,baseHeight; useWaterTexture
+Jungle_Rocks,6012,jungle,,jungle; rocks,,,6,,,,,freeFacing; freePlacing; randomRotation
+Palm_Tree_Trunk,6013,jungle,,jungle; destruction; plants,,,10,,,,,freeFacing; freePlacing
+Charcoal_Burn,6014,jungle,,jungle; destruction; plants,,,,,,,,freeFacing; freePlacing; randomRotation
+Jungle_Wall,6015,jungle,,jungle; barriers,,1,6,,,,,blocking; baseHeight
+Underground_Rock,6016,jungle,,jungle; rocks,,,6,,,,,freeFacing; freePlacing
+Underground_Rock_BlackTop,6017,jungle,,jungle; rocks,,,6,,,,,freeFacing; freePlacing
+Underground_Rocks_Medium,6018,jungle,,jungle; rocks,,,6,,,,,freeFacing; freePlacing
+Underground_Pebble,6019,jungle,,jungle; rocks,,,6,,,,,freeFacing; freePlacing;randomRotation
+Vines,6020,jungle,,jungle; plants,,,5,,,,,freeFacing; freePlacing
+Jungle_Rock_Small,6021,jungle,,jungle; rocks,,,5,,,,,freeFacing; freePlacing;randomRotation
+Flowers_Tiny,6022,jungle,,jungle; plants,,,,,,,,freeFacing; freePlacing
+Flowers_Plane,6023,jungle,,jungle; plants,,,2,,,,,freeFacing; freePlacing
+Flower_Medium,6024,jungle,,jungle; plants,,,,,,,,freeFacing; freePlacing
+Mining_Truck,6025,jungle,,vehicles,3,,3,,,,,blocking
+House_Jungle,6026,jungle,,jungle;settlement,2,1,2,,,,,blocking
+House_Jungle_Tall,6027,jungle,,jungle;settlement,2,2,2,,,,,blocking
+Jungle_Settler_House_Fill,6028,jungle,,jungle;settlement,,,,,,,,
+Jungle_Settler_House_Piece,6029,jungle,,jungle;settlement,,,15,,,,,freePlacing
+Palm_Tree_Trunk_Stack,6030,jungle,,jungle; plants,1 2 ,,3,,,,,blocking; baseHeight
+Truck_Trees,6031,jungle,,jungle;vehicles,1 2,,,,,,,blocking
+Vault_Room_Door,6032,jungle,,jungle,,,,,,,,
+,,,,,,,,,,,,
+Forklift,6035,base,,settlement; vehicles,1,,2,,,,,blocking
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+Beach_Ball,6036,base,,beach,,,,,,,,freeFacing; freePlacing
+Beach_Bed,6037,base,,beach,,,,,,,,
+Beach_Planks,6038,base,,beach,,,3,,,,,terrainObject; adjustChildrenToTerrain;bendOverTerrain
+Beach_Poles,6039,base,,beach,,,2,,,,,
+Beach_Sign_Big,6040,base,,beach,3 1,,,,,,,
+Beach_Towel,6041,base,,beach,,,3,,15,,,freeFacing; freePlacing; bendOverTerrain
+Beach_Umbrella,6042,base,,beach,,,,,,,,freeFacing; freePlacing; randomRotation
+Beach_Warning_Sign,6043,base,,beach,,,,,,,,freeFacing; freePlacing
+Wind_Check,6044,base,,beach,,,,,,,,freeFacing; freePlacing
+Beach_Tower,6045,base,,beach,2 1,,,,,,,blocking
+Beach_cabin,6046,base,,beach,1,,,0.8,,,,blocking
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+Chainsaw_Mech_Destroyed,6047,jungle,,vehicles; destruction,1 2,,2,,,,,
+,,,,,,,,,,,,
+Sledgehammer_Parked,6048,base,,vehicles,1,,,,,,,blocking
+Cyclone_Parked,6049,base,,vehicles,1,,,,,,,blocking
+M6_Jaeger_Parked,6050,base,,vehicles,1,,,,,,,blocking
+Container_New_Blue,6051,base,,containers,1 2,1,5,,,,,blocking
+Container_New_Yellow,6052,base,,containers,1 2,1,5,,,,,blocking
+Container_New_Red,6053,base,,containers,1 2,1,5,,,,,blocking
+Truck_Container,6054,base,,containers; vehicles,1 2,1,3,,,,,blocking
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+American_Football_Goal,6055,base,,sports,,,,,,,,
+Basketball_Hoop,6056,base,,sports,,,,,,,,
+Football_Goal,6057,base,,sports,,,,,,,,
+Tennis_Net,6058,base,,sports,,,2,,,,,
+Football  ,6059,base,,sports,,,,,,,,freeFacing; freePlacing
+Basketball  ,6060,base,,sports,,,,,,,,freeFacing; freePlacing
+American_Football ,6061,base,,sports,,,,,,,,freeFacing; freePlacing
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+// FROST DECORATIONS,,,,,,,,,,,,
+Pine_Tree,7000,,FrostDLC,frost,,,,,,,,freeFacing; freePlacing;randomRotation
+Ice_Cone,7001,,FrostDLC,frost,,,3,,,,,freeFacing; freePlacing;randomRotation
+Rock_Snow,7002,,FrostDLC,frost,,,6,,,,,freeFacing; freePlacing
+Frost_Rock_Small,7003,,FrostDLC,frost,,,3,,,,,freeFacing; freePlacing
+Train_Front,7004,,FrostDLC,frost,5 2,,,,,,,blocking
+Pillar_Top,7005,,FrostDLC,frost,,,,,,,,
+Pillar_Middle,7006,,FrostDLC,frost,,,,,,,,
+Pillar_Bottom,7007,,FrostDLC,frost,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+// CHEMICAL DECORATIONS,,,,,,,,,,,,
+Chemical_Rock_Big,8000,chem,,chemical,,,5,,,,,freeFacing; freePlacing;blocking; baseHeight;terrainObject
+Chemical_Rock_Medium,8001,chem,,chemical,,,4,,,,,freeFacing; freePlacing;terrainObject
+Chemical_Rock_Small,8002,chem,,chemical,,,5,,,,,freeFacing; freePlacing;randomRotation
+Chemical_Barrel,8003,chem,,chemical,,,5,,,,,freeFacing; freePlacing;randomRotation
+Chemical_Barrels_Slope,8026,chem,,chemical,,,4,,,,,terrainObject; adjustChildrenToTerrain
+Chemical_Barrels_1x1,8022,chem,,containers; chemical,,,,,,,,freeFacing; freePlacing ;blocking
+Chemical_Barrels_1x2,8023,chem,,containers; chemical,,,,,,,,freeFacing; freePlacing ;blocking
+Chemical_Barrels_2x2,8024,chem,,containers; chemical,,,,,,,,freeFacing; freePlacing ;blocking
+Decal_Acid_Pool,8025,chem,, decals; chemical,,,,,,,,freeFacing; freePlacing
+,,,,,,,,,,,,
+Poison_Gas_Local,8006,chem,,chemical,,,,,,,,freeFacing; freePlacing
+Jail_Bars_Base,8007,chem,,chemical,,,,,,,,
+Jail_Bars_Middle,8008,chem,,chemical,,,,,,,,
+Jail_Bars_Middle_Light,8009,chem,,chemical,,,,,,,,
+Bug_Cage,8010,base,,chemical,,,5,,,,,
+Gas_Cloud,8011,chem,,chemical,,,,,,,enabled: true; emissionPerVertex: 0.02,requireSpecificRemove
+Gas_Cloud_Green,9036,chem,,chemical,,,,,,,enabled: true; emissionPerVertex: 0.02,requireSpecificRemove
+Gas_Plane_NoBlocking,9037,chem,,chemical,,,,,,,enabled: true,requireSpecificRemove
+Roku_San_Wall,8012,base,,barriers,,,5,,,,,blocking; baseHeight
+Truck_Flatbed,8013,base,,vehicles,1,1,,,,,,blocking
+Cargo_Ship_Crashed,8014,lava,,destruction,,,,,,,,
+,,,,,,,,,,,,
+Chemical_FuelTank,8015,chem,,vehicles; chemical,1,,2,,,,,freePlacing; blocking
+Chemical_Truck,8016,chem,,vehicles; chemical,,,2,,,,,blocking
+Chemical_Truck_Damaged,8027,chem,,vehicles; chemical,,,,,,,,blocking
+Damaged_Streetlight,8017,chem,,carnage,,,4,,,,,
+,,,,,,,,,,,,
+Decayed_Corpse_Warrior,8019,chem,,carnage,,,6,,,,,freeFacing; freePlacing
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+Road_Cross_Diagonal_Damaged,9004,chem,,road,4,,1,,,,,bendOverTerrain; terrainObject
+Road_T_Cross_Diagonal_Damaged,9005,chem,,road,4,,1,,,,,bendOverTerrain; terrainObject
+Road_Diagonal_Short_Damaged,9006,chem,,road,3,,1,,,,,bendOverTerrain; terrainObject
+Road_Straight_Diagonal_A_Damaged,9007,chem,,road,4,,1,,,,,bendOverTerrain; terrainObject
+Road_Straight_Diagonal_B_Damaged,9008,chem,,road,4,,1,,,,,bendOverTerrain; terrainObject
+Road_Corner_Damaged,9009,chem,,road,2 2,,1,,,,,bendOverTerrain; terrainObject
+Road_Cross_Damaged,9010,chem,,road,4,,1,,,,,bendOverTerrain; terrainObject
+Road_Curve_Damaged,9011,chem,,road,5 5,,1,,,,,bendOverTerrain; terrainObject
+Road_Curve_Long_A_Damaged,9012,chem,,road,4 6,,1,,,,,bendOverTerrain; terrainObject
+Road_Curve_Long_B_Damaged,9013,chem,,road,4 6,,1,,,,,bendOverTerrain; terrainObject
+Road_Diagonal_Damaged,9014,chem,,road,4,,1,,,,,bendOverTerrain; terrainObject
+Road_Straight_Damaged,9015,chem,,road,2 4,,1,,,,,bendOverTerrain; terrainObject
+Road_End_Damaged,9016,chem,,road,2 4,,1,,,,,bendOverTerrain; terrainObject
+Road_Straight_Short_Damaged,9017,chem,,road,2 1,,1,,,,,bendOverTerrain; terrainObject
+Road_T_Cross_Damaged,9018,chem,,road,3 4,,1,,,,,bendOverTerrain; terrainObject
+Road_End2_Damaged,9019,chem,,road,4,,1,,,,,bendOverTerrain; terrainObject
+Road_Straight2_Damaged,9020,chem,,road,2 4,,1,,,,,bendOverTerrain
+Glowing_Mushroom,6033,chem,,plants,,,4,0.9 1.1,,,,freeFacing; freePlacing; randomRotation
+Mushroom_Light,6034,chem,,plants; light,,,,,,,,freeFacing; freePlacing
+,,,,,,,,,,,,
+Lab_Building_Fill,9027,chem,,rooftop,1,,,,,,,
+Lab_Slope,9028,chem,,slopes,1,,2,,,,,baseHeight
+,,,,,,,,,,,,
+Scientist_Corpse,9021,base,,carnage,,,3,,,,,freeFacing; freePlacing
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+Merc_Camp_Bottom,9025,lava,,base,,,,,,,,bendOverTerrain; terrainObject; freeFacing; freePlacing
+,,,,,,,,,,,,
+Bug_Tunnel_Small_Rocks,9026,base,,,,,,,,,, terrainObject; noEditor;adjustChildrenToTerrain
+,,,,,,,,,,,,
+Damaged_Trailer,9029,base,,vehicles,,,,,,,,freePlacing; blocking
+Damaged_Truck,9031,base,,vehicles,,,,,,,,noEditor
+TargetPractice_Tanker,9030,base,,chemical,3 2,,,,,,,blocking
+,,,,,,,,,,,,
+Cage_Truck,9032,chem,,vehicles; chemical,,,2,,,,,
+,,,,,,,,,,,,
+Floor_Grill,9033,chem,,chemical,,,3,,,,,
+,,,,,,,,,,,,
+Bug_Cage_Mask,9034,chem,,,,,,,,Bug_Cage,,noEditor
+,,,,,,,,,,,,
+Green_Gas_Local,9035,chem,,chemical,,,,,,,,freeFacing; freePlacing
+,,,,,,,,,,,,
+Spitter_Mutated,9038,chem,,chemical,,,3,,,,,freeFacing; freePlacing
+,,,,,,,,,,,,
+Mannequin_Male,9039,chem,,chemical,,,6,,,,,freeFacing; freePlacing
+Mannequin_Female,9040,chem,,chemical,,,6,,,,,freeFacing; freePlacing
+Mannequin_Limbs,9041,chem,,chemical,,,2,,,,,freeFacing; freePlacing
+,,,,,,,,,,,,
+Sewer_Pipe_Chem,9042,chem,,chemical,,,2,,,,,baseHeight
+ICBM_Missile,9043,chem,,chemical,1,,3,,,,,
+Cooling_Tower,9044,chem,,chemical,6,7,3,,,,,baseHeight
+Cooling_Tower_Debris,9045,chem,,chemical,,,3,,,,,
+,,,,,,,,,,,,
+Egg_Cluster_Big,9046,chem,,chemical,,,,,,,,freeFacing; freePlacing
+Egg_Cluster_Small,9047,chem,,chemical,,,3,,,,,freeFacing; freePlacing
+Egg_Cluster_Bits,9048,chem,,chemical,,,2,,,,,freeFacing; freePlacing
+Egg_Cluster_Decal,9049,chem,,chemical,,,,,,,,freeFacing; freePlacing
+,,,,,,,,,,,,
+Chemical_Entrance,9050,chem,,chemical,2 1,,,,,,,
+Chemical_Entrance_Big,9052,chem,,chemical,3 1,,,,,,,
+Chemical_Door,9051,chem,,chemical,,,,,,,,
+,,,,,,,,,,,,
+Target_Practice,9053,chem,,chemical,,,,,,,,blocking
+,,,,,,,,,,,,
+Gate_Long_Open,9054,base,,base,4 1,,,,,,,
+Gate_Long_Closed,9055,base,,base,4 1,,,,,,,blocking
+Gate_Short_Open,9056,base,,base,2 1,,,,,,,
+Gate_Short_Closed,9057,base,,base,2 1,,,,,,,blocking
+,,,,,,,,,,,,
+Storm_Tent_1x1,5300,jungle,,base,1,,1,0.9,10,,,blocking; baseHeight
+Storm_Tent_1x2,5301,jungle,,base,1 2,,1,,10,,,blocking; baseHeight
+Storm_Tent_1x3,5302,jungle,,base,1 3,,1,,10,,,blocking; baseHeight
+,,,,,,,,,,,,
+Spawn_Pit_Hole,5303,base,,/,2,,,,,Spawn_Pit_Mask,,baseHeight; noEditor
+,,,,,,,,,,,,
+Light_Shaft,5304,jungle,,jungle,,,,,,,,freeFacing; freePlacing
+,,,,,,,,,,,,
+Outpost_Jungle_Outer_Detail,5305,jungle,,base,,,,,,,,
+,,,,,,,,,,,,
+Wooden_Blockade,5306,jungle,,base,,,2,,,,,blocking
+,,,,,,,,,,,,
+Jungle_Tent_1x2,5307,jungle,,base,1 2,1,2,,5,,,blocking; flatFoundation
+,,,,,,,,,,,,
+Sandbag_Bundle,5308,jungle,,base,,,4,,,,,terrainObject; adjustChildrenToTerrain
+Sandbag_Small_Bundle,5315,jungle,,base,,,3,,,,,terrainObject; adjustChildrenToTerrain;freeFacing; freePlacing
+Jungle_Sandbag_Bunker,5309,jungle,,base,2,,,,,,,blocking
+,,,,,,,,,,,,
+Decal_AO,5310,jungle,,,,,,,,,,
+,,,,,,,,,,,,
+Outpost_Slope,5311,jungle,,slopes; base,,,2,,,,,baseHeight
+Outpost_Piece,5312,jungle,,base,,,4,,,,,freeFacing; freePlacing
+Outpost_Top_Fill,5313,jungle,,base,,,4,,,,,
+Outpost_Jungle_Gate,5316,jungle,,base,,,,,,,,baseHeight
+,,,,,,,,,,,,
+Ivy,5314,jungle,,jungle,,,,,,,,
+,,,,,,,,,,,,
+Eagle_Floaty,5317,jungle,,beach,,,,,,,,
+,,,,,,,,,,,,
+Jungle_Section_1x1,5318,jungle,,jungle,1,,,,,,,blocking; adjustChildrenToTerrain
+Jungle_Section_2x2,5319,jungle,,jungle,2,2,,,,,,blocking; adjustChildrenToTerrain
+Jungle_Section_3x3,5320,jungle,,jungle,3,2,,,,,,blocking; adjustChildrenToTerrain
+Jungle_Deforestation_1x1,5339,jungle,,jungle,1,,,,,,,adjustChildrenToTerrain
+Jungle_Deforestation_2x2,5340,jungle,,jungle,2,,,,,,,adjustChildrenToTerrain
+Jungle_Deforestation_3x3,5341,jungle,,jungle,3,,,,,,,adjustChildrenToTerrain
+Corpse_Herbivore,5321,jungle,,carnage,1,,2,,,,,freeFacing; freePlacing; randomRotation
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+Jungle_Road_Cross_Diagonal,5322,jungle,,jungle; road,4,,1,,,,,bendOverTerrain; terrainObject
+Jungle_Road_T_Cross_Diagonal,5323,jungle,,jungle; road,4,,1,,,,,bendOverTerrain; terrainObject
+Jungle_Road_Diagonal_Short,5324,jungle,,jungle; road,3,,1,,,,,bendOverTerrain; terrainObject
+Jungle_Road_Straight_Diagonal_A,5325,jungle,,jungle; road,4,,1,,,,,bendOverTerrain; terrainObject
+Jungle_Road_Straight_Diagonal_B,5326,jungle,,jungle; road,4,,1,,,,,bendOverTerrain; terrainObject
+Jungle_Road_Corner,5327,jungle,,jungle; road,2 2,,1,,,,,bendOverTerrain; terrainObject
+Jungle_Road_Cross,5328,jungle,,jungle; road,4,,1,,,,,bendOverTerrain; terrainObject
+Jungle_Road_Curve,5329,jungle,,jungle; road,5 5,,1,,,,,bendOverTerrain; terrainObject
+Jungle_Road_Curve_Long_A,5330,jungle,,jungle; road,4 6,,1,,,,,bendOverTerrain; terrainObject
+Jungle_Road_Curve_Long_B,5331,jungle,,jungle; road,4 6,,1,,,,,bendOverTerrain; terrainObject
+Jungle_Road_Diagonal,5332,jungle,,jungle; road,4,,1,,,,,bendOverTerrain; terrainObject
+Jungle_Road_Straight,5333,jungle,,jungle; road,2 4,,1,,,,,bendOverTerrain; terrainObject
+Jungle_Road_End,5334,jungle,,jungle; road,2 4,,1,,,,,bendOverTerrain; terrainObject
+Jungle_Road_Straight_Short,5335,jungle,,jungle; road,2 1,,1,,,,,bendOverTerrain; terrainObject
+Jungle_Road_T_Cross,5336,jungle,,jungle; road,3 4,,1,,,,,bendOverTerrain; terrainObject
+Jungle_Road_End2,5337,jungle,,jungle; road,4,,1,,,,,bendOverTerrain; terrainObject
+Jungle_Road_Straight2,5338,jungle,,jungle; road,2 4,,1,,,,,bendOverTerrain
+,,,,,,,,,,,,
+Hopper_Cage_Corner_Bot,5343,jungle,NewDecorations,jungle,,,,,,,,
+Hopper_Cage_Corner_Middle,5344,jungle,NewDecorations,jungle,,,,,,,,
+Hopper_Cage_Corner_Roof,5345,jungle,NewDecorations,jungle,,,,,,,,
+Hopper_Cage_Side_Bot,5346,jungle,NewDecorations,jungle,,,,,,,,
+Hopper_Cage_Side_Middle,5347,jungle,NewDecorations,jungle,,,,,,,,
+Hopper_Cage_Side_Roof,5348,jungle,NewDecorations,jungle,,,,,,,,
+,,,,,,,,,,,,
+Setpiece_Bones,5349,jungle,,jungle,,,,,,,,baseHeight; noEditor

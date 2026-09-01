@@ -1,0 +1,20 @@
+{
+    "name": "CsvTool.Editor",
+    "rootNamespace": "CsvTool.Editor",
+    "references": [
+        "CsvTool.Core",
+        "CsvTool.Schema",
+        "Neo.EditorUI"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,50 @@
+name,id,dlc,featureflag,hitpoints,traits
+Cliffs_A,0,base,,/,elevatedBase; slopeTerrain; randomVariations
+Building_A,1,base,,/,
+Building_B,6,base,,/,
+Building_C,9,base,,/,
+Skyscraper_A,8,base,,/,
+Outpost,2,base,,10,climbable
+Damaged_Outpost,3,base,,10,noEditor
+Destroyed_Wall,4,base,,/,noEditor
+Trenches,7,base,,/,
+Quay,5,base,,/,
+Tunnel_Cliffs,10,base,,/,elevatedBase; slopeTerrain; randomVariations
+Canal_Wall,1001,base,,/,elevatedBase
+Internal_Wall,1002,base,,/,
+Industrial_B,11,lava,,/,
+Spacestation_A,12,lava,,/,
+,,,,,
+// CHEMICAL,,,,,
+Cliffs_Chem,200,chem,,/,elevatedBase; slopeTerrain; randomVariations
+Bug_Prison,201,chem,,,
+Lab_Building,504,chem,,,
+// LAVA,,,,,
+Cliffs_Lava,300,lava,,/,elevatedBase; slopeTerrain; randomVariations
+Cliffs_Lava_Veins,301,lava,,/,elevatedBase; slopeTerrain; randomVariations
+Cliffs_Lava_Tunnel,302,lava,,/,elevatedBase; slopeTerrain; randomVariations
+,,,,,
+// LAB,,,,,
+Cliffs_Purple,100,,LabDLC,/,elevatedBase; slopeTerrain; randomVariations
+Lab,403,,LabDLC,,isUndergroundBlackTop
+,,,,,
+// METRO,,,,,
+Skyscraper_B,400,base,,/,
+UnderConstruction,401,metro,,/,
+Office_Walls,402,metro,,,
+Destroyed,404,base,,,
+Settler_House,405,base,,,
+Warehouse,406,metro,,/,
+,,,,,
+// JUNGLE,,,,,
+Jungle_Cliff,407,jungle,,,elevatedBase; slopeTerrain; randomVariations
+Jungle_Cliff_Climbable,408,jungle,,,elevatedBase; slopeTerrain; randomVariations; climbable
+Jungle_Underground,409,jungle,,,elevatedBase; slopeTerrain
+Settler_House_Jungle,410,jungle,,,
+Jungle_Outpost,411,jungle,,10,climbable;elevatedBase
+,,,,,
+// FROST,,,,,
+Frost_Mountain,500,,FrostDLC,,
+Frost_Cave,501,,FrostDLC,,
+Frost_Train,503,,FrostDLC,,elevatedBase;  climbable
+Frost_Building,502,,FrostDLC,,

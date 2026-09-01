@@ -1,0 +1,22 @@
+{
+    "name": "CsvTool.Recovery.Tests",
+    "rootNamespace": "CsvTool.Editor.Recovery.Tests",
+    "references": [
+        "CsvTool.Editor",
+        "CsvTool.Core"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false,
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ]
+}

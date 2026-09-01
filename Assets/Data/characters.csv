@@ -1,0 +1,25 @@
+name,id,robot,robot2,robot2_old,avatar
+//,,,"This is back to using name, replace commas with pipe (|)",name for reference (should match key but not used),
+,,,,,
+Hawthorne,0,Matthew,Roger - Laid-Back| Casual| Resonant,Roger,hawthorne
+Ava Advisor,1,Kendra,Sarah - Mature| Reassuring| Confident,Sarah,ava_advisor
+Ava Cortez,2,Kendra,Sarah - Mature| Reassuring| Confident,Sarah,ava_commander
+Victor Yarrow,3,Brian,Callum,Callum,victor
+Propagandist,4,Brian,George - Warm| Captivating Storyteller,George,fednet
+Hidden_Hawthorne,6,Matthew,Roger - Laid-Back| Casual| Resonant,Roger,noise
+Announcer,5,Joey,Roger - Laid-Back| Casual| Resonant,Roger,siren
+Hawthorne Private,7,Matthew,Roger - Laid-Back| Casual| Resonant,Roger,hawthorne_private
+Director,8,Kendra,Will,Will,director
+Junior,9,Joey,Adam - Dominant| Firm,Brian,junior
+Merc,10,Matthew,Roger - Laid-Back| Casual| Resonant,Roger,mercenary
+Cop,11,Kendra,Sarah - Mature| Reassuring| Confident,Sarah,cop
+Cop_Vision,13,Kendra,Sarah - Mature| Reassuring| Confident,Sarah,cop_vision
+Cop_Dying,14,Kendra,Sarah - Mature| Reassuring| Confident,Sarah,cop_dying
+Senior,12,Matthew,Roger - Laid-Back| Casual| Resonant,Roger,senior
+Civilian,15,Joey,Adam - Dominant| Firm,Brian,civilian
+Jungle Soldier,16,Kendra,Sarah - Mature| Reassuring| Confident,Sarah,jungle_soldier
+Jungle Reporter,17,Emma,Lily - Velvety Actress,Jessica,jungle_reporter
+Jungle Reporter FEDNET,20,Emma,Lily - Velvety Actress,Jessica,jungle_reporter_fednet
+Adjutant,18,Emma,Sarah - Mature| Reassuring| Confident,Sarah,adjutant
+Scientist,19,Brian,Callum - Husky Trickster,Callum,scientist
+Pilot,21,Joey,Adam - Dominant| Firm,Brian,pilot

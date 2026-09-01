@@ -1,0 +1,205 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ac83c72130b4f1bb995010cdef9e1f4, type: 3}
+  m_Name: CsvWorkspace
+  m_EditorClassIdentifier: CsvTool.Editor::CsvTool.Editor.Configuration.CsvWorkspaceAsset
+  rootDirectory: Assets/Data
+  caseSensitiveNames: 0
+  includeUnconfiguredTables: 1
+  tables:
+  - name: abilities
+    relativePath: abilities.csv
+    description: 
+    enabled: 1
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
+    frozenColumnCount: 0
+    frozenColumns: []
+    columns: []
+  - name: categories
+    relativePath: categories.csv
+    description: 
+    enabled: 1
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
+    frozenColumnCount: 0
+    frozenColumns: []
+    columns: []
+  - name: characters
+    relativePath: characters.csv
+    description: 
+    enabled: 1
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
+    frozenColumnCount: 0
+    frozenColumns: []
+    columns: []
+  - name: classes
+    relativePath: classes.csv
+    description: 
+    enabled: 1
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
+    frozenColumnCount: 0
+    frozenColumns: []
+    columns: []
+  - name: costsTable
+    relativePath: costsTable.csv
+    description: 
+    enabled: 1
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
+    frozenColumnCount: 0
+    frozenColumns: []
+    columns: []
+  - name: dayTime
+    relativePath: dayTime.csv
+    description: 
+    enabled: 1
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
+    frozenColumnCount: 0
+    frozenColumns: []
+    columns: []
+  - name: decorations
+    relativePath: decorations.csv
+    description: 
+    enabled: 1
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
+    frozenColumnCount: 0
+    frozenColumns: []
+    columns: []
+  - name: edges
+    relativePath: edges.csv
+    description: 
+    enabled: 1
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
+    frozenColumnCount: 0
+    frozenColumns: []
+    columns: []
+  - name: landscapes
+    relativePath: landscapes.csv
+    description: 
+    enabled: 1
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
+    frozenColumnCount: 0
+    frozenColumns: []
+    columns: []
+  - name: propulsion
+    relativePath: propulsion.csv
+    description: 
+    enabled: 1
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
+    frozenColumnCount: 0
+    frozenColumns: []
+    columns: []
+  - name: resources
+    relativePath: resources.csv
+    description: 
+    enabled: 1
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
+    frozenColumnCount: 0
+    frozenColumns: []
+    columns: []
+  - name: sounds
+    relativePath: sounds.csv
+    description: 
+    enabled: 1
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
+    frozenColumnCount: 0
+    frozenColumns: []
+    columns: []
+  - name: survival-DEV
+    relativePath: survival-DEV.csv
+    description: 
+    enabled: 1
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
+    frozenColumnCount: 0
+    frozenColumns: []
+    columns: []
+  - name: technologies
+    relativePath: technologies.csv
+    description: 
+    enabled: 1
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
+    frozenColumnCount: 0
+    frozenColumns: []
+    columns: []
+  - name: terrain
+    relativePath: terrain.csv
+    description: 
+    enabled: 1
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
+    frozenColumnCount: 0
+    frozenColumns: []
+    columns: []
+  - name: units
+    relativePath: units.csv
+    description: 
+    enabled: 1
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
+    frozenColumnCount: 1
+    frozenColumns: []
+    columns: []
+  - name: weapons
+    relativePath: weapons.csv
+    description: 
+    enabled: 1
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
+    frozenColumnCount: 0
+    frozenColumns: []
+    columns: []
