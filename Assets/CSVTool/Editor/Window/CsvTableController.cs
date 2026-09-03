@@ -173,6 +173,36 @@ namespace CsvTool.Editor
             return SetCells(new[] { new CsvCellAssignment(recordIndex, columnIndex, value) });
         }
 
+        /// <summary>Inserts a data row before a physical document record, or appends at Records.Count.</summary>
+        public int InsertDataRow(int physicalInsertIndex)
+        {
+            EnsureLoaded();
+            if (physicalInsertIndex < 0 || physicalInsertIndex > Document.Records.Count)
+                throw new ArgumentOutOfRangeException("physicalInsertIndex");
+            List<string> values = new List<string>();
+            for (int i = 0; i < Document.ColumnCount; i++) values.Add(string.Empty);
+            Document.InsertRecord(physicalInsertIndex, values);
+            RebuildSearch();
+            return physicalInsertIndex;
+        }
+
+        /// <summary>Inserts a table column. Index-addressed schema is intentionally blocked because changing it silently would retarget metadata.</summary>
+        public void InsertColumn(int physicalColumnIndex, string header)
+        {
+            EnsureLoaded();
+            if (HasIndexBasedSchemaAtOrAfter(physicalColumnIndex))
+                throw new InvalidOperationException("This table uses index-based schema metadata at or after this column. Update the workspace configuration explicitly before inserting a column.");
+            List<int> records = new List<int>();
+            for (int i = 0; i < Document.Records.Count; i++)
+            {
+                CsvRecordKind kind = Document.Records[i].Kind;
+                if (kind == CsvRecordKind.Header || kind == CsvRecordKind.Data) records.Add(i);
+            }
+            Document.InsertColumn(physicalColumnIndex, records, header ?? string.Empty);
+            ResolveSchema();
+            RebuildSearch();
+        }
+
         /// <summary>
         /// Applies a collection of physical cell assignments as one undoable
         /// operation. All coordinates and edit permissions are preflighted
@@ -347,6 +377,16 @@ namespace CsvTool.Editor
                 if (column.IsResolved && column.PhysicalIndex == columnIndex &&
                     column.Schema != null && column.Schema.ReadOnly) return true;
             }
+            return false;
+        }
+
+        private bool HasIndexBasedSchemaAtOrAfter(int columnIndex)
+        {
+            if (Schema == null) return false;
+            if (Schema.IdentityColumnIndex >= columnIndex || Schema.DisplayColumnIndex >= columnIndex) return true;
+            if (Schema.Columns == null) return false;
+            for (int i = 0; i < Schema.Columns.Count; i++)
+                if (Schema.Columns[i] != null && Schema.Columns[i].Index >= columnIndex) return true;
             return false;
         }
 

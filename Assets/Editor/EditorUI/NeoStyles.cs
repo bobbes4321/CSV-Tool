@@ -17,6 +17,7 @@ namespace Neo.EditorUI
         private static GUIStyle s_popupItem;
         private static GUIStyle s_popupSearchHint;
         private static GUIStyle s_centeredBold;
+        private static GUIStyle s_autocompleteItem;
 
         public static GUIStyle HeaderTitle =>
             s_headerTitle ?? (s_headerTitle = new GUIStyle(EditorStyles.boldLabel)
@@ -69,6 +70,16 @@ namespace Neo.EditorUI
             s_centeredBold ?? (s_centeredBold = new GUIStyle(EditorStyles.boldLabel)
             {
                 alignment = TextAnchor.MiddleCenter
+            });
+
+        public static GUIStyle AutocompleteItem =>
+            s_autocompleteItem ?? (s_autocompleteItem = new GUIStyle(EditorStyles.label)
+            {
+                alignment = TextAnchor.MiddleLeft,
+                clipping = TextClipping.Clip,
+                padding = new RectOffset(8, 8, 0, 0),
+                normal = { textColor = NeoColors.GridCellText },
+                hover = { textColor = NeoColors.GridCellText }
             });
     }
 }

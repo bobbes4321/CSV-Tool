@@ -25,7 +25,6 @@ namespace CsvTool.Editor
         private static GUIContent s_tempContent;
         private static GUIStyle s_cellStyle;
         private static GUIStyle s_editCellStyle;
-        private static GUIStyle s_autocompleteItemStyle;
         private static GUIStyle s_headerStyle;
         private static GUIStyle s_rowNumberStyle;
 
@@ -82,6 +81,10 @@ namespace CsvTool.Editor
         // coordinates, while edits continue to carry physical CsvDocument record indices.
         private int _anchorRow = -1;
         private int _anchorColumn = -1;
+        // A left-button drag starts from an ordinary cell click and moves only the active
+        // corner. Keeping the anchor separate is what makes click-and-drag match Shift+arrow
+        // range selection without ever converting visual rows into physical record indices.
+        private bool _isRangeDragging;
 
         private const string EditControlName = "CsvGridCellEdit";
 
@@ -118,7 +121,7 @@ namespace CsvTool.Editor
         /// <summary>Raised when an edit is committed. The document is deliberately not mutated here.</summary>
         public event Action<CsvGridCellEdit> CellEditCommitted;
 
-        /// <summary>Raised for a multi-cell paste. The grid never mutates the document.</summary>
+        /// <summary>Raised for a multi-cell edit such as paste or clearing a selection. The grid never mutates the document.</summary>
         public event Action<CsvGridBatchEdit> BatchEditCommitted;
 
         /// <summary>Alias for consumers which name the event after the paste operation.</summary>
@@ -141,6 +144,9 @@ namespace CsvTool.Editor
 
         /// <summary>Raised when Ctrl-click requests navigation from a cell value.</summary>
         public event Action<int, int, string> ReferenceNavigationRequested;
+
+        /// <summary>Requests a spreadsheet-style row/column context menu. Coordinates remain physical.</summary>
+        public event Action<CsvGridSelection, bool, Vector2> StructureMenuRequested;
 
         /// <summary>Requests capped suggestions without requiring the popup to be visible.</summary>
         public IReadOnlyList<string> GetAutocompleteSuggestions(int physicalRecord, int column, string editText)
@@ -181,6 +187,7 @@ namespace CsvTool.Editor
             _anchorRow = _anchorColumn = -1;
             _visibleStats = CsvGridVisibleStats.Empty;
             _resizingColumn = -1;
+            _isRangeDragging = false;
             ClearEditState();
             ClearAutocomplete();
         }
@@ -391,6 +398,8 @@ namespace CsvTool.Editor
             _rowMapInitialized = false;
             _scrollPosition = Vector2.zero;
             _resizingColumn = -1;
+            _isRangeDragging = false;
+            _anchorRow = _anchorColumn = -1;
             ClearEditState();
 
             if (document == null)
@@ -574,6 +583,25 @@ namespace CsvTool.Editor
             if (HandleAutocompleteInput(current))
                 return;
 
+            if (current.type == EventType.ContextClick)
+            {
+                bool header = _headerRect.Contains(current.mousePosition);
+                Rect rowGutter = new Rect(_lastRect.x, _bodyRect.y, _settings.RowNumberWidth, _bodyRect.height);
+                bool gutter = rowGutter.Contains(current.mousePosition);
+                if (_bodyRect.Contains(current.mousePosition) || header || gutter)
+                {
+                    int row = header ? (_selection.IsValid ? _selection.Row : 0) : RowAtScreenY(current.mousePosition.y);
+                    int column = gutter ? (_selection.IsValid ? _selection.Column : 0) : ColumnAtScreenX(current.mousePosition.x);
+                    if (row >= 0 && column >= 0)
+                    {
+                        SelectCell(row, column, false);
+                        StructureMenuRequested?.Invoke(_selection, header, current.mousePosition);
+                        current.Use();
+                        return;
+                    }
+                }
+            }
+
             if (current.type == EventType.KeyDown)
             {
                 if (_isEditing)
@@ -620,6 +648,23 @@ namespace CsvTool.Editor
                 if (current.type == EventType.MouseUp)
                 {
                     _resizingColumn = -1;
+                    GUIUtility.hotControl = 0;
+                    current.Use();
+                    return;
+                }
+            }
+
+            if (_isRangeDragging)
+            {
+                if (current.type == EventType.MouseDrag)
+                {
+                    UpdateRangeDrag(current.mousePosition);
+                    current.Use();
+                    return;
+                }
+                if (current.type == EventType.MouseUp)
+                {
+                    _isRangeDragging = false;
                     GUIUtility.hotControl = 0;
                     current.Use();
                     return;
@@ -686,7 +731,11 @@ namespace CsvTool.Editor
                         if (current.clickCount >= 2)
                             BeginEdit();
                         else
+                        {
+                            _isRangeDragging = true;
+                            GUIUtility.hotControl = _controlId;
                             GUIUtility.keyboardControl = _controlId;
+                        }
                         current.Use();
                         return;
                     }
@@ -743,7 +792,7 @@ namespace CsvTool.Editor
             if (!command && !current.shift &&
                 (current.keyCode == KeyCode.Delete || current.keyCode == KeyCode.Backspace))
             {
-                ClearSelectedCell();
+                ClearSelection();
                 current.Use();
                 return true;
             }
@@ -935,6 +984,11 @@ namespace CsvTool.Editor
             _editingColumn = _selection.Column;
             _editingOldValue = _document.GetCell(_editingRecordIndex, _editingColumn);
             _editingText = _editingOldValue;
+            // A double-click reaches BeginEdit before the named TextField exists for this
+            // IMGUI pass. Claim focus for the grid immediately so a previously focused
+            // Record/Inspector field drawn later in the same event cannot restart its old
+            // edit session and display suggestions for the wrong column.
+            GUIUtility.keyboardControl = _controlId;
             _editFocusPending = true;
             ClearAutocomplete();
             _autocompleteSuppressed = false;
@@ -966,12 +1020,42 @@ namespace CsvTool.Editor
             CommitValue(value ?? string.Empty, _selection.RecordIndex, _selection.Column, oldValue);
         }
 
-        private void ClearSelectedCell()
+        /// <summary>
+        /// Clears all non-empty cells in the current rectangular selection. Multiple cells are
+        /// emitted as one batch so the owner can validate and undo them atomically.
+        /// </summary>
+        public bool ClearSelection()
         {
-            if (!_selection.IsValid || _document == null) return;
-            CommitValue(string.Empty, _selection.RecordIndex, _selection.Column,
-                _document.GetCell(_selection.RecordIndex, _selection.Column));
+            if (!_selection.IsValid || _document == null) return false;
+            CsvGridRangeSelection range = RangeSelection;
+            if (!range.IsValid) range = new CsvGridRangeSelection(_selection.Row, _selection.Column,
+                _selection.Row, _selection.Column);
+
+            if (range.IsSingleCell)
+            {
+                string oldValue = _document.GetCell(_selection.RecordIndex, _selection.Column);
+                CommitValue(string.Empty, _selection.RecordIndex, _selection.Column, oldValue);
+                GUI.changed = true;
+                return !string.IsNullOrEmpty(oldValue);
+            }
+
+            List<CsvGridCellEdit> edits = new List<CsvGridCellEdit>();
+            for (int row = range.TopRow; row <= range.BottomRow; row++)
+            {
+                int recordIndex = GetRecordIndex(row);
+                if (recordIndex < 0) continue;
+                for (int column = range.LeftColumn; column <= range.RightColumn; column++)
+                {
+                    string oldValue = _document.GetCell(recordIndex, column);
+                    if (!string.IsNullOrEmpty(oldValue))
+                        edits.Add(new CsvGridCellEdit(_document, recordIndex, column, oldValue, string.Empty));
+                }
+            }
+
+            if (edits.Count == 0) return false;
+            BatchEditCommitted?.Invoke(new CsvGridBatchEdit(_document, edits, false));
             GUI.changed = true;
+            return true;
         }
 
         private void CommitValue(string value, int recordIndex, int column, string oldValue)
@@ -1017,39 +1101,10 @@ namespace CsvTool.Editor
 
         private bool HandleAutocompleteInput(Event current)
         {
-            if (!_isEditing || !_autocompleteVisible || _autocompleteSuggestions.Count == 0 ||
-                !_autocompleteRect.Contains(current.mousePosition))
-                return false;
-
-            if (current.type == EventType.MouseMove)
-            {
-                int hovered = Mathf.FloorToInt((current.mousePosition.y - _autocompleteRect.y) /
-                    _settings.RowHeight);
-                hovered = Mathf.Clamp(hovered, 0, Mathf.Min(8, _autocompleteSuggestions.Count) - 1);
-                if (_autocompleteSelection != hovered)
-                {
-                    _autocompleteSelection = hovered;
-                    GUI.changed = true;
-                    RepaintRequested?.Invoke();
-                }
-                return true;
-            }
-
-            if (current.type == EventType.MouseDown && current.button == 0)
-            {
-                int clicked = Mathf.FloorToInt((current.mousePosition.y - _autocompleteRect.y) /
-                    _settings.RowHeight);
-                int visibleCount = Mathf.Min(8, _autocompleteSuggestions.Count);
-                if (clicked >= 0 && clicked < visibleCount)
-                {
-                    _autocompleteSelection = clicked;
-                    AcceptAutocomplete();
-                    current.Use();
-                    return true;
-                }
-            }
-
-            return false;
+            if (!_isEditing || !_autocompleteVisible) return false;
+            return NeoAutocompleteOverlay.HandleInput(current, _autocompleteRect,
+                _autocompleteSuggestions.Count, _settings.RowHeight, ref _autocompleteSelection,
+                () => { AcceptAutocomplete(); }, RepaintRequested);
         }
 
         private void RefreshAutocomplete(bool force)
@@ -1094,29 +1149,10 @@ namespace CsvTool.Editor
             if (!_isEditing || !_autocompleteVisible || _autocompleteSuggestions.Count == 0) return;
             if (Event.current.type != EventType.Repaint) return;
 
-            // Draw an opaque overlay so suggestions remain readable over the cells beneath it.
-            // The popup is kept in the window's GUI coordinates, outside the body clips.
             float height = Mathf.Min(8, _autocompleteSuggestions.Count) * _settings.RowHeight;
             _autocompleteRect = new Rect(_autocompleteRect.x, _autocompleteRect.y, 280f, height);
-            EditorGUI.DrawRect(_autocompleteRect, NeoColors.GridBackground);
-            EditorGUI.DrawRect(new Rect(_autocompleteRect.x, _autocompleteRect.y,
-                _autocompleteRect.width, 1f), NeoColors.GridSelectionBorder);
-            EditorGUI.DrawRect(new Rect(_autocompleteRect.x, _autocompleteRect.yMax - 1f,
-                _autocompleteRect.width, 1f), NeoColors.GridSelectionBorder);
-            EditorGUI.DrawRect(new Rect(_autocompleteRect.x, _autocompleteRect.y, 1f,
-                _autocompleteRect.height), NeoColors.GridSelectionBorder);
-            EditorGUI.DrawRect(new Rect(_autocompleteRect.xMax - 1f, _autocompleteRect.y, 1f,
-                _autocompleteRect.height), NeoColors.GridSelectionBorder);
-
-            int visibleCount = Mathf.Min(8, _autocompleteSuggestions.Count);
-            for (int i = 0; i < visibleCount; i++)
-            {
-                Rect item = new Rect(_autocompleteRect.x, _autocompleteRect.y + i * _settings.RowHeight,
-                    _autocompleteRect.width, _settings.RowHeight);
-                if (i == _autocompleteSelection)
-                    EditorGUI.DrawRect(item, NeoColors.GridSelectionFillStrong);
-                GUI.Label(item, _autocompleteSuggestions[i], AutocompleteItemStyle);
-            }
+            NeoAutocompleteOverlay.Draw(_autocompleteRect, _autocompleteSuggestions,
+                _autocompleteSelection, _settings.RowHeight);
         }
 
         private void HandleKeyboard(Event current)
@@ -1155,6 +1191,18 @@ namespace CsvTool.Editor
             float local = screenY - _bodyRect.y + _scrollPosition.y;
             int row = Mathf.FloorToInt(local / _settings.RowHeight);
             return row >= 0 && row < _bodyRecordIndices.Count ? row : -1;
+        }
+
+        private void UpdateRangeDrag(Vector2 mousePosition)
+        {
+            // IMGUI keeps sending drag events to our hot control after the pointer leaves the
+            // body. Clamp to the body so a quick drag to an edge still selects the last visible
+            // cell instead of dropping the range update altogether.
+            float x = Mathf.Clamp(mousePosition.x, _bodyRect.x, _bodyRect.xMax - 0.01f);
+            float y = Mathf.Clamp(mousePosition.y, _bodyRect.y, _bodyRect.yMax - 0.01f);
+            int row = RowAtScreenY(y);
+            int column = ColumnAtScreenX(x);
+            if (row >= 0 && column >= 0) SetRangeCell(row, column);
         }
 
         private int ColumnAtScreenX(float screenX)
@@ -1620,25 +1668,6 @@ namespace CsvTool.Editor
             }
         }
 
-        private static GUIStyle AutocompleteItemStyle
-        {
-            get
-            {
-                if (s_autocompleteItemStyle == null)
-                {
-                    s_autocompleteItemStyle = new GUIStyle(EditorStyles.label)
-                    {
-                        alignment = TextAnchor.MiddleLeft,
-                        clipping = TextClipping.Clip,
-                        padding = new RectOffset(8, 8, 0, 0)
-                    };
-                    s_autocompleteItemStyle.normal.textColor = NeoColors.GridCellText;
-                    s_autocompleteItemStyle.hover.textColor = NeoColors.GridCellText;
-                }
-                return s_autocompleteItemStyle;
-            }
-        }
-
         private static GUIStyle HeaderStyle
         {
             get
@@ -1713,7 +1742,7 @@ namespace CsvTool.Editor
         public static CsvGridRangeSelection Invalid { get { return new CsvGridRangeSelection(-1, -1, -1, -1); } }
     }
 
-    /// <summary>One immutable batch of physical document edits emitted by a grid paste.</summary>
+    /// <summary>One immutable batch of physical document edits emitted by the grid.</summary>
     public sealed class CsvGridBatchEdit
     {
         private readonly List<CsvGridCellEdit> _edits;

@@ -47,10 +47,13 @@ namespace CsvTool.Core
         {
             get
             {
+                if (HasStructuralChanges) return true;
                 for (int i = 0; i < _records.Count; i++) if (_records[i].IsDirty) return true;
                 return false;
             }
         }
+
+        public bool HasStructuralChanges { get; private set; }
 
         public int ColumnCount
         {
@@ -121,6 +124,46 @@ namespace CsvTool.Core
             if (string.Equals(oldValue, value, StringComparison.Ordinal)) return false;
             record.SetValue(columnIndex, value);
             History.Record(new CsvCellEdit(recordIndex, columnIndex, oldValue, value, oldCellCount, record.CellCount));
+            return true;
+        }
+
+        /// <summary>Inserts a physical data record. The index is a document record index, never a filtered view index.</summary>
+        public bool InsertRecord(int recordIndex, IReadOnlyList<string> values)
+        {
+            if (recordIndex < 0 || recordIndex > _records.Count) throw new ArgumentOutOfRangeException("recordIndex");
+            List<string> copied = new List<string>();
+            if (values != null) for (int i = 0; i < values.Count; i++) copied.Add(values[i] ?? string.Empty);
+            string ending = recordIndex < _records.Count ? _newline : (_hasFinalNewline ? _newline : string.Empty);
+            bool wasStructural = HasStructuralChanges;
+            CsvRecord inserted = CsvRecord.CreateInserted(recordIndex, CsvRecordKind.Data, copied, ending);
+            _records.Insert(recordIndex, inserted);
+            RenumberRecords();
+            HasStructuralChanges = true;
+            History.RecordOperation(new CsvInsertRecordOperation(recordIndex, copied, wasStructural));
+            return true;
+        }
+
+        /// <summary>Inserts a value into each supplied physical record at one physical column.</summary>
+        public bool InsertColumn(int columnIndex, IReadOnlyList<int> recordIndices, string headerValue)
+        {
+            if (columnIndex < 0 || columnIndex > ColumnCount) throw new ArgumentOutOfRangeException("columnIndex");
+            if (recordIndices == null) throw new ArgumentNullException("recordIndices");
+            List<int> targets = new List<int>();
+            for (int i = 0; i < recordIndices.Count; i++)
+            {
+                int index = recordIndices[i];
+                if (index < 0 || index >= _records.Count) throw new ArgumentOutOfRangeException("recordIndices");
+                if (!targets.Contains(index)) targets.Add(index);
+            }
+            bool wasStructural = HasStructuralChanges;
+            List<int> oldCellCounts = new List<int>(targets.Count);
+            for (int i = 0; i < targets.Count; i++)
+            {
+                oldCellCounts.Add(_records[targets[i]].CellCount);
+                _records[targets[i]].InsertValue(columnIndex, targets[i] == FindHeaderRecordIndex() ? headerValue : string.Empty);
+            }
+            HasStructuralChanges = true;
+            History.RecordOperation(new CsvInsertColumnOperation(columnIndex, targets, oldCellCounts, headerValue, wasStructural));
             return true;
         }
 
@@ -264,7 +307,7 @@ namespace CsvTool.Core
                 CsvRecord record = _records[i];
                 text.Append(record.GetRawContent());
                 string lineEnding = record.OriginalLineEnding;
-                if (record.IsDirty && lineEnding.Length == 0 && i < _records.Count - 1) lineEnding = _newline;
+                if (lineEnding.Length == 0 && i < _records.Count - 1) lineEnding = _newline;
                 text.Append(lineEnding);
             }
             return EncodingInfo.Encode(text.ToString());
@@ -302,6 +345,7 @@ namespace CsvTool.Core
             _sourcePath = destination;
             for (int i = 0; i < _records.Count; i++) _records[i].MarkClean(_records[i].GetRawContent());
             History.Clear();
+            HasStructuralChanges = false;
         }
 
         /// <summary>Compares file paths using the platform's expected case rules for conflict detection.</summary>
@@ -322,6 +366,33 @@ namespace CsvTool.Core
         {
             if (recordIndex < 0 || recordIndex >= _records.Count) throw new ArgumentOutOfRangeException("recordIndex");
             _records[recordIndex].RestoreValue(columnIndex, value, targetCellCount);
+        }
+
+        private int FindHeaderRecordIndex()
+        {
+            for (int i = 0; i < _records.Count; i++) if (_records[i].Kind == CsvRecordKind.Header) return i;
+            return -1;
+        }
+
+        private void RenumberRecords()
+        {
+            for (int i = 0; i < _records.Count; i++) _records[i].Index = i;
+        }
+
+        private sealed class CsvInsertRecordOperation : ICsvEditOperation
+        {
+            private readonly int index; private readonly List<string> values; private readonly bool wasStructural;
+            public CsvInsertRecordOperation(int index, List<string> values, bool wasStructural) { this.index = index; this.values = new List<string>(values); this.wasStructural = wasStructural; }
+            public void Undo(CsvDocument document) { document._records.RemoveAt(index); document.RenumberRecords(); document.HasStructuralChanges = wasStructural; }
+            public void Redo(CsvDocument document) { document._records.Insert(index, CsvRecord.CreateInserted(index, CsvRecordKind.Data, values, index < document._records.Count ? document._newline : (document._hasFinalNewline ? document._newline : string.Empty))); document.RenumberRecords(); document.HasStructuralChanges = true; }
+        }
+
+        private sealed class CsvInsertColumnOperation : ICsvEditOperation
+        {
+            private readonly int column; private readonly List<int> records; private readonly List<int> oldCellCounts; private readonly string header; private readonly bool wasStructural;
+            public CsvInsertColumnOperation(int column, List<int> records, List<int> oldCellCounts, string header, bool wasStructural) { this.column = column; this.records = new List<int>(records); this.oldCellCounts = new List<int>(oldCellCounts); this.header = header ?? string.Empty; this.wasStructural = wasStructural; }
+            public void Undo(CsvDocument document) { for (int i = records.Count - 1; i >= 0; i--) { document._records[records[i]].RemoveValue(column); document._records[records[i]].SetCellCount(oldCellCounts[i]); } document.HasStructuralChanges = wasStructural; }
+            public void Redo(CsvDocument document) { int headerIndex = document.FindHeaderRecordIndex(); for (int i = 0; i < records.Count; i++) document._records[records[i]].InsertValue(column, records[i] == headerIndex ? header : string.Empty); document.HasStructuralChanges = true; }
         }
 
         private void ValidateCoordinate(int recordIndex, int columnIndex)

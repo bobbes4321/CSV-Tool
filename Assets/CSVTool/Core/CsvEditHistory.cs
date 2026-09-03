@@ -76,10 +76,24 @@ namespace CsvTool.Core
         }
     }
 
+    internal interface ICsvEditOperation
+    {
+        void Undo(CsvDocument document);
+        void Redo(CsvDocument document);
+    }
+
+    internal sealed class CsvCellEditOperation : ICsvEditOperation
+    {
+        private readonly List<CsvCellEdit> edits;
+        public CsvCellEditOperation(List<CsvCellEdit> edits) { this.edits = new List<CsvCellEdit>(edits); }
+        public void Undo(CsvDocument document) { for (int i = edits.Count - 1; i >= 0; i--) { CsvCellEdit edit = edits[i]; document.ApplyHistoryValue(edit.RecordIndex, edit.ColumnIndex, edit.OldValue, edit.OldCellCount); } }
+        public void Redo(CsvDocument document) { for (int i = 0; i < edits.Count; i++) { CsvCellEdit edit = edits[i]; document.ApplyHistoryValue(edit.RecordIndex, edit.ColumnIndex, edit.NewValue, edit.NewCellCount); } }
+    }
+
     /// <summary>A small command history independent of Unity's Undo system and serialized object state.</summary>
     public sealed class CsvEditHistory
     {
-        private readonly List<CsvEditBatch> _batches = new List<CsvEditBatch>();
+        private readonly List<ICsvEditOperation> _batches = new List<ICsvEditOperation>();
         private int _cursor;
 
         /// <summary>Number of undoable operations. A batch is one operation.</summary>
@@ -96,7 +110,15 @@ namespace CsvTool.Core
         {
             if (edits == null || edits.Count == 0) return;
             if (_cursor < _batches.Count) _batches.RemoveRange(_cursor, _batches.Count - _cursor);
-            _batches.Add(new CsvEditBatch(new List<CsvCellEdit>(edits)));
+            _batches.Add(new CsvCellEditOperation(edits));
+            _cursor++;
+        }
+
+        internal void RecordOperation(ICsvEditOperation operation)
+        {
+            if (operation == null) throw new ArgumentNullException("operation");
+            if (_cursor < _batches.Count) _batches.RemoveRange(_cursor, _batches.Count - _cursor);
+            _batches.Add(operation);
             _cursor++;
         }
 
@@ -104,12 +126,7 @@ namespace CsvTool.Core
         {
             if (document == null) throw new ArgumentNullException("document");
             if (!CanUndo) return false;
-            CsvEditBatch batch = _batches[_cursor - 1];
-            for (int i = batch.Edits.Count - 1; i >= 0; i--)
-            {
-                CsvCellEdit edit = batch.Edits[i];
-                document.ApplyHistoryValue(edit.RecordIndex, edit.ColumnIndex, edit.OldValue, edit.OldCellCount);
-            }
+            _batches[_cursor - 1].Undo(document);
             _cursor--;
             return true;
         }
@@ -118,12 +135,7 @@ namespace CsvTool.Core
         {
             if (document == null) throw new ArgumentNullException("document");
             if (!CanRedo) return false;
-            CsvEditBatch batch = _batches[_cursor];
-            for (int i = 0; i < batch.Edits.Count; i++)
-            {
-                CsvCellEdit edit = batch.Edits[i];
-                document.ApplyHistoryValue(edit.RecordIndex, edit.ColumnIndex, edit.NewValue, edit.NewCellCount);
-            }
+            _batches[_cursor].Redo(document);
             _cursor++;
             return true;
         }

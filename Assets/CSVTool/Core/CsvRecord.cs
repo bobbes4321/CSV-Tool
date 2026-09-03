@@ -66,6 +66,39 @@ namespace CsvTool.Core
             while (_values.Count < count) _values.Add(string.Empty);
         }
 
+        internal void InsertValue(int columnIndex, string value)
+        {
+            if (columnIndex < 0) throw new ArgumentOutOfRangeException("columnIndex");
+            EnsureColumnCount(columnIndex);
+            _values.Insert(columnIndex, value ?? string.Empty);
+            _isDirty = !ValuesEqual(_values, _originalValues);
+        }
+
+        internal void RemoveValue(int columnIndex)
+        {
+            if (columnIndex < 0 || columnIndex >= _values.Count) throw new ArgumentOutOfRangeException("columnIndex");
+            _values.RemoveAt(columnIndex);
+            _isDirty = !ValuesEqual(_values, _originalValues);
+        }
+
+        internal void SetCellCount(int count)
+        {
+            if (count < 0) throw new ArgumentOutOfRangeException("count");
+            while (_values.Count > count) _values.RemoveAt(_values.Count - 1);
+            EnsureColumnCount(count);
+            _isDirty = !ValuesEqual(_values, _originalValues);
+        }
+
+        internal static CsvRecord CreateInserted(int index, CsvRecordKind kind, IReadOnlyList<string> values, string lineEnding)
+        {
+            List<string> copied = new List<string>();
+            if (values != null) for (int i = 0; i < values.Count; i++) copied.Add(values[i] ?? string.Empty);
+            CsvRecord record = new CsvRecord(index, kind, string.Empty, lineEnding, copied, false);
+            record._originalValues.Clear();
+            record._isDirty = true;
+            return record;
+        }
+
         internal void RestoreValue(int columnIndex, string value, int targetCellCount)
         {
             if (targetCellCount < 0)

@@ -28,7 +28,8 @@ The toolbar **Filter** narrows visible records. Ctrl/Cmd+F opens a contextual
 cell finder which ranks properties and values on the selected record first;
 Ctrl/Cmd+G opens **Go to Column**. The optional **Inspector** keeps a compact
 Record view beside the Grid. **All rows** includes comments, sections, and
-blank separators. Enable **Edit structure** before changing those rows.
+blank separators. Enable **Edit non-data rows** before changing those existing
+rows; it does not add or remove rows or columns, and the header remains read-only.
 Ctrl/Cmd-click a configured reference to navigate to its target row.
 
 ## Project map

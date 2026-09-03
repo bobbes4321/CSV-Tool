@@ -15,6 +15,7 @@ namespace CsvTool.Editor
     /// </summary>
     public sealed class CsvRecordView
     {
+        private static int nextViewId;
         private const float DefaultListWidth = 220f;
         private const float ListRowHeight = 22f;
         private const float FieldRowHeight = 20f;
@@ -32,10 +33,33 @@ namespace CsvTool.Editor
         private int selectedRecordIndex = -1;
         private string lastError = string.Empty;
         private readonly CsvRecordForm form;
+        private string autocompleteText;
+        private string autocompleteQuery;
+        private int autocompleteRecord = -1;
+        private int autocompleteColumn = -1;
+        private int autocompleteSelection;
+        private bool autocompleteVisible;
+        private bool autocompleteSuppressed;
+        private Rect autocompleteRect;
+        private Vector2 autocompleteScreenAnchor;
+        private readonly List<string> autocompleteSuggestions = new List<string>();
+        private readonly Dictionary<string, string> editBuffers = new Dictionary<string, string>();
+        private string activeControlName;
+        private int activeRecord = -1;
+        private int activeColumn = -1;
+        private bool editFocusPending;
+        private bool activeControlDrawnThisPass;
+        private bool activeControlFocusedThisPass;
+        private readonly int viewId;
+
+        public Func<int, int, string, IReadOnlyList<string>> AutocompleteProvider { get; set; }
+        public int AutocompleteMaxSuggestions = 8;
+        public bool AutocompleteWhileTyping = true;
 
         public CsvRecordView(CsvTableController controller, CsvTableSchema schema = null,
             CsvRecordViewDefinition definition = null)
         {
+            viewId = ++nextViewId;
             form = new CsvRecordForm(this);
             this.definition = definition;
             Bind(controller, schema, definition);
@@ -59,6 +83,9 @@ namespace CsvTool.Editor
         public IReadOnlyList<CsvRecordFieldGroup> Groups { get { return groups; } }
         public IReadOnlyList<int> FilteredRecordIndices { get { return filteredRecords; } }
         public CsvRecordForm Form { get { return form; } }
+        public bool IsEditing { get { return activeRecord >= 0 && activeColumn >= 0; } }
+        public bool IsAutocompleteVisible { get { return autocompleteVisible; } }
+        public IReadOnlyList<string> AutocompleteSuggestions { get { return autocompleteSuggestions; } }
 
         /// <summary>Raised after a successful controller.SetCell call.</summary>
         public event Action<CsvRecordViewCellEdit> CellEditCommitted;
@@ -69,9 +96,28 @@ namespace CsvTool.Editor
         /// <summary>Useful for a host window that owns recovery journals and repainting.</summary>
         public event Action RepaintRequested;
 
+        /// <summary>Requests capped suggestions using physical document coordinates.</summary>
+        public IReadOnlyList<string> GetAutocompleteSuggestions(int physicalRecordIndex,
+            int physicalColumnIndex, string editText)
+        {
+            List<string> result = new List<string>();
+            if (AutocompleteProvider == null) return result;
+            IReadOnlyList<string> provided = AutocompleteProvider(physicalRecordIndex,
+                physicalColumnIndex, editText ?? string.Empty);
+            int cap = Mathf.Clamp(AutocompleteMaxSuggestions, 1,
+                NeoAutocompleteOverlay.MaxVisibleSuggestions);
+            if (provided != null)
+                for (int i = 0; i < provided.Count && result.Count < cap; i++)
+                    if (provided[i] != null) result.Add(provided[i]);
+            return result;
+        }
+
         public void Bind(CsvTableController nextController, CsvTableSchema nextSchema = null,
             CsvRecordViewDefinition nextDefinition = null)
         {
+            // Rebinding is used after edits and configuration changes. Never discard a live
+            // delayed field value merely because the host is refreshing this projection.
+            CommitEditing();
             controller = nextController;
             schema = nextSchema ?? (nextController == null ? null : nextController.Schema);
             if (nextDefinition != null || definition == null) definition = nextDefinition;
@@ -79,10 +125,12 @@ namespace CsvTool.Editor
             RebuildRecordList();
             if (!IsVisible(selectedRecordIndex)) selectedRecordIndex = filteredRecords.Count == 0 ? -1 : filteredRecords[0];
             lastError = string.Empty;
+            ClearEditSession();
         }
 
         public void SetDefinition(CsvRecordViewDefinition nextDefinition)
         {
+            CommitEditing();
             definition = nextDefinition;
             RefreshFields();
             RebuildRecordList();
@@ -98,6 +146,7 @@ namespace CsvTool.Editor
         {
             search = search ?? string.Empty;
             if (string.Equals(recordSearch, search, StringComparison.Ordinal)) return;
+            CommitEditing();
             recordSearch = search;
             RebuildRecordList();
             if (!IsVisible(selectedRecordIndex)) selectedRecordIndex = filteredRecords.Count == 0 ? -1 : filteredRecords[0];
@@ -107,11 +156,38 @@ namespace CsvTool.Editor
         {
             if (!IsVisible(physicalRecordIndex)) return false;
             if (selectedRecordIndex == physicalRecordIndex) return true;
+            CommitEditing();
             selectedRecordIndex = physicalRecordIndex;
             lastError = string.Empty;
             if (RecordSelected != null) RecordSelected(physicalRecordIndex);
             if (RepaintRequested != null) RepaintRequested();
             return true;
+        }
+
+        /// <summary>
+        /// Commits this view's one explicit edit session. Hosts call this before transferring
+        /// selection to another surface, so a record popup can never outlive its owning field.
+        /// </summary>
+        public void CommitEditing()
+        {
+            if (activeRecord < 0 || activeColumn < 0 || controller == null)
+            {
+                ClearEditSession();
+                return;
+            }
+
+            int record = activeRecord;
+            int column = activeColumn;
+            string value = autocompleteText ?? string.Empty;
+            ClearEditSession();
+            string current = controller.GetCell(record, column);
+            if (!string.Equals(value, current, StringComparison.Ordinal)) TryCommitCell(record, column, value);
+        }
+
+        /// <summary>Cancels this view's active edit session without changing the CSV document.</summary>
+        public void CancelEditing()
+        {
+            ClearEditSession();
         }
 
         public bool SelectFilteredRecord(int listIndex)
@@ -277,6 +353,17 @@ private void DrawDetails(Rect rect)
                 GUI.Label(new Rect(rect.x + 5f, rect.y, rect.width - 10f, 28f), lastError, EditorStyles.helpBox);
             Rect body = new Rect(rect.x, rect.y + errorHeight, rect.width,
                 Mathf.Max(1f, rect.height - errorHeight));
+            activeControlDrawnThisPass = false;
+            activeControlFocusedThisPass = false;
+            // Autocomplete must see pointer events before the focused TextField or an overlapped
+            // field consumes them.
+            if (autocompleteVisible)
+            {
+                // Use the rectangle cached by the repaint which actually drew the popup. Calling
+                // ScreenToGUIPoint here, before entering the scroll view, produces a different
+                // clip-space origin in docked/floating editor layouts and makes clicks fall through.
+                HandleAutocompleteMouse(Event.current);
+            }
             float contentHeight = EstimateContentHeight();
             detailScroll = GUI.BeginScrollView(body, detailScroll,
                 new Rect(0f, 0f, body.width - 14f, Mathf.Max(body.height, contentHeight)));
@@ -302,6 +389,10 @@ private void DrawDetails(Rect rect)
                 y += 4f;
             }
             GUI.EndScrollView();
+            if (autocompleteVisible && Event.current.type == EventType.Repaint)
+                PositionAutocomplete(body);
+            DrawAutocompletePopup();
+            CommitIfFocusMoved();
         }
 
 
@@ -339,12 +430,60 @@ private void DrawDetails(Rect rect)
             }
             else
             {
-                // DelayedTextField keeps typing local to Unity's control and sends
-                // one SetCell operation on Enter/focus loss, avoiding history spam.
-                next = EditorGUI.DelayedTextField(valueRect, current);
+                string controlName = "CsvRecordField_" + viewId + "_" + selectedRecordIndex + "_" + field.ColumnIndex;
+                string bufferKey = selectedRecordIndex + ":" + field.ColumnIndex;
+                string buffered;
+                if (!editBuffers.TryGetValue(bufferKey, out buffered)) buffered = current;
+                GUI.SetNextControlName(controlName);
+                if (activeRecord == selectedRecordIndex && activeColumn == field.ColumnIndex)
+                    HandleAutocompleteKeyboard(Event.current, controlName);
+                next = EditorGUI.TextField(valueRect, buffered);
+                bool focused = string.Equals(GUI.GetNameOfFocusedControl(), controlName, StringComparison.Ordinal);
+                bool changed = !string.Equals(next, buffered, StringComparison.Ordinal);
+                if (focused && (activeRecord != selectedRecordIndex || activeColumn != field.ColumnIndex))
+                    BeginEditSession(controlName, selectedRecordIndex, field.ColumnIndex, buffered);
+                if (changed)
+                {
+                    if (activeRecord != selectedRecordIndex || activeColumn != field.ColumnIndex)
+                        BeginEditSession(controlName, selectedRecordIndex, field.ColumnIndex, buffered);
+                    editBuffers[bufferKey] = next;
+                    autocompleteText = next;
+                    autocompleteRecord = selectedRecordIndex;
+                    autocompleteColumn = field.ColumnIndex;
+                    activeControlName = controlName;
+                    autocompleteSuppressed = string.IsNullOrEmpty(next);
+                    if (autocompleteSuppressed) ClearAutocomplete();
+                    else
+                    {
+                        autocompleteSuppressed = false;
+                        if (AutocompleteWhileTyping) RefreshAutocomplete(false);
+                    }
+                }
+                if (focused && AutocompleteWhileTyping && !autocompleteVisible && !autocompleteSuppressed)
+                    RefreshAutocomplete(false);
+                if (activeRecord == selectedRecordIndex && activeColumn == field.ColumnIndex)
+                {
+                    activeControlDrawnThisPass = true;
+                    activeControlFocusedThisPass = focused;
+                    // Convert while inside the scroll-view clip. This avoids mixing content and
+                    // window coordinates, which otherwise offsets clicks after vertical scrolling.
+                    autocompleteScreenAnchor = GUIUtility.GUIToScreenPoint(
+                        new Vector2(valueRect.x, valueRect.yMax));
+                    autocompleteRect = new Rect(autocompleteRect.x, autocompleteRect.y,
+                        NeoAutocompleteOverlay.DefaultWidth,
+                        FieldRowHeight * Mathf.Min(8, autocompleteSuggestions.Count));
+                }
+                if (editFocusPending && string.Equals(activeControlName, controlName, StringComparison.Ordinal) &&
+                    Event.current.type == EventType.Repaint)
+                {
+                    EditorGUI.FocusTextInControl(controlName);
+                    editFocusPending = false;
+                    activeControlFocusedThisPass = true;
+                }
             }
             EditorGUI.EndDisabledGroup();
-            if (!string.Equals(next, current, StringComparison.Ordinal))
+            bool commitFieldValue = usePopup || field.ValueKind == CsvValueKind.Boolean;
+            if (commitFieldValue && !string.Equals(next, current, StringComparison.Ordinal))
             {
                 string editError;
                 if (CsvRecordValueParser.IsValid(field, next, out editError)) TryCommitCell(selectedRecordIndex, field.ColumnIndex, next);
@@ -354,6 +493,165 @@ private void DrawDetails(Rect rect)
                 GUI.Label(new Rect(valueRect.x, valueRect.yMax + 1f, valueRect.width, 16f), validationError, NeoStyles.MiniDim);
             if (!string.IsNullOrEmpty(field.HelpText))
                 GUI.Label(new Rect(valueRect.x, valueRect.yMax + 1f, valueRect.width, 16f), field.HelpText, NeoStyles.MiniDim);
+        }
+
+        private void HandleAutocompleteKeyboard(Event currentEvent, string controlName)
+        {
+            if (currentEvent == null || currentEvent.type != EventType.KeyDown ||
+                activeRecord < 0 || activeColumn < 0) return;
+            if (!editFocusPending && !string.Equals(GUI.GetNameOfFocusedControl(),
+                controlName, StringComparison.Ordinal))
+            {
+                CommitEditing();
+                return;
+            }
+            if ((currentEvent.control || currentEvent.command) && currentEvent.keyCode == KeyCode.Space)
+            {
+                RefreshAutocomplete(true); currentEvent.Use();
+            }
+            else if (autocompleteVisible && (currentEvent.keyCode == KeyCode.UpArrow || currentEvent.keyCode == KeyCode.DownArrow))
+            {
+                autocompleteSelection = Mathf.Clamp(autocompleteSelection +
+                    (currentEvent.keyCode == KeyCode.DownArrow ? 1 : -1), 0, autocompleteSuggestions.Count - 1);
+                currentEvent.Use();
+            }
+            else if (currentEvent.keyCode == KeyCode.Escape)
+            {
+                if (autocompleteVisible) { ClearAutocomplete(); autocompleteSuppressed = true; }
+                else
+                {
+                    CancelEditing();
+                    GUIUtility.keyboardControl = 0;
+                }
+                currentEvent.Use();
+            }
+            else if (currentEvent.keyCode == KeyCode.Return || currentEvent.keyCode == KeyCode.KeypadEnter || currentEvent.keyCode == KeyCode.Tab)
+            {
+                if (!AcceptAutocomplete())
+                {
+                    CommitEditing();
+                    GUIUtility.keyboardControl = 0;
+                }
+                currentEvent.Use();
+            }
+        }
+
+        private void RefreshAutocomplete(bool force)
+        {
+            if (AutocompleteProvider == null || activeRecord < 0 || activeColumn < 0 ||
+                autocompleteRecord != activeRecord || autocompleteColumn != activeColumn)
+            {
+                ClearAutocomplete();
+                return;
+            }
+            string query = autocompleteText ?? string.Empty;
+            if (!force && autocompleteRecord == activeRecord && autocompleteColumn == activeColumn &&
+                string.Equals(autocompleteQuery, query, StringComparison.Ordinal)) return;
+            IReadOnlyList<string> provided = GetAutocompleteSuggestions(autocompleteRecord,
+                autocompleteColumn, query);
+            autocompleteSuggestions.Clear();
+            if (provided != null)
+                for (int i = 0; i < provided.Count; i++)
+                    if (provided[i] != null) autocompleteSuggestions.Add(provided[i]);
+            autocompleteQuery = query;
+            autocompleteSelection = 0;
+            autocompleteVisible = autocompleteSuggestions.Count > 0;
+        }
+
+        private bool AcceptAutocomplete()
+        {
+            if (!autocompleteVisible || autocompleteSuggestions.Count == 0) return false;
+            autocompleteText = autocompleteSuggestions[Mathf.Clamp(autocompleteSelection, 0, autocompleteSuggestions.Count - 1)];
+            editBuffers[autocompleteRecord + ":" + autocompleteColumn] = autocompleteText;
+            autocompleteSuppressed = true;
+            ClearAutocomplete();
+            // A focused IMGUI TextField renders its TextEditor cache. Briefly release it so the
+            // accepted value is adopted, then restore focus during the next repaint.
+            GUIUtility.keyboardControl = 0;
+            editFocusPending = true;
+            GUI.changed = true;
+            RepaintRequested?.Invoke();
+            return true;
+        }
+
+        private void HandleAutocompleteMouse(Event currentEvent)
+        {
+            if (!autocompleteVisible) return;
+            NeoAutocompleteOverlay.HandleInput(currentEvent, autocompleteRect,
+                autocompleteSuggestions.Count, FieldRowHeight, ref autocompleteSelection,
+                AcceptAutocompleteFromMouse, RepaintRequested);
+        }
+
+        private void DrawAutocompletePopup()
+        {
+            if (Event.current.type != EventType.Repaint || !autocompleteVisible || autocompleteSuggestions.Count == 0) return;
+            NeoAutocompleteOverlay.Draw(autocompleteRect, autocompleteSuggestions,
+                autocompleteSelection, FieldRowHeight);
+        }
+
+        private void PositionAutocomplete(Rect bounds)
+        {
+            Vector2 anchor = GUIUtility.ScreenToGUIPoint(autocompleteScreenAnchor);
+            float width = Mathf.Min(NeoAutocompleteOverlay.DefaultWidth, bounds.width);
+            float height = Mathf.Min(NeoAutocompleteOverlay.MaxVisibleSuggestions,
+                autocompleteSuggestions.Count) * FieldRowHeight;
+            float x = Mathf.Clamp(anchor.x, bounds.x, Mathf.Max(bounds.x, bounds.xMax - width));
+            float y = anchor.y;
+            if (y + height > bounds.yMax)
+                y = Mathf.Max(bounds.y, anchor.y - FieldRowHeight - height);
+            autocompleteRect = new Rect(x, y, width, height);
+        }
+
+        private void ClearAutocomplete()
+        {
+            autocompleteVisible = false;
+            autocompleteQuery = null;
+            autocompleteSelection = 0;
+            autocompleteSuggestions.Clear();
+        }
+
+        private void AcceptAutocompleteFromMouse()
+        {
+            AcceptAutocomplete();
+        }
+
+        private void BeginEditSession(string controlName, int record, int column, string value)
+        {
+            if (activeRecord >= 0 && (activeRecord != record || activeColumn != column))
+                CommitEditing();
+            activeControlName = controlName;
+            activeRecord = record;
+            activeColumn = column;
+            autocompleteText = value ?? string.Empty;
+            autocompleteRecord = record;
+            autocompleteColumn = column;
+            // An empty value is still a valid autocomplete query: focusing an empty field
+            // should offer the column's available values. Suppression is reserved for an
+            // explicit dismissal (Escape) or an accepted suggestion, and is reset when a
+            // fresh field-edit session begins.
+            autocompleteSuppressed = false;
+        }
+
+        private void CommitIfFocusMoved()
+        {
+            if (!IsEditing || editFocusPending || Event.current.type != EventType.Repaint) return;
+            if (!activeControlDrawnThisPass || !activeControlFocusedThisPass)
+                CommitEditing();
+        }
+
+        private void ClearEditSession()
+        {
+            if (activeRecord >= 0 && activeColumn >= 0)
+                editBuffers.Remove(activeRecord + ":" + activeColumn);
+            activeControlName = null;
+            activeRecord = -1;
+            activeColumn = -1;
+            autocompleteText = null;
+            autocompleteRecord = -1;
+            autocompleteColumn = -1;
+            autocompleteSuppressed = false;
+            editFocusPending = false;
+            ClearAutocomplete();
         }
 
         private float EstimateContentHeight()

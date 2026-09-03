@@ -1,5 +1,7 @@
 using CsvTool.Schema;
 using NUnit.Framework;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace CsvTool.Editor.Tests
 {
@@ -69,6 +71,46 @@ namespace CsvTool.Editor.Tests
             Assert.IsTrue(CsvRecordValueParser.TryParseBoolean("yes", out boolean));
             Assert.IsTrue(boolean);
             Assert.IsFalse(CsvRecordValueParser.TryParseDecimal("1,25", out decimalValue));
+        }
+
+        [Test]
+        public void AutocompleteUsesPhysicalCoordinatesAndCapsProviderResults()
+        {
+            CsvRecordView view = new CsvRecordView(null) { AutocompleteMaxSuggestions = 2 };
+            int requestedRecord = -1;
+            int requestedColumn = -1;
+            string requestedText = null;
+            view.AutocompleteProvider = (record, column, text) =>
+            {
+                requestedRecord = record;
+                requestedColumn = column;
+                requestedText = text;
+                return new[] { "alpha", "alpine", "also" };
+            };
+
+            IReadOnlyList<string> suggestions = view.GetAutocompleteSuggestions(17, 4, "al");
+
+            Assert.AreEqual(17, requestedRecord);
+            Assert.AreEqual(4, requestedColumn);
+            Assert.AreEqual("al", requestedText);
+            CollectionAssert.AreEqual(new[] { "alpha", "alpine" }, suggestions);
+        }
+
+        [Test]
+        public void EmptyFieldStartsWithAutocompleteEnabled()
+        {
+            CsvRecordView view = new CsvRecordView(null);
+            MethodInfo beginEdit = typeof(CsvRecordView).GetMethod("BeginEditSession",
+                BindingFlags.Instance | BindingFlags.NonPublic);
+            FieldInfo suppressed = typeof(CsvRecordView).GetField("autocompleteSuppressed",
+                BindingFlags.Instance | BindingFlags.NonPublic);
+
+            Assert.IsNotNull(beginEdit);
+            Assert.IsNotNull(suppressed);
+            beginEdit.Invoke(view, new object[] { "empty-field", 7, 3, string.Empty });
+
+            Assert.IsFalse((bool)suppressed.GetValue(view),
+                "Focusing an empty field must allow an empty-prefix autocomplete request.");
         }
     }
 }

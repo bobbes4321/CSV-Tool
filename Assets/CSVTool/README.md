@@ -21,8 +21,8 @@ In a workspace inspector, **Populate Missing Tables From Root** adds table entri
 - Ctrl/Cmd+G opens **Go to Column**, including configured names, groups, and the selected record's current values.
 - Toggle **Grid / Record** for a spreadsheet or ScriptableObject-style form projection over the same row.
 - Toggle **Inspector** in Grid mode to edit the selected record in a compact panel without losing grid context.
-- Comments, sections, and blank separators can be hidden with **All rows**.
-- While editing, autocomplete appears as you type. Ctrl/Cmd+Space opens it explicitly.
+- **All rows** shows or hides comments, sections, and blank separators. **Edit non-data rows** permits editing those existing rows; it does not add or remove rows or columns.
+- While editing in Grid or Record view, autocomplete appears as you type. Ctrl/Cmd+Space opens it explicitly; use Up/Down and Enter/Tab, click a suggestion, or press Escape to dismiss it.
 - Ctrl/Cmd-click a configured reference cell to navigate to its target row.
 
 Grid and Record views share one document, selection model, undo history, recovery journal, and save path.
@@ -62,7 +62,7 @@ Autocomplete combines configured enum values, configured reference keys, and cac
 - An unchanged document serializes byte-for-byte identically, including BOM and newline style.
 - Saves are atomic and refuse to overwrite a file that changed externally after it was opened.
 - Unsaved cell edits are journaled under `Library/CsvTool/Recovery` and offered after a reload or editor restart.
-- Header rows are always read-only. Comment, section, and blank rows require the explicit **Edit structure** toggle.
+- Header rows are always read-only. Comment, section, and blank rows require the explicit **Edit non-data rows** toggle.
 
 The current parser treats the first parsed row as a header. Headerless CSV schemas are not yet exposed in the workspace inspector.
 

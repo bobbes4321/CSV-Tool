@@ -1,6 +1,10 @@
 using System.Collections.Generic;
+using System.Reflection;
+using System.Text;
 using NUnit.Framework;
+using CsvTool.Core;
 using CsvTool.Editor;
+using UnityEngine;
 
 namespace CsvTool.Editor.Tests
 {
@@ -86,6 +90,39 @@ namespace CsvTool.Editor.Tests
             Assert.AreEqual(4, requestedColumn);
             Assert.AreEqual("al", requestedText);
             CollectionAssert.AreEqual(new[] { "alpha", "alpine" }, suggestions);
+        }
+
+        [Test]
+        public void BeginningGridEditClaimsFocusBeforeInspectorCanRedraw()
+        {
+            CsvGrid grid = new CsvGrid();
+            CsvDocument document = CsvDocument.Load(Encoding.UTF8.GetBytes("name,id\nunit,1\n"));
+            BindingFlags flags = BindingFlags.Instance | BindingFlags.NonPublic;
+            FieldInfo documentField = typeof(CsvGrid).GetField("_document", flags);
+            FieldInfo selectionField = typeof(CsvGrid).GetField("_selection", flags);
+            FieldInfo controlField = typeof(CsvGrid).GetField("_controlId", flags);
+            MethodInfo beginEdit = typeof(CsvGrid).GetMethod("BeginEdit", flags);
+
+            Assert.IsNotNull(documentField);
+            Assert.IsNotNull(selectionField);
+            Assert.IsNotNull(controlField);
+            Assert.IsNotNull(beginEdit);
+            documentField.SetValue(grid, document);
+            selectionField.SetValue(grid, new CsvGridSelection(0, 0, 1));
+            controlField.SetValue(grid, 24601);
+
+            int previousFocus = GUIUtility.keyboardControl;
+            try
+            {
+                GUIUtility.keyboardControl = 24600;
+                beginEdit.Invoke(grid, null);
+                Assert.AreEqual(24601, GUIUtility.keyboardControl,
+                    "A grid double-click must release any Record-view TextField immediately.");
+            }
+            finally
+            {
+                GUIUtility.keyboardControl = previousFocus;
+            }
         }
     }
 }

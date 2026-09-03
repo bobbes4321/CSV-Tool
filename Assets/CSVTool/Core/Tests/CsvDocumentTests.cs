@@ -237,6 +237,37 @@ namespace CsvTool.Core.Tests
         }
 
         [Test]
+        public void InsertedRecordUsesPhysicalIndexAndUndoRestoresOriginalBytes()
+        {
+            byte[] original = Encoding.UTF8.GetBytes("name,value\r\nalpha,one\r\nbeta,two");
+            CsvDocument document = CsvDocument.Load(original);
+
+            document.InsertRecord(2, new[] { "new", "row" });
+            Assert.AreEqual("new", document.GetCell(2, 0));
+            Assert.AreEqual("beta", document.GetCell(3, 0));
+            Assert.AreEqual("name,value\r\nalpha,one\r\nnew,row\r\nbeta,two", Encoding.UTF8.GetString(document.Serialize()));
+
+            Assert.IsTrue(document.Undo());
+            Assert.IsFalse(document.IsDirty);
+            CollectionAssert.AreEqual(original, document.Serialize());
+        }
+
+        [Test]
+        public void InsertedColumnHandlesRaggedRowsAndUndoRestoresWidths()
+        {
+            byte[] original = Encoding.UTF8.GetBytes("a,b\n1\n2,3\n");
+            CsvDocument document = CsvDocument.Load(original);
+
+            document.InsertColumn(1, new[] { 0, 1, 2 }, "new");
+            Assert.AreEqual("a,new,b\n1,\n2,,3\n", Encoding.UTF8.GetString(document.Serialize()));
+            Assert.AreEqual(2, document.Records[1].CellCount);
+
+            Assert.IsTrue(document.Undo());
+            Assert.AreEqual(1, document.Records[1].CellCount);
+            CollectionAssert.AreEqual(original, document.Serialize());
+        }
+
+        [Test]
         public void ChangesExposeOriginalAndCurrentValuesAndRevertCellIsUndoable()
         {
             CsvDocument document = CsvDocument.Load(Encoding.UTF8.GetBytes("a,b\nold,keep\n"));

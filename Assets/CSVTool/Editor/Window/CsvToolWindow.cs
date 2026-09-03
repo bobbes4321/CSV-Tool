@@ -93,6 +93,7 @@ namespace CsvTool.Editor
             grid.RepaintRequested += Repaint;
             grid.SelectionChanged += OnGridSelectionChanged;
             grid.ReferenceNavigationRequested += OnReferenceNavigationRequested;
+            grid.StructureMenuRequested += OnStructureMenuRequested;
             grid.AutocompleteProvider = GetAutocompleteSuggestions;
             grid.Settings.AutocompleteWhileTyping = true;
             recordMode = EditorPrefs.GetBool(ViewModePref, false);
@@ -110,11 +111,11 @@ namespace CsvTool.Editor
         private void OnDisable()
         {
             EditorApplication.update -= PollExternalState;
+            // Domain reloads also disable the window. Commit whichever surface owns the live
+            // field while callbacks are still connected so recovery can capture it.
+            CommitActiveEditing();
             if (grid != null)
             {
-                // Domain reloads also disable the window. Commit the one active buffer while
-                // callbacks are still connected so it is captured by the recovery journal.
-                grid.CommitEditing();
                 grid.CellEditCommitted -= OnCellEditCommitted;
                 grid.BatchEditCommitted -= OnBatchEditCommitted;
                 grid.UndoRequested -= UndoCurrent;
@@ -123,6 +124,7 @@ namespace CsvTool.Editor
                 grid.RepaintRequested -= Repaint;
                 grid.SelectionChanged -= OnGridSelectionChanged;
                 grid.ReferenceNavigationRequested -= OnReferenceNavigationRequested;
+                grid.StructureMenuRequested -= OnStructureMenuRequested;
                 grid.AutocompleteProvider = null;
             }
             UnbindRecordView();
@@ -131,7 +133,7 @@ namespace CsvTool.Editor
 
         private void OnLostFocus()
         {
-            if (grid != null) grid.CommitEditing();
+            CommitActiveEditing();
             UpdateUnsavedState();
         }
 
@@ -179,7 +181,7 @@ namespace CsvTool.Editor
         private bool OpenContextualFind()
         {
             if (!EnsureCurrentLoaded()) return false;
-            if (grid != null) grid.CommitEditing();
+            CommitActiveEditing();
             int selectedRecord = GetNavigationRecordIndex();
             Rect anchor = GetNavigationPopupAnchor(440f);
             CsvContextualFindPopup.Show(anchor,
@@ -192,7 +194,7 @@ namespace CsvTool.Editor
         private bool OpenGoToColumn()
         {
             if (!EnsureCurrentLoaded()) return false;
-            if (grid != null) grid.CommitEditing();
+            CommitActiveEditing();
             int selectedRecord = GetNavigationRecordIndex();
             int selectedColumn = grid != null && grid.Selection.IsValid ? grid.Selection.Column : 0;
             CsvGoToColumnModel model = CsvGoToColumnModel.ForTable(current, selectedRecord,
@@ -335,13 +337,17 @@ namespace CsvTool.Editor
             if (workspace != null && GUILayout.Button("Rescan", EditorStyles.toolbarButton, GUILayout.Width(55f)))
                 RescanWorkspace();
             if (current != null && GUILayout.Button("Reload", EditorStyles.toolbarButton, GUILayout.Width(55f))) ReloadCurrent();
+            EditorGUI.BeginDisabledGroup(current == null);
+            if (GUILayout.Button(new GUIContent("+ Row", "Insert a blank data row after the selected row"), EditorStyles.toolbarButton, GUILayout.Width(48f))) InsertRowAfterSelection();
+            if (GUILayout.Button(new GUIContent("+ Column", "Insert a column after the selected column"), EditorStyles.toolbarButton, GUILayout.Width(66f))) PromptInsertColumnAfterSelection();
+            EditorGUI.EndDisabledGroup();
             EditorGUI.BeginDisabledGroup(current == null || !current.CanUndo);
             if (GUILayout.Button("Undo", EditorStyles.toolbarButton, GUILayout.Width(42f))) UndoCurrent();
             EditorGUI.EndDisabledGroup();
             EditorGUI.BeginDisabledGroup(current == null || !current.CanRedo);
             if (GUILayout.Button("Redo", EditorStyles.toolbarButton, GUILayout.Width(42f))) RedoCurrent();
             EditorGUI.EndDisabledGroup();
-            EditorGUI.BeginDisabledGroup(current == null || (!current.IsDirty && (grid == null || !grid.IsEditing)));
+            EditorGUI.BeginDisabledGroup(current == null || (!current.IsDirty && !HasActiveEditing));
             if (GUILayout.Button("Save", EditorStyles.toolbarButton, GUILayout.Width(42f))) SaveCurrent();
             EditorGUI.EndDisabledGroup();
             EditorGUILayout.EndHorizontal();
@@ -351,7 +357,7 @@ namespace CsvTool.Editor
             string newSearch = EditorGUILayout.TextField(new GUIContent("Filter"), search, EditorStyles.toolbarSearchField);
             if (!string.Equals(newSearch, search, StringComparison.Ordinal))
             {
-                if (grid != null) grid.CommitEditing();
+                CommitActiveEditing();
                 search = newSearch;
                 if (current != null)
                 {
@@ -390,11 +396,17 @@ namespace CsvTool.Editor
                     EditorStyles.toolbarButton, GUILayout.Width(58f));
                 if (includeStructure != current.IncludeNonDataRows)
                 {
-                    if (grid != null) grid.CommitEditing();
+                    CommitActiveEditing();
                     current.IncludeNonDataRows = includeStructure;
                     PreserveVisibleSelection();
                     RefreshRecordView();
                 }
+                bool allowStructure = GUILayout.Toggle(current.AllowStructuralRowEdits,
+                    new GUIContent("Edit non-data rows",
+                        "Allows editing existing comment, section, and blank rows. Does not add or remove rows or columns; the CSV header remains read-only."),
+                    EditorStyles.toolbarButton, GUILayout.Width(118f));
+                if (allowStructure != current.AllowStructuralRowEdits)
+                    current.AllowStructuralRowEdits = allowStructure;
             }
             if (grid != null)
             {
@@ -411,7 +423,7 @@ namespace CsvTool.Editor
                     EditorStyles.toolbarButton, GUILayout.Width(58f));
                 if (nextRecordMode != recordMode)
                 {
-                    if (grid != null) grid.CommitEditing();
+                    CommitActiveEditing();
                     recordMode = nextRecordMode;
                     EditorPrefs.SetBool(ViewModePref, recordMode);
                 }
@@ -421,21 +433,17 @@ namespace CsvTool.Editor
                 EditorGUI.EndDisabledGroup();
                 if (nextQuickInspector != showQuickInspector)
                 {
-                    if (grid != null) grid.CommitEditing();
+                    CommitActiveEditing();
                     showQuickInspector = nextQuickInspector;
                     EditorPrefs.SetBool(QuickInspectorPref, showQuickInspector);
                     if (!showQuickInspector) UnbindQuickInspector();
                 }
-                bool allowStructure = GUILayout.Toggle(current.AllowStructuralRowEdits, "Edit structure",
-                    EditorStyles.toolbarButton, GUILayout.Width(82f));
-                if (allowStructure != current.AllowStructuralRowEdits)
-                    current.AllowStructuralRowEdits = allowStructure;
                 string changesLabel = current.IsDirty ? "Changes *" : "Changes";
                 bool nextShowChanges = GUILayout.Toggle(showChanges, changesLabel,
                     EditorStyles.toolbarButton, GUILayout.Width(68f));
                 if (nextShowChanges != showChanges)
                 {
-                    if (grid != null) grid.CommitEditing();
+                    CommitActiveEditing();
                     showChanges = nextShowChanges;
                 }
                 int schemaIssueCount = GetSchemaIssueCount();
@@ -721,7 +729,7 @@ namespace CsvTool.Editor
         private void ReloadCurrent()
         {
             if (current == null) return;
-            if (grid != null) grid.CommitEditing();
+            CommitActiveEditing();
             if (current.IsDirty && !EditorUtility.DisplayDialog("Reload CSV", "Discard unsaved changes and reload this file?", "Reload", "Cancel")) return;
             try
             {
@@ -750,6 +758,85 @@ namespace CsvTool.Editor
             grid.FrozenColumnCount = Mathf.Max(0, count);
             EditorPrefs.SetInt(FrozenColumnsPref, grid.FrozenColumnCount);
             Repaint();
+        }
+
+        private void OnStructureMenuRequested(CsvGridSelection selection, bool header, Vector2 position)
+        {
+            if (current == null || !selection.IsValid) return;
+            GenericMenu menu = new GenericMenu();
+            if (!header)
+            {
+                menu.AddItem(new GUIContent("Insert Row Above"), false, () => InsertRow(selection.RecordIndex));
+                menu.AddItem(new GUIContent("Insert Row Below"), false, () => InsertRow(selection.RecordIndex + 1));
+                menu.AddSeparator(string.Empty);
+            }
+            menu.AddItem(new GUIContent("Insert Column Left"), false, () => PromptInsertColumn(selection.Column, position));
+            menu.AddItem(new GUIContent("Insert Column Right"), false, () => PromptInsertColumn(selection.Column + 1, position));
+            menu.ShowAsContext();
+        }
+
+        private void InsertRowAfterSelection()
+        {
+            int insertAt = current == null || current.Document == null ? -1 : current.Document.Records.Count;
+            if (grid != null && grid.Selection.IsValid) insertAt = grid.Selection.RecordIndex + 1;
+            InsertRow(insertAt);
+        }
+
+        private void InsertRow(int physicalInsertIndex)
+        {
+            if (current == null || grid == null) return;
+            CommitActiveEditing();
+            try
+            {
+                int inserted = current.InsertDataRow(physicalInsertIndex);
+                grid.InvalidateVisibleRecordMap();
+                grid.InvalidateDocumentLayout();
+                valueIndexes.Remove(current);
+                RefreshRecordView();
+                // A filtered view can legitimately hide the new blank row; retain the filter rather than changing edit targeting.
+                grid.SelectPhysicalCell(inserted, Mathf.Max(0, grid.Selection.Column));
+                UpdateRecoveryJournal();
+                UpdateUnsavedState();
+                Repaint();
+            }
+            catch (Exception exception)
+            {
+                EditorUtility.DisplayDialog("Unable to insert row", exception.Message, "OK");
+            }
+        }
+
+        private void PromptInsertColumnAfterSelection()
+        {
+            int column = grid != null && grid.Selection.IsValid ? grid.Selection.Column + 1 : (current == null || current.Document == null ? 0 : current.Document.ColumnCount);
+            PromptInsertColumn(column, new Vector2(position.width * 0.5f, 32f));
+        }
+
+        private void PromptInsertColumn(int physicalColumnIndex, Vector2 position)
+        {
+            if (current == null || grid == null) return;
+            CommitActiveEditing();
+            PopupWindow.Show(new Rect(position, Vector2.zero), new CsvNewColumnPopup(header => InsertColumn(physicalColumnIndex, header)));
+        }
+
+        private void InsertColumn(int physicalColumnIndex, string header)
+        {
+            if (current == null || grid == null) return;
+            try
+            {
+                current.InsertColumn(physicalColumnIndex, header);
+                grid.InvalidateVisibleRecordMap();
+                grid.InvalidateDocumentLayout();
+                valueIndexes.Remove(current);
+                RefreshRecordView();
+                if (grid.Selection.IsValid) grid.SelectPhysicalCell(grid.Selection.RecordIndex, physicalColumnIndex);
+                UpdateRecoveryJournal();
+                UpdateUnsavedState();
+                Repaint();
+            }
+            catch (Exception exception)
+            {
+                EditorUtility.DisplayDialog("Unable to insert column", exception.Message, "OK");
+            }
         }
 
         private void OnCellEditCommitted(CsvGridCellEdit edit)
@@ -822,7 +909,7 @@ namespace CsvTool.Editor
         private void UndoCurrent()
         {
             if (current == null) return;
-            if (grid != null) grid.CommitEditing();
+            CommitActiveEditing();
             if (!current.Undo()) return;
             if (grid != null) grid.InvalidateVisibleRecordMap();
             valueIndexes.Remove(current);
@@ -835,7 +922,7 @@ namespace CsvTool.Editor
         private void RedoCurrent()
         {
             if (current == null) return;
-            if (grid != null) grid.CommitEditing();
+            CommitActiveEditing();
             if (!current.Redo()) return;
             if (grid != null) grid.InvalidateVisibleRecordMap();
             valueIndexes.Remove(current);
@@ -853,7 +940,7 @@ namespace CsvTool.Editor
         private bool SaveCurrent()
         {
             if (current == null) return true;
-            if (grid != null) grid.CommitEditing();
+            CommitActiveEditing();
             if (!current.IsDirty) { UpdateUnsavedState(); return true; }
             try
             {
@@ -910,7 +997,7 @@ namespace CsvTool.Editor
         private bool CanLeaveCurrent(string action)
         {
             if (current == null) return true;
-            if (grid != null) grid.CommitEditing();
+            CommitActiveEditing();
             if (!current.IsDirty) return true;
             int choice = EditorUtility.DisplayDialogComplex("Unsaved CSV changes",
                 "Save changes to " + current.Name + " before you " + action + "?",
@@ -943,9 +1030,27 @@ namespace CsvTool.Editor
             Repaint();
         }
 
+        private bool HasActiveEditing
+        {
+            get
+            {
+                return (grid != null && grid.IsEditing) ||
+                    (recordView != null && recordView.IsEditing) ||
+                    (quickInspector != null && quickInspector.RecordView.IsEditing);
+            }
+        }
+
+        private void CommitActiveEditing()
+        {
+            if (grid != null) grid.CommitEditing();
+            if (recordView != null && recordView.IsEditing) recordView.CommitEditing();
+            if (quickInspector != null && quickInspector.RecordView.IsEditing)
+                quickInspector.RecordView.CommitEditing();
+        }
+
         private void UpdateUnsavedState()
         {
-            bool unsaved = (current != null && current.IsDirty) || (grid != null && grid.IsEditing);
+            bool unsaved = (current != null && current.IsDirty) || HasActiveEditing;
             hasUnsavedChanges = unsaved;
             saveChangesMessage = current == null
                 ? "The CSV tool has unsaved changes."
@@ -960,6 +1065,8 @@ namespace CsvTool.Editor
         public override void DiscardChanges()
         {
             if (grid != null) grid.CancelEditing();
+            if (recordView != null) recordView.CancelEditing();
+            if (quickInspector != null) quickInspector.RecordView.CancelEditing();
             if (current != null && current.IsDirty)
             {
                 try
@@ -982,6 +1089,14 @@ namespace CsvTool.Editor
             if (current == null || !current.IsLoaded) return;
             try
             {
+                if (current.Document.HasStructuralChanges)
+                {
+                    // Version 1 journals address only loaded cell coordinates. Replaying one after an insertion
+                    // could target a shifted cell, so never write a deceptively recoverable journal.
+                    CsvRecoveryJournal.Delete(current.AbsolutePath);
+                    recoveryWarning = "Structural edits are not recoverable until saved";
+                    return;
+                }
                 if (current.IsDirty) CsvRecoveryJournal.Write(current.AbsolutePath, current.Changes);
                 else CsvRecoveryJournal.Delete(current.AbsolutePath);
                 recoveryWarning = string.Empty;
@@ -1164,6 +1279,7 @@ namespace CsvTool.Editor
             if (recordView != null && ReferenceEquals(recordView.Controller, current)) return;
             UnbindRecordView();
             recordView = new CsvRecordView(current, current.Schema, BuildRecordDefinition());
+            recordView.AutocompleteProvider = GetAutocompleteSuggestions;
             recordView.CellEditCommitted += OnRecordCellEditCommitted;
             recordView.RecordSelected += OnRecordSelected;
             recordView.RepaintRequested += Repaint;
@@ -1197,6 +1313,7 @@ namespace CsvTool.Editor
             if (quickInspector != null && ReferenceEquals(quickInspector.Controller, current)) return;
             UnbindQuickInspector();
             quickInspector = new CsvQuickRecordInspector(current, current.Schema, BuildRecordDefinition());
+            quickInspector.RecordView.AutocompleteProvider = GetAutocompleteSuggestions;
             quickInspector.CellEditCommitted += OnQuickInspectorCellEditCommitted;
             quickInspector.RecordSelected += OnRecordSelected;
             quickInspector.ColumnSelected += OnQuickInspectorColumnSelected;
@@ -1223,6 +1340,11 @@ namespace CsvTool.Editor
         {
             if (syncingSelection || !selection.IsValid) return;
             syncingSelection = true;
+            // Grid selection transfers interaction ownership. Record views must finish their
+            // field session before they mirror the new physical record, otherwise a popup could
+            // remain attached to a field which is no longer the active editor control.
+            if (recordView != null) recordView.CommitEditing();
+            if (quickInspector != null) quickInspector.RecordView.CommitEditing();
             if (recordView != null) recordView.SelectRecord(selection.RecordIndex);
             if (quickInspector != null) quickInspector.SelectRecord(selection.RecordIndex);
             syncingSelection = false;

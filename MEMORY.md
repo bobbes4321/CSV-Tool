@@ -15,6 +15,7 @@ The implementation already includes:
 - physical-row editing with filtering and structural-row classification;
 - grouped undo/redo, atomic saves, and external-change conflict detection;
 - recovery journals under `Library/CsvTool/Recovery`;
+- physical row and column insertion with undo/redo, Grid toolbar controls, and spreadsheet-style Grid context menus;
 - Grid and Record views sharing a document, selection, history, recovery, and
   save path;
 - contextual Ctrl/Cmd+F cell finding, Ctrl/Cmd+G column navigation, and a
@@ -36,8 +37,9 @@ is not exposed in the window.
    reports duplicate headers as ambiguous.
 3. The first parsed row is the header row. Headerless schemas are not exposed
    yet.
-4. Comments, sections, and blank rows are read-only unless **Edit structure**
-   is enabled.
+4. **All rows** controls visibility of comments, sections, and blank rows;
+   **Edit non-data rows** separately unlocks edits to those existing rows. It
+   does not add or remove rows or columns, and headers remain read-only.
 5. References and list syntax are opt-in. The editor does not infer that a
    column name or separator implies a relationship.
 6. Core and Schema are `noEngineReferences` assemblies so their tests and
@@ -51,6 +53,9 @@ is not exposed in the window.
    filter/row-visibility state it changes.
 8. Full Record mode composes a record navigator with a shared `CsvRecordForm`;
    the Grid inspector reuses only the form so it does not duplicate record browsing.
+9. Grid and Record editing have explicit, view-local edit sessions. When selection moves
+   between surfaces, the outgoing session is finalized before the mirrored physical selection
+   changes; autocomplete overlays may only exist for their owning session.
 
 ## Known limitations
 
@@ -61,6 +66,8 @@ is not exposed in the window.
   .NET SDK installed.
 - Unity batch tests require the project not to be open in another Unity
   process. Use the Unity Test Runner when the editor is already open.
+- Recovery journal format 1 intentionally does not persist structural insertions;
+  the editor warns that row/column insertions are not crash-recoverable until saved.
 
 At this review, Unity `6000.3.10f1` was already running against the project, so
 the batch invocation exited before creating a result XML. No code changes were
