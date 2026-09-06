@@ -6,6 +6,7 @@ using CsvTool.Editor.Configuration;
 using CsvTool.Editor.Index;
 using CsvTool.Editor.Recovery;
 using CsvTool.Editor.Search;
+using CsvTool.Editor.Validation;
 using CsvTool.Schema;
 using Neo.EditorUI;
 using UnityEditor;
@@ -45,8 +46,10 @@ namespace CsvTool.Editor
         private string search = string.Empty;
         private Vector2 sidebarScroll;
         private Vector2 changesScroll;
+        private Vector2 issuesScroll;
         private double nextExternalPoll;
         private bool showChanges;
+        private bool showIssues;
         private PendingCellNavigation pendingNavigation;
         private readonly HashSet<string> recoveryCheckedPaths = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         private string recoveryWarning = string.Empty;
@@ -87,6 +90,7 @@ namespace CsvTool.Editor
             grid.FrozenColumnCount = EditorPrefs.GetInt(FrozenColumnsPref, 1);
             grid.CellEditCommitted += OnCellEditCommitted;
             grid.BatchEditCommitted += OnBatchEditCommitted;
+            grid.PastePreflightRejected += OnPastePreflightRejected;
             grid.UndoRequested += UndoCurrent;
             grid.RedoRequested += RedoCurrent;
             grid.SaveRequested += SaveCurrentFromShortcut;
@@ -95,6 +99,7 @@ namespace CsvTool.Editor
             grid.ReferenceNavigationRequested += OnReferenceNavigationRequested;
             grid.StructureMenuRequested += OnStructureMenuRequested;
             grid.AutocompleteProvider = GetAutocompleteSuggestions;
+            grid.PasteCellErrorProvider = GetPasteCellError;
             grid.Settings.AutocompleteWhileTyping = true;
             recordMode = EditorPrefs.GetBool(ViewModePref, false);
             showQuickInspector = EditorPrefs.GetBool(QuickInspectorPref, false);
@@ -118,6 +123,7 @@ namespace CsvTool.Editor
             {
                 grid.CellEditCommitted -= OnCellEditCommitted;
                 grid.BatchEditCommitted -= OnBatchEditCommitted;
+                grid.PastePreflightRejected -= OnPastePreflightRejected;
                 grid.UndoRequested -= UndoCurrent;
                 grid.RedoRequested -= RedoCurrent;
                 grid.SaveRequested -= SaveCurrentFromShortcut;
@@ -126,6 +132,7 @@ namespace CsvTool.Editor
                 grid.ReferenceNavigationRequested -= OnReferenceNavigationRequested;
                 grid.StructureMenuRequested -= OnStructureMenuRequested;
                 grid.AutocompleteProvider = null;
+                grid.PasteCellErrorProvider = null;
             }
             UnbindRecordView();
             UnbindQuickInspector();
@@ -445,12 +452,23 @@ namespace CsvTool.Editor
                 {
                     CommitActiveEditing();
                     showChanges = nextShowChanges;
+                    if (showChanges) showIssues = false;
                 }
                 int schemaIssueCount = GetSchemaIssueCount();
                 EditorGUI.BeginDisabledGroup(schemaIssueCount == 0);
                 if (GUILayout.Button(schemaIssueCount == 0 ? "Schema OK" : "Schema " + schemaIssueCount,
                     EditorStyles.toolbarButton, GUILayout.Width(72f))) ShowSchemaIssues();
                 EditorGUI.EndDisabledGroup();
+                int datasetIssueCount = GetDatasetIssueCount();
+                bool nextShowIssues = GUILayout.Toggle(showIssues,
+                    datasetIssueCount == 0 ? "Issues OK" : "Issues " + datasetIssueCount,
+                    EditorStyles.toolbarButton, GUILayout.Width(72f));
+                if (nextShowIssues != showIssues)
+                {
+                    CommitActiveEditing();
+                    showIssues = nextShowIssues;
+                    if (showIssues) showChanges = false;
+                }
             }
             EditorGUILayout.EndHorizontal();
         }
@@ -511,17 +529,18 @@ namespace CsvTool.Editor
                     return;
                 }
             }
-            if (!showChanges)
+            if (!showChanges && !showIssues)
             {
                 DrawCurrentView(rect);
                 return;
             }
 
-            const float changesHeight = 170f;
-            Rect gridRect = new Rect(rect.x, rect.y, rect.width, Mathf.Max(80f, rect.height - changesHeight - 4f));
-            Rect changesRect = new Rect(rect.x, gridRect.yMax + 4f, rect.width, Mathf.Max(60f, rect.yMax - gridRect.yMax - 4f));
+            const float panelHeight = 170f;
+            Rect gridRect = new Rect(rect.x, rect.y, rect.width, Mathf.Max(80f, rect.height - panelHeight - 4f));
+            Rect panelRect = new Rect(rect.x, gridRect.yMax + 4f, rect.width, Mathf.Max(60f, rect.yMax - gridRect.yMax - 4f));
             DrawCurrentView(gridRect);
-            DrawChangesPanel(changesRect);
+            if (showIssues) DrawIssuesPanel(panelRect);
+            else DrawChangesPanel(panelRect);
         }
 
         private void DrawCurrentView(Rect rect)
@@ -667,6 +686,45 @@ namespace CsvTool.Editor
             GUI.EndScrollView();
         }
 
+        private void DrawIssuesPanel(Rect rect)
+        {
+            GUI.Box(rect, GUIContent.none, EditorStyles.helpBox);
+            Rect inner = new Rect(rect.x + 5f, rect.y + 4f,
+                Mathf.Max(1f, rect.width - 10f), Mathf.Max(1f, rect.height - 8f));
+            const float headerHeight = 20f;
+            IReadOnlyList<CsvDatasetDiagnostic> issues = GetDatasetIssues();
+            GUI.Label(new Rect(inner.x, inner.y, inner.width, headerHeight),
+                "Issues " + issues.Count + " (configuration and data)", NeoStyles.SectionTitle);
+            if (issues.Count == 0)
+            {
+                GUI.Label(new Rect(inner.x, inner.y + headerHeight, inner.width, 18f),
+                    "No schema or data validation issues.", NeoStyles.MiniDim);
+                return;
+            }
+
+            Rect listRect = new Rect(inner.x, inner.y + headerHeight, inner.width,
+                Mathf.Max(1f, inner.height - headerHeight));
+            const float rowHeight = 22f;
+            float contentHeight = Mathf.Max(listRect.height, issues.Count * rowHeight);
+            Rect contentRect = new Rect(0f, 0f, Mathf.Max(1f, listRect.width - 16f), contentHeight);
+            issuesScroll = GUI.BeginScrollView(listRect, issuesScroll, contentRect);
+            for (int i = 0; i < issues.Count; i++)
+            {
+                CsvDatasetDiagnostic issue = issues[i];
+                string location = issue.PhysicalRecordIndex >= 0 && issue.PhysicalColumnIndex >= 0
+                    ? "Row " + (issue.PhysicalRecordIndex + 1) + ", " + current.GetHeader(issue.PhysicalColumnIndex)
+                    : "Configuration";
+                string label = issue.Severity + "  " + issue.Code + "  |  " + location + "  |  " + issue.Message;
+                Rect rowRect = new Rect(0f, i * rowHeight, contentRect.width, rowHeight);
+                bool canJump = issue.PhysicalRecordIndex >= 0 && issue.PhysicalColumnIndex >= 0;
+                EditorGUI.BeginDisabledGroup(!canJump);
+                if (GUI.Button(rowRect, new GUIContent(label, issue.ToString()), EditorStyles.miniButton))
+                    JumpToChange(issue.PhysicalRecordIndex, issue.PhysicalColumnIndex);
+                EditorGUI.EndDisabledGroup();
+            }
+            GUI.EndScrollView();
+        }
+
         private static string PreviewValue(string value)
         {
             if (string.IsNullOrEmpty(value)) return "(empty)";
@@ -693,15 +751,55 @@ namespace CsvTool.Editor
             {
                 string state = current.HasExternalChange ? "File changed on disk" : (current.IsDirty ? "Unsaved changes" : "Ready");
                 if (!string.IsNullOrEmpty(recoveryWarning)) state += " | " + recoveryWarning;
-                GUILayout.Label(current.Name + "  ·  " + current.DataRowCount + " rows  ·  " + state, NeoStyles.MiniDim);
+                int visibleRows = current.VisibleRecordIndices.Count;
+                int eligibleRows = GetEligibleRowCount();
+                GUILayout.Label(current.Name + "  ·  " + visibleRows + " of " + eligibleRows +
+                    " rows visible  ·  " + state, NeoStyles.MiniDim);
                 GUILayout.FlexibleSpace();
                 CsvGridSelection selection = grid == null ? CsvGridSelection.Invalid : grid.Selection;
                 if (recordMode && recordView != null && recordView.SelectedRecordIndex >= 0)
-                    GUILayout.Label("Row " + (recordView.SelectedRecordIndex + 1) + " (record view)", NeoStyles.MiniDim);
+                    GUILayout.Label(DescribeRecordSelection(recordView.SelectedRecordIndex) + " (record view)", NeoStyles.MiniDim);
                 else if (selection.IsValid)
-                    GUILayout.Label("Row " + (selection.RecordIndex + 1) + ", " + current.GetHeader(selection.Column), NeoStyles.MiniDim);
+                    GUILayout.Label(DescribeSelection(selection), NeoStyles.MiniDim);
             }
             EditorGUILayout.EndHorizontal();
+        }
+
+        private int GetEligibleRowCount()
+        {
+            if (current == null || current.Document == null) return 0;
+            int count = 0;
+            for (int i = 0; i < current.Document.Records.Count; i++)
+            {
+                CsvRecord record = current.Document.Records[i];
+                if (i == current.HeaderRecordIndex) continue;
+                if (!current.IncludeNonDataRows && record.Kind != CsvRecordKind.Data) continue;
+                count++;
+            }
+            return count;
+        }
+
+        private string DescribeSelection(CsvGridSelection selection)
+        {
+            string result = "Row " + (selection.RecordIndex + 1) + ", " + current.GetHeader(selection.Column);
+            CsvGridRangeSelection range = grid == null ? CsvGridRangeSelection.Invalid : grid.RangeSelection;
+            if (range.IsValid && !range.IsSingleCell)
+                result += "  |  " + (range.RowCount * range.ColumnCount) + " cells selected";
+            CsvResolvedColumn identity = current.ResolvedSchema == null ? null : current.ResolvedSchema.Identity;
+            if (identity != null && identity.IsResolved)
+                result += "  |  " + current.GetHeader(identity.PhysicalIndex) + " = " +
+                    PreviewValue(current.GetCell(selection.RecordIndex, identity.PhysicalIndex));
+            return result;
+        }
+
+        private string DescribeRecordSelection(int recordIndex)
+        {
+            string result = "Row " + (recordIndex + 1);
+            CsvResolvedColumn identity = current.ResolvedSchema == null ? null : current.ResolvedSchema.Identity;
+            if (identity != null && identity.IsResolved)
+                result += "  |  " + current.GetHeader(identity.PhysicalIndex) + " = " +
+                    PreviewValue(current.GetCell(recordIndex, identity.PhysicalIndex));
+            return result;
         }
 
         private void SelectRememberedTable()
@@ -886,6 +984,17 @@ namespace CsvTool.Editor
             }
         }
 
+        private string GetPasteCellError(int recordIndex, int columnIndex)
+        {
+            return current == null ? "No CSV table is selected." : current.GetEditError(recordIndex, columnIndex);
+        }
+
+        private void OnPastePreflightRejected(CsvGridPastePreflight preflight)
+        {
+            if (preflight == null) return;
+            EditorUtility.DisplayDialog("Paste not applied", preflight.Summary, "OK");
+        }
+
         private void JumpToChange(int recordIndex, int columnIndex)
         {
             NavigateToPhysicalCell(recordIndex, columnIndex, NavigationSource.Change);
@@ -910,10 +1019,9 @@ namespace CsvTool.Editor
         {
             if (current == null) return;
             CommitActiveEditing();
+            int structuralRevision = current.StructuralRevision;
             if (!current.Undo()) return;
-            if (grid != null) grid.InvalidateVisibleRecordMap();
-            valueIndexes.Remove(current);
-            RefreshRecordView();
+            RefreshAfterHistory(structuralRevision != current.StructuralRevision);
             UpdateRecoveryJournal();
             UpdateUnsavedState();
             Repaint();
@@ -923,13 +1031,23 @@ namespace CsvTool.Editor
         {
             if (current == null) return;
             CommitActiveEditing();
+            int structuralRevision = current.StructuralRevision;
             if (!current.Redo()) return;
-            if (grid != null) grid.InvalidateVisibleRecordMap();
-            valueIndexes.Remove(current);
-            RefreshRecordView();
+            RefreshAfterHistory(structuralRevision != current.StructuralRevision);
             UpdateRecoveryJournal();
             UpdateUnsavedState();
             Repaint();
+        }
+
+        private void RefreshAfterHistory(bool structuralChange)
+        {
+            if (grid != null)
+            {
+                grid.InvalidateVisibleRecordMap();
+                if (structuralChange) grid.InvalidateDocumentLayout();
+            }
+            valueIndexes.Remove(current);
+            RefreshRecordView();
         }
 
         private void SaveCurrentFromShortcut()
@@ -944,7 +1062,7 @@ namespace CsvTool.Editor
             if (!current.IsDirty) { UpdateUnsavedState(); return true; }
             try
             {
-                current.Save();
+                current.Save(workspace == null ? null : workspace.Tables);
                 DeleteRecoveryJournal();
                 UpdateUnsavedState();
                 Repaint();
@@ -1395,6 +1513,20 @@ namespace CsvTool.Editor
             Repaint();
         }
 
+        private IReadOnlyList<CsvDatasetDiagnostic> GetDatasetIssues()
+        {
+            if (current == null || !current.IsLoaded) return EmptyDatasetIssues;
+            return current.ValidateDataset(workspace == null ? null : workspace.Tables);
+        }
+
+        private int GetDatasetIssueCount()
+        {
+            return GetDatasetIssues().Count;
+        }
+
+        private static readonly IReadOnlyList<CsvDatasetDiagnostic> EmptyDatasetIssues =
+            new CsvDatasetDiagnostic[0];
+
         private int GetSchemaIssueCount()
         {
             return current == null || current.ResolvedSchema == null ? 0 : current.ResolvedSchema.Diagnostics.Count;
@@ -1500,13 +1632,7 @@ namespace CsvTool.Editor
 
         private static CsvColumnSchema GetConfiguredColumn(CsvTableController table, int physicalColumn)
         {
-            if (table == null || table.ResolvedSchema == null) return null;
-            for (int i = 0; i < table.ResolvedSchema.Columns.Count; i++)
-            {
-                CsvResolvedColumn column = table.ResolvedSchema.Columns[i];
-                if (column.IsResolved && column.PhysicalIndex == physicalColumn) return column.Schema;
-            }
-            return null;
+            return table == null ? null : table.GetConfiguredColumn(physicalColumn);
         }
 
         private CsvTableController EnsureReferenceTargetOpen(CsvReferenceSpec reference)
@@ -1524,25 +1650,9 @@ namespace CsvTool.Editor
 
         private static int ResolveTargetColumn(CsvTableController target, string selector)
         {
-            if (target == null || string.IsNullOrWhiteSpace(selector)) return -1;
-            if (target.ResolvedSchema != null)
-            {
-                for (int i = 0; i < target.ResolvedSchema.Columns.Count; i++)
-                {
-                    CsvResolvedColumn column = target.ResolvedSchema.Columns[i];
-                    if (column.IsResolved && column.Schema != null &&
-                        string.Equals(column.Schema.Name, selector, StringComparison.OrdinalIgnoreCase))
-                        return column.PhysicalIndex;
-                }
-            }
-            int match = -1;
-            for (int i = 0; i < target.Headers.Count; i++)
-            {
-                if (!string.Equals(target.Headers[i], selector, StringComparison.OrdinalIgnoreCase)) continue;
-                if (match >= 0) return -1;
-                match = i;
-            }
-            return match;
+            int physicalColumn;
+            return target != null && target.TryResolvePhysicalColumn(selector, out physicalColumn)
+                ? physicalColumn : -1;
         }
 
         private void OnReferenceNavigationRequested(int recordIndex, int columnIndex, string value)

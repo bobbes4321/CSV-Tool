@@ -162,7 +162,8 @@ namespace CsvTool.Editor
             if (table.Document != null && selectedPhysicalRecordIndex >= 0 &&
                 selectedPhysicalRecordIndex < table.Document.Records.Count)
                 values = table.Document.Records[selectedPhysicalRecordIndex].Values;
-            return ForColumns(table.Headers, values, table.Schema, recordView, preferredPhysicalColumnIndex);
+            return ForColumns(table.Headers, values, table.Schema, recordView, preferredPhysicalColumnIndex,
+                table.GetConfiguredColumn);
         }
 
         /// <summary>
@@ -171,7 +172,8 @@ namespace CsvTool.Editor
         /// </summary>
         public static CsvGoToColumnModel ForColumns(IReadOnlyList<string> headers,
             IReadOnlyList<string> currentRowValues, CsvTableSchema schema = null,
-            CsvRecordViewDefinition recordView = null, int preferredPhysicalColumnIndex = -1)
+            CsvRecordViewDefinition recordView = null, int preferredPhysicalColumnIndex = -1,
+            Func<int, CsvColumnSchema> configuredColumnResolver = null)
         {
             List<CsvGoToColumnEntry> entries = new List<CsvGoToColumnEntry>();
             if (headers == null) return new CsvGoToColumnModel(entries, preferredPhysicalColumnIndex);
@@ -180,7 +182,9 @@ namespace CsvTool.Editor
                 string rawHeader = headers[index] ?? string.Empty;
                 string displayName = string.IsNullOrEmpty(rawHeader) ? "Column " + (index + 1) : rawHeader;
                 string group = "Other";
-                CsvColumnSchema configured = FindSchemaColumn(schema, headers, index);
+                CsvColumnSchema configured = configuredColumnResolver == null
+                    ? FindSchemaColumn(schema, headers, index)
+                    : configuredColumnResolver(index);
                 if (configured != null)
                 {
                     if (!string.IsNullOrWhiteSpace(configured.EffectiveDisplayName))

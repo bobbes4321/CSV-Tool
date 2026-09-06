@@ -80,6 +80,46 @@ An additional safe round-trip check is the `read_console` tool with
 before treating the bridge as disconnected. Never use MCP mutations during a
 connectivity check, and do not clear or alter sample project data.
 
+## CLI versus MCP workflow
+
+MCP is convenient for live, structured interaction with the open Unity editor,
+but exposing many verbose MCP tools can consume model context and make tool
+selection noisier. MCP itself supports paginated and cacheable tool discovery,
+but the host decides how many tool definitions remain available to the model.
+The protocol is not inherently more context-efficient than a CLI.
+
+CLI output also enters the model context, so CLI commands should have narrow
+responsibilities and concise, structured output. Avoid commands that dump large
+logs, full files, or verbose help text unless that information is needed.
+
+Use a hybrid workflow:
+
+- Prefer `rg`, PowerShell, and other shell/CLI commands for repository search,
+  file inspection, focused edits, CSV fixture work, and automation.
+- Prefer the Unity batch CLI for EditMode tests and other non-interactive Unity
+  validation, but only when no interactive Unity process is already using the
+  project.
+- Prefer Unity MCP for live editor state, selections, windows, menu commands,
+  and other operations that must target the already-open editor instance.
+- Keep the active MCP tool surface as small as practical for the current task;
+  activate only the relevant tool group when the host supports tool groups.
+- Read resources and request summaries or pages first. Fetch detailed data only
+  when it is needed for the next decision or edit.
+- Keep tool descriptions, command output, and custom diagnostics concise,
+  deterministic, and machine-readable where practical.
+
+Do not use CLI and MCP to start competing Unity instances. If the editor is
+open, route live-editor work through its connected MCP instance. If a batch
+operation is required and Unity reports that the batch command cannot run while
+the project is open, stop and follow the existing close-and-retry procedure
+instead of launching another Unity process.
+
+If a project-specific CLI is added later, prefer a small command surface such
+as `csvtool validate`, `csvtool query`, `csvtool format-check`, and
+`csvtool test`, with JSON or concise text output, explicit paths, stable exit
+codes, and no hidden name-based guessing. Keep destructive or write commands
+explicit and conflict-aware.
+
 ## Change hygiene
 
 Before editing, inspect the current working tree and preserve unrelated user

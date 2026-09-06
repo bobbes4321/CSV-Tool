@@ -69,6 +69,43 @@ namespace CsvTool.Editor.Tests
         }
 
         [Test]
+        public void PastePreflightReportsOverflowWithoutMutatingOrRetargetingPhysicalRows()
+        {
+            CsvDocument document = CsvDocument.Load(Encoding.UTF8.GetBytes("id,value\none,old\n"));
+            List<List<string>> clipboard = CsvGridClipboard.ParseTsv("first\nsecond");
+
+            CsvGridPastePreflight preflight = CsvGridPastePreflight.Create(document, clipboard,
+                0, 1, visualRow => visualRow == 0 ? 1 : -1, null);
+
+            Assert.IsTrue(preflight.HasPartialApplicationConditions);
+            Assert.AreEqual(1, preflight.OverflowRowCount);
+            Assert.AreEqual(1, preflight.OmittedDestinationCount);
+            Assert.AreEqual(1, preflight.Cells.Count);
+            Assert.AreEqual(1, preflight.Cells[0].RecordIndex,
+                "The eligible destination remains a physical document record.");
+            Assert.AreEqual("old", document.GetCell(1, 1),
+                "Planning a partial paste must not mutate the document.");
+        }
+
+        [Test]
+        public void PastePreflightReportsProtectedDestinationsBeforeAnyMutation()
+        {
+            CsvDocument document = CsvDocument.Load(Encoding.UTF8.GetBytes("id,value\none,old\n"));
+            List<List<string>> clipboard = CsvGridClipboard.ParseTsv("first\tsecond");
+
+            CsvGridPastePreflight preflight = CsvGridPastePreflight.Create(document, clipboard,
+                0, 0, visualRow => 1, (record, column) => column == 1 ? "Read-only column." : string.Empty);
+
+            Assert.IsTrue(preflight.HasPartialApplicationConditions);
+            Assert.AreEqual(1, preflight.ProtectedCellCount);
+            Assert.AreEqual(1, preflight.OmittedDestinationCount);
+            Assert.AreEqual(1, preflight.Cells.Count);
+            Assert.AreEqual(0, preflight.Cells[0].ColumnIndex);
+            Assert.AreEqual("one", document.GetCell(1, 0));
+            Assert.AreEqual("old", document.GetCell(1, 1));
+        }
+
+        [Test]
         public void AutocompleteProviderUsesPhysicalCoordinatesAndCapsResults()
         {
             CsvGridSettings settings = new CsvGridSettings { AutocompleteMaxSuggestions = 2 };

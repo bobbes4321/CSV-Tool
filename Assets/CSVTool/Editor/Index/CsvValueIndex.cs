@@ -110,9 +110,20 @@ namespace CsvTool.Editor.Index
             CsvColumnSchema column = FindColumn(source, sourceColumnIndex);
             if (column == null || column.References.Count == 0) return output.AsReadOnly();
             string raw = source.GetCell(sourceRecordIndex, sourceColumnIndex);
-            IReadOnlyList<string> tokens = ExtractTokens(raw, column.TokenSyntax);
+            string extractionError;
+            IReadOnlyList<string> tokens = ExtractTokens(raw, column.TokenSyntax, out extractionError);
+            if (!string.IsNullOrEmpty(extractionError))
+            {
+                output.Add(new CsvReferenceResolution
+                {
+                    Status = CsvReferenceResolutionStatus.Invalid,
+                    Token = raw,
+                    Message = extractionError
+                });
+                return output.AsReadOnly();
+            }
             foreach (string token in tokens)
-                output.Add(ResolveToken(token, column.References, tables));
+                output.Add(ResolveToken(token, column.References, tables, source.CaseSensitiveNames));
             return output.AsReadOnly();
         }
 
@@ -138,13 +149,24 @@ namespace CsvTool.Editor.Index
                 workspace == null ? null : workspace.Tables);
         }
 
-        private static CsvReferenceResolution ResolveToken(string token, IList<CsvReferenceSpec> specs, IEnumerable<CsvTableController> tables)
+        private static CsvReferenceResolution ResolveToken(string token, IList<CsvReferenceSpec> specs,
+            IEnumerable<CsvTableController> tables, bool caseSensitiveNames)
         {
             List<CsvReferenceResolution> matches = new List<CsvReferenceResolution>();
             foreach (CsvReferenceSpec spec in specs)
             {
                 if (spec == null || !spec.IsConfigured) continue;
-                CsvTableController target = FindTable(tables, spec.TargetTable);
+                bool ambiguousTarget;
+                CsvTableController target = FindTable(tables, spec.TargetTable, caseSensitiveNames,
+                    out ambiguousTarget);
+                if (ambiguousTarget)
+                    return new CsvReferenceResolution
+                    {
+                        Status = CsvReferenceResolutionStatus.Ambiguous,
+                        Token = token,
+                        TargetKey = token,
+                        Message = "The configured target table name is ambiguous."
+                    };
                 if (target == null || target.Document == null) continue;
                 int keyColumn = FindTableColumn(target, spec.TargetKeyColumn, false);
                 if (keyColumn < 0) continue;
@@ -152,10 +174,11 @@ namespace CsvTool.Editor.Index
                 {
                     CsvRecord record = target.Document.Records[i];
                     if (record.Kind != CsvRecordKind.Data) continue;
-                    if (string.Equals(record.GetValue(keyColumn), token, StringComparison.OrdinalIgnoreCase))
+                    if (string.Equals(record.GetValue(keyColumn), token,
+                        caseSensitiveNames ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase))
                     {
                         int display = FindTableColumn(target, spec.TargetDisplayColumn, true);
-                        matches.Add(new CsvReferenceResolution { Status = CsvReferenceResolutionStatus.Resolved, Token = token, TargetTableName = target.Name, TargetKey = record.GetValue(keyColumn), TargetDisplay = record.GetValue(display), TargetRecordIndex = i, TargetKeyColumnIndex = keyColumn, TargetDisplayColumnIndex = display });
+                        matches.Add(new CsvReferenceResolution { Status = CsvReferenceResolutionStatus.Resolved, Token = token, TargetTableName = target.Name, TargetKey = record.GetValue(keyColumn), TargetDisplay = display < 0 ? string.Empty : record.GetValue(display), TargetRecordIndex = i, TargetKeyColumnIndex = keyColumn, TargetDisplayColumnIndex = display });
                     }
                 }
             }
@@ -164,8 +187,10 @@ namespace CsvTool.Editor.Index
             return new CsvReferenceResolution { Status = CsvReferenceResolutionStatus.Missing, Token = token, TargetKey = token, Message = "The reference target was not found." };
         }
 
-        private static IReadOnlyList<string> ExtractTokens(string raw, CsvTokenSyntax syntax)
+        private static IReadOnlyList<string> ExtractTokens(string raw, CsvTokenSyntax syntax,
+            out string error)
         {
+            error = string.Empty;
             syntax = syntax ?? new CsvTokenSyntax(); raw = raw ?? string.Empty;
             List<string> result = new List<string>();
             if (syntax.Mode == CsvTokenExtractionMode.FirstWhitespaceToken)
@@ -174,13 +199,60 @@ namespace CsvTool.Editor.Index
                 if (parts.Length > 0) Add(result, parts[0], syntax);
             }
             else if (syntax.Mode == CsvTokenExtractionMode.Delimited) foreach (string item in raw.Split(new[] { syntax.Separator }, StringSplitOptions.None)) Add(result, item, syntax);
-            else if (syntax.Mode == CsvTokenExtractionMode.RegexCapture && !string.IsNullOrEmpty(syntax.RegexPattern)) foreach (Match m in Regex.Matches(raw, syntax.RegexPattern)) if (syntax.RegexCaptureGroup < m.Groups.Count) Add(result, m.Groups[syntax.RegexCaptureGroup].Value, syntax);
+            else if (syntax.Mode == CsvTokenExtractionMode.RegexCapture && !string.IsNullOrEmpty(syntax.RegexPattern))
+            {
+                try
+                {
+                    Regex regex = new Regex(syntax.RegexPattern, RegexOptions.CultureInvariant,
+                        CsvTokenSyntax.RegexMatchTimeout);
+                    foreach (Match m in regex.Matches(raw))
+                    {
+                        if (syntax.RegexCaptureGroup >= m.Groups.Count)
+                        {
+                            error = "Configured regex capture group is unavailable.";
+                            return result.AsReadOnly();
+                        }
+                        Add(result, m.Groups[syntax.RegexCaptureGroup].Value, syntax);
+                    }
+                }
+                catch (ArgumentException exception) { error = "Configured regex is invalid: " + exception.Message; }
+                catch (RegexMatchTimeoutException) { error = "Configured regex exceeded the 100 ms evaluation limit."; }
+            }
             else Add(result, raw, syntax);
             return result.AsReadOnly();
         }
         private static void Add(List<string> result, string value, CsvTokenSyntax syntax) { if (syntax.TrimWhitespace) value = value.Trim(); if (!syntax.IgnoreEmptyTokens || value.Length > 0) result.Add(value); }
-        private static CsvColumnSchema FindColumn(CsvTableController t, int index) { if (t.Schema != null) foreach (CsvColumnSchema c in t.Schema.Columns) if (c != null && ((c.Index >= 0 && c.Index == index) || (c.Index < 0 && string.Equals(c.Name, t.GetHeader(index), StringComparison.OrdinalIgnoreCase)))) return c; return null; }
-        private static int FindTableColumn(CsvTableController t, string selector, bool optional) { if (string.IsNullOrWhiteSpace(selector)) return optional ? -1 : -1; if (t.Schema != null) foreach (CsvColumnSchema c in t.Schema.Columns) if (c != null && c.Index >= 0 && string.Equals(c.Name, selector, StringComparison.OrdinalIgnoreCase)) return c.Index; for (int i = 0; i < t.Headers.Count; i++) if (string.Equals(t.GetHeader(i), selector, StringComparison.OrdinalIgnoreCase)) return i; return -1; }
-        private static CsvTableController FindTable(IEnumerable<CsvTableController> tables, string name) { if (tables != null) foreach (CsvTableController t in tables) if (t != null && string.Equals(t.Name, name, StringComparison.OrdinalIgnoreCase)) return t; return null; }
+        private static CsvColumnSchema FindColumn(CsvTableController t, int index)
+        {
+            // ResolvedSchema is the only source of configured-column identity here.
+            // GetHeader intentionally returns presentation labels, so it must not be
+            // used to decide which source column owns reference metadata.
+            return t == null ? null : t.GetConfiguredColumn(index);
+        }
+
+        private static int FindTableColumn(CsvTableController t, string selector, bool optional)
+        {
+            int physicalColumn;
+            return t != null && t.TryResolvePhysicalColumn(selector, out physicalColumn)
+                ? physicalColumn : -1;
+        }
+        private static CsvTableController FindTable(IEnumerable<CsvTableController> tables, string name,
+            bool caseSensitiveNames, out bool ambiguous)
+        {
+            ambiguous = false;
+            CsvTableController found = null;
+            if (tables != null) foreach (CsvTableController t in tables)
+                if (t != null && string.Equals(t.Name, name, caseSensitiveNames
+                    ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase))
+                {
+                    if (found != null)
+                    {
+                        ambiguous = true;
+                        return null;
+                    }
+                    found = t;
+                }
+            return found;
+        }
     }
 }

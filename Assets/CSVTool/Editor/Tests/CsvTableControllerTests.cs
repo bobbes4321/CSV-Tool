@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using CsvTool.Core;
 using CsvTool.Editor;
+using CsvTool.Editor.Validation;
 using CsvTool.Schema;
 using NUnit.Framework;
 
@@ -147,6 +148,65 @@ namespace CsvTool.Editor.Tests
         }
 
         [Test]
+        public void InsertRowBeforeHeaderRebuildsHeaderProtectionAndPhysicalViewOnUndoRedo()
+        {
+            CsvTableController controller = Open("name,value\nalpha,one\n");
+            Assert.AreEqual(0, controller.HeaderRecordIndex);
+            int initialRevision = controller.StructuralRevision;
+
+            Assert.AreEqual(0, controller.InsertDataRow(0));
+            Assert.AreEqual(1, controller.HeaderRecordIndex);
+            Assert.AreEqual("name", controller.GetCell(1, 0));
+            CollectionAssert.AreEqual(new[] { 0, 2 }, controller.VisibleRecordIndices);
+            Assert.Greater(controller.StructuralRevision, initialRevision);
+            Assert.Throws<InvalidOperationException>(() => controller.SetCell(1, 0, "not a header edit"));
+            Assert.IsTrue(controller.SetCell(0, 0, "inserted"));
+
+            // Undo the inserted-row cell edit, then the structural insertion.
+            Assert.IsTrue(controller.Undo());
+            Assert.IsTrue(controller.Undo());
+            Assert.AreEqual(0, controller.HeaderRecordIndex);
+            CollectionAssert.AreEqual(new[] { 1 }, controller.VisibleRecordIndices);
+            Assert.Throws<InvalidOperationException>(() => controller.SetCell(0, 0, "not a header edit"));
+
+            Assert.IsTrue(controller.Redo());
+            Assert.AreEqual(1, controller.HeaderRecordIndex);
+            CollectionAssert.AreEqual(new[] { 0, 2 }, controller.VisibleRecordIndices);
+            Assert.Throws<InvalidOperationException>(() => controller.SetCell(1, 0, "not a header edit"));
+        }
+
+        [Test]
+        public void InsertColumnBeforeNameSelectedReadOnlyColumnReresolvesOnUndoRedo()
+        {
+            string path = Write("name,value\nalpha,one\n");
+            CsvTableSchema schema = new CsvTableSchema("table", "table.csv");
+            schema.Columns.Add(new CsvColumnSchema("name") { ReadOnly = true });
+            CsvTableController controller = new CsvTableController("table", path, schema);
+            controller.Open();
+
+            controller.InsertColumn(0, "inserted");
+            Assert.AreEqual("inserted", controller.GetCell(0, 0));
+            Assert.AreEqual("name", controller.GetCell(0, 1));
+            Assert.AreEqual(1, controller.ResolvedSchema.Columns[0].PhysicalIndex);
+            Assert.Throws<InvalidOperationException>(() => controller.SetCell(1, 1, "blocked after insert"));
+            Assert.IsTrue(controller.SetCell(1, 0, "allowed"));
+
+            // Undo the allowed cell edit, then the structural insertion.
+            Assert.IsTrue(controller.Undo());
+            Assert.IsTrue(controller.Undo());
+            Assert.AreEqual("name", controller.GetCell(0, 0));
+            Assert.AreEqual(0, controller.ResolvedSchema.Columns[0].PhysicalIndex);
+            Assert.Throws<InvalidOperationException>(() => controller.SetCell(1, 0, "blocked after undo"));
+
+            // Return to the structural boundary and redo the insertion without
+            // creating a new history branch from the undone state.
+            Assert.IsTrue(controller.Redo());
+            Assert.AreEqual("name", controller.GetCell(0, 1));
+            Assert.AreEqual(1, controller.ResolvedSchema.Columns[0].PhysicalIndex);
+            Assert.Throws<InvalidOperationException>(() => controller.SetCell(1, 1, "blocked after redo"));
+        }
+
+        [Test]
         public void SaveClearsDirtyStateAndRefreshesObservedFileState()
         {
             string path = Write("name,value\nalpha,old\n");
@@ -180,6 +240,46 @@ namespace CsvTool.Editor.Tests
             Assert.IsTrue(controller.HasExternalChange);
             Assert.IsTrue(controller.IsDirty);
             Assert.AreEqual("name,value\nalpha,oth\n", File.ReadAllText(path));
+        }
+
+        [Test]
+        public void SaveGateBlocksInvalidDatasetWithoutWritingAndAllowsCorrectedData()
+        {
+            string path = Write("id,score\nunit,not-a-number\n");
+            CsvTableSchema schema = new CsvTableSchema("table", "table.csv") { IdentityColumn = "id" };
+            schema.Columns.Add(new CsvColumnSchema("score") { ValueKind = CsvValueKind.Integer, Required = true });
+            CsvTableController controller = new CsvTableController("table", path, schema);
+            controller.Open();
+            controller.SetCell(1, 0, "unit-edited");
+
+            CsvDatasetValidationException exception = Assert.Throws<CsvDatasetValidationException>(() => controller.Save());
+            Assert.AreEqual("DATA_TYPE_INVALID", exception.Diagnostics[0].Code);
+            Assert.AreEqual("id,score\nunit,not-a-number\n", File.ReadAllText(path),
+                "The validation gate must run before any atomic-save write.");
+            Assert.IsTrue(controller.IsDirty);
+
+            controller.SetCell(1, 1, "42");
+            controller.Save();
+            Assert.AreEqual("id,score\nunit-edited,42\n", File.ReadAllText(path));
+            Assert.IsFalse(controller.IsDirty);
+        }
+
+        [Test]
+        public void SaveGateDoesNotBlockAnUnopenedUnrelatedWorkspaceTable()
+        {
+            string path = Write("id,value\nunit,old\n");
+            CsvTableController current = new CsvTableController("current", path,
+                new CsvTableSchema("current", "table.csv"));
+            current.Open();
+            current.SetCell(1, 1, "saved");
+            CsvTableController unopened = new CsvTableController("unrelated",
+                Path.Combine(temporaryDirectory, "unrelated.csv"),
+                new CsvTableSchema("unrelated", "unrelated.csv"));
+
+            current.Save(new[] { current, unopened });
+
+            Assert.AreEqual("id,value\nunit,saved\n", File.ReadAllText(path));
+            Assert.IsFalse(current.IsDirty);
         }
 
         [Test]

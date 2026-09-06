@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using CsvTool.Core;
 using CsvTool.Schema;
+using CsvTool.Editor.Validation;
 
 namespace CsvTool.Editor
 {
@@ -22,11 +23,13 @@ namespace CsvTool.Editor
         private bool includeNonDataRows;
         private bool allowStructuralRowEdits;
 
-        public CsvTableController(string name, string absolutePath, CsvTableSchema schema)
+        public CsvTableController(string name, string absolutePath, CsvTableSchema schema,
+            bool caseSensitiveNames = false)
         {
             Name = name ?? string.Empty;
             AbsolutePath = Path.GetFullPath(absolutePath ?? string.Empty);
             Schema = schema;
+            CaseSensitiveNames = caseSensitiveNames;
             // Documentation, comments, sections, and blank separators remain
             // visible by default; projects may opt into data-only views.
             includeNonDataRows = true;
@@ -35,6 +38,7 @@ namespace CsvTool.Editor
         public string Name { get; private set; }
         public string AbsolutePath { get; private set; }
         public CsvTableSchema Schema { get; private set; }
+        public bool CaseSensitiveNames { get; private set; }
         public CsvResolvedTableSchema ResolvedSchema { get; private set; }
         public CsvDocument Document { get; private set; }
         public IReadOnlyList<int> VisibleRecordIndices { get { return visibleRecords; } }
@@ -73,6 +77,13 @@ namespace CsvTool.Editor
         public int HeaderRecordIndex { get { return headerRecordIndex; } }
         public int DataRowCount { get { return visibleRecords.Count; } }
         public int SearchMatchCount { get { return searchMatches.Count; } }
+
+        /// <summary>
+        /// Monotonically increases when a structural edit changes the physical
+        /// document shape or header location. Editor views can use this signal
+        /// to invalidate physical selection and layout caches as one operation.
+        /// </summary>
+        public int StructuralRevision { get; private set; }
 
         public bool IsRecordVisible(int recordIndex)
         {
@@ -173,6 +184,81 @@ namespace CsvTool.Editor
             return SetCells(new[] { new CsvCellAssignment(recordIndex, columnIndex, value) });
         }
 
+        /// <summary>Returns the non-mutating permission error for one physical cell, if any.</summary>
+        public string GetEditError(int recordIndex, int columnIndex)
+        {
+            try
+            {
+                ValidateEdit(recordIndex, columnIndex);
+                return string.Empty;
+            }
+            catch (Exception exception) when (exception is ArgumentOutOfRangeException ||
+                exception is InvalidOperationException)
+            {
+                return exception.Message;
+            }
+        }
+
+        /// <summary>Looks up configured metadata by its already-resolved physical column.</summary>
+        public CsvColumnSchema GetConfiguredColumn(int physicalColumnIndex)
+        {
+            if (ResolvedSchema == null) return null;
+            for (int i = 0; i < ResolvedSchema.Columns.Count; i++)
+            {
+                CsvResolvedColumn column = ResolvedSchema.Columns[i];
+                if (column != null && column.IsResolved && column.PhysicalIndex == physicalColumnIndex)
+                    return column.Schema;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Resolves a configuration selector to exactly one physical column. Raw headers and
+        /// configured selectors participate; display labels never do, and ambiguity is an error.
+        /// </summary>
+        public bool TryResolvePhysicalColumn(string selector, out int physicalColumnIndex)
+        {
+            physicalColumnIndex = -1;
+            if (string.IsNullOrWhiteSpace(selector) || ResolvedSchema == null) return false;
+            List<int> candidates = new List<int>();
+            StringComparison comparison = CaseSensitiveNames ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase;
+            CsvResolvedColumn identity = ResolvedSchema.Identity;
+            if (identity != null && identity.IsResolved && Schema != null && Schema.IdentityColumnIndex >= 0 &&
+                string.Equals(selector, Schema.IdentityColumn ?? string.Empty, comparison))
+            {
+                physicalColumnIndex = identity.PhysicalIndex;
+                return true;
+            }
+            for (int i = 0; i < ResolvedSchema.Columns.Count; i++)
+            {
+                CsvResolvedColumn column = ResolvedSchema.Columns[i];
+                if (column != null && column.IsResolved && column.Schema != null && column.Schema.Index >= 0 &&
+                    string.Equals(selector, column.Schema.Name ?? string.Empty, comparison) &&
+                    !candidates.Contains(column.PhysicalIndex)) candidates.Add(column.PhysicalIndex);
+            }
+            if (candidates.Count == 1)
+            {
+                physicalColumnIndex = candidates[0];
+                return true;
+            }
+            if (candidates.Count > 1) return false;
+            for (int i = 0; i < Headers.Count; i++)
+                if (string.Equals(selector, Headers[i] ?? string.Empty, comparison)) candidates.Add(i);
+            for (int i = 0; i < ResolvedSchema.Columns.Count; i++)
+            {
+                CsvResolvedColumn column = ResolvedSchema.Columns[i];
+                if (column != null && column.IsResolved && column.Schema != null &&
+                    string.Equals(selector, column.Schema.Name ?? string.Empty, comparison) &&
+                    !candidates.Contains(column.PhysicalIndex)) candidates.Add(column.PhysicalIndex);
+            }
+            if (identity != null && identity.IsResolved && Schema != null &&
+                string.Equals(selector, Schema.IdentityColumn ?? string.Empty, comparison) &&
+                !candidates.Contains(identity.PhysicalIndex)) candidates.Add(identity.PhysicalIndex);
+            if (candidates.Count != 1) return false;
+            physicalColumnIndex = candidates[0];
+            return true;
+        }
+
         /// <summary>Inserts a data row before a physical document record, or appends at Records.Count.</summary>
         public int InsertDataRow(int physicalInsertIndex)
         {
@@ -182,7 +268,7 @@ namespace CsvTool.Editor
             List<string> values = new List<string>();
             for (int i = 0; i < Document.ColumnCount; i++) values.Add(string.Empty);
             Document.InsertRecord(physicalInsertIndex, values);
-            RebuildSearch();
+            RebuildStructuralState(true);
             return physicalInsertIndex;
         }
 
@@ -199,8 +285,7 @@ namespace CsvTool.Editor
                 if (kind == CsvRecordKind.Header || kind == CsvRecordKind.Data) records.Add(i);
             }
             Document.InsertColumn(physicalColumnIndex, records, header ?? string.Empty);
-            ResolveSchema();
-            RebuildSearch();
+            RebuildStructuralState(true);
         }
 
         /// <summary>
@@ -229,8 +314,13 @@ namespace CsvTool.Editor
         public bool Undo()
         {
             EnsureLoaded();
+            int previousRecordCount = Document.Records.Count;
+            int previousColumnCount = Document.ColumnCount;
+            int previousHeaderRecordIndex = headerRecordIndex;
             bool changed = Document.Undo();
-            if (changed) RebuildSearch();
+            if (changed && HasStructuralShapeChanged(previousRecordCount, previousColumnCount, previousHeaderRecordIndex))
+                RebuildStructuralState(true);
+            else if (changed) RebuildSearch();
             return changed;
         }
 
@@ -238,8 +328,13 @@ namespace CsvTool.Editor
         public bool Redo()
         {
             EnsureLoaded();
+            int previousRecordCount = Document.Records.Count;
+            int previousColumnCount = Document.ColumnCount;
+            int previousHeaderRecordIndex = headerRecordIndex;
             bool changed = Document.Redo();
-            if (changed) RebuildSearch();
+            if (changed && HasStructuralShapeChanged(previousRecordCount, previousColumnCount, previousHeaderRecordIndex))
+                RebuildStructuralState(true);
+            else if (changed) RebuildSearch();
             return changed;
         }
 
@@ -273,7 +368,16 @@ namespace CsvTool.Editor
         /// </summary>
         public void Save()
         {
+            Save(new[] { this });
+        }
+
+        /// <summary>Performs shared dataset validation before the conflict-aware core save.</summary>
+        public void Save(IEnumerable<CsvTableController> validationTables)
+        {
             EnsureLoaded();
+            IReadOnlyList<CsvDatasetDiagnostic> diagnostics = ValidateDataset(validationTables);
+            if (CsvDatasetValidationException.HasErrors(diagnostics))
+                throw new CsvDatasetValidationException(diagnostics);
             try
             {
                 Document.SaveToFile();
@@ -289,6 +393,12 @@ namespace CsvTool.Editor
             // subsequent poll does not report our own write as external.
             ObserveFile();
             HasExternalChange = false;
+        }
+
+        public IReadOnlyList<CsvDatasetDiagnostic> ValidateDataset(
+            IEnumerable<CsvTableController> validationTables = null)
+        {
+            return CsvDatasetValidator.Validate(validationTables ?? new[] { this });
         }
 
         public int FindNextMatch(int currentRecordIndex, int currentColumnIndex, bool backwards)
@@ -319,7 +429,37 @@ namespace CsvTool.Editor
         public void RefreshView()
         {
             EnsureLoaded();
+            int previousRecordCount = Document.Records.Count;
+            int previousColumnCount = Document.ColumnCount;
+            int previousHeaderRecordIndex = headerRecordIndex;
+            bool structuralChange = HasStructuralShapeChanged(previousRecordCount, previousColumnCount, previousHeaderRecordIndex);
+            RebuildStructuralState(structuralChange);
+        }
+
+        private void RebuildStructuralState(bool structuralChange)
+        {
+            FindHeader();
+            ResolveSchema();
             RebuildSearch();
+
+            if (structuralChange) StructuralRevision++;
+        }
+
+        private bool HasStructuralShapeChanged(int previousRecordCount, int previousColumnCount,
+            int previousHeaderRecordIndex)
+        {
+            if (Document == null) return false;
+            return previousRecordCount != Document.Records.Count ||
+                previousColumnCount != Document.ColumnCount ||
+                previousHeaderRecordIndex != FindHeaderRecordIndex();
+        }
+
+        private int FindHeaderRecordIndex()
+        {
+            if (Document == null) return -1;
+            for (int i = 0; i < Document.Records.Count; i++)
+                if (Document.Records[i].Kind == CsvRecordKind.Header) return i;
+            return Document.Records.Count > 0 ? 0 : -1;
         }
 
         private void FindHeader()
@@ -342,7 +482,7 @@ namespace CsvTool.Editor
             List<string> headers = new List<string>(Headers.Count);
             for (int i = 0; i < Headers.Count; i++) headers.Add(Headers[i]);
             ResolvedSchema = CsvSchemaResolver.Resolve(Schema ?? new CsvTableSchema(Name,
-                Path.GetFileName(AbsolutePath)), headers);
+                Path.GetFileName(AbsolutePath)), headers, CaseSensitiveNames);
         }
 
         private void EnsureLoaded()
@@ -496,7 +636,8 @@ namespace CsvTool.Editor
                 if (skipExisting && ContainsPath(paths[i])) continue;
                 string relative = GetRelativePath(Folder, paths[i]);
                 string name = Path.ChangeExtension(relative, null).Replace('\\', '/');
-                tables.Add(new CsvTableController(name, paths[i], new CsvTableSchema(name, relative)));
+                tables.Add(new CsvTableController(name, paths[i], new CsvTableSchema(name, relative),
+                    configuredSchema != null && configuredSchema.CaseSensitiveNames));
             }
         }
 
@@ -528,15 +669,22 @@ namespace CsvTool.Editor
                 string name = string.IsNullOrWhiteSpace(schema.Name)
                     ? Path.ChangeExtension(schema.RelativePath, null).Replace('\\', '/')
                     : schema.Name;
-                tables.Add(new CsvTableController(name, absolutePath, schema));
+                tables.Add(new CsvTableController(name, absolutePath, schema,
+                    configuredSchema.CaseSensitiveNames));
             }
         }
 
         public CsvTableController Find(string name)
         {
+            CsvTableController found = null;
             for (int i = 0; i < tables.Count; i++)
-                if (string.Equals(tables[i].Name, name, StringComparison.OrdinalIgnoreCase)) return tables[i];
-            return null;
+                if (string.Equals(tables[i].Name, name, configuredSchema != null && configuredSchema.CaseSensitiveNames
+                    ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase))
+                {
+                    if (found != null) return null;
+                    found = tables[i];
+                }
+            return found;
         }
 
         private static string GetRelativePath(string root, string path)

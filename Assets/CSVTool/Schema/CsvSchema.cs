@@ -39,6 +39,9 @@ namespace CsvTool.Schema
     /// </summary>
     public sealed class CsvTokenSyntax
     {
+        /// <summary>Finite budget used by consumers that evaluate configured regular expressions.</summary>
+        public static readonly TimeSpan RegexMatchTimeout = TimeSpan.FromMilliseconds(100);
+
         public CsvTokenSyntax()
             : this(CsvTokenExtractionMode.WholeCell, string.Empty, true, true)
         {

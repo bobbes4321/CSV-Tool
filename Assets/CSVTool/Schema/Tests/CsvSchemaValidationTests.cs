@@ -160,6 +160,30 @@ namespace CsvTool.Schema.Tests
         }
 
         [Test]
+        public void MalformedRegexAndUnavailableCaptureGroupAreRejectedBeforeNavigation()
+        {
+            CsvWorkspaceSchema workspace = Workspace();
+            workspace.Tables.Add(new CsvTableSchema("abilities", "abilities.csv"));
+            CsvTableSchema units = new CsvTableSchema("units", "units.csv");
+            units.Columns.Add(ReferenceColumn("broken", new CsvTokenSyntax(CsvTokenExtractionMode.RegexCapture)
+            {
+                RegexPattern = "(",
+                RegexCaptureGroup = 1
+            }, "abilities", "id"));
+            units.Columns.Add(ReferenceColumn("missingGroup", new CsvTokenSyntax(CsvTokenExtractionMode.RegexCapture)
+            {
+                RegexPattern = "(id)",
+                RegexCaptureGroup = 2
+            }, "abilities", "id"));
+            workspace.Tables.Add(units);
+
+            IReadOnlyList<CsvSchemaIssue> issues = CsvSchemaValidator.Validate(workspace);
+
+            AssertHasCode(issues, "REGEX_PATTERN_INVALID");
+            AssertHasCode(issues, "REGEX_CAPTURE_GROUP_MISSING");
+        }
+
+        [Test]
         public void UnitsAbilitiesStyleConfigurationIsValid()
         {
             CsvWorkspaceSchema workspace = Workspace();

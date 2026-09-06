@@ -127,6 +127,9 @@ namespace CsvTool.Editor
         /// <summary>Alias for consumers which name the event after the paste operation.</summary>
         public event Action<CsvGridBatchEdit> PasteCommitted;
 
+        /// <summary>Raised when a paste cannot be applied completely and is therefore not emitted for mutation.</summary>
+        public event Action<CsvGridPastePreflight> PastePreflightRejected;
+
         /// <summary>Raised for the owning controller/window to perform an undo.</summary>
         public event Action UndoRequested;
 
@@ -141,6 +144,12 @@ namespace CsvTool.Editor
 
         /// <summary>Supplies edit suggestions for a physical record/column and current text.</summary>
         public Func<int, int, string, IReadOnlyList<string>> AutocompleteProvider { get; set; }
+
+        /// <summary>
+        /// Optional owner-supplied permission check used during paste planning.
+        /// A non-empty response rejects the complete paste before any edit event is raised.
+        /// </summary>
+        public Func<int, int, string> PasteCellErrorProvider { get; set; }
 
         /// <summary>Raised when Ctrl-click requests navigation from a cell value.</summary>
         public event Action<int, int, string> ReferenceNavigationRequested;
@@ -872,37 +881,32 @@ namespace CsvTool.Editor
             CsvGridRangeSelection selectedRange = RangeSelection;
             int startRow = selectedRange.IsValid ? selectedRange.TopRow : _selection.Row;
             int startColumn = selectedRange.IsValid ? selectedRange.LeftColumn : _selection.Column;
-            if (rows.Count == 1 && rows[0].Count == 1)
+            CsvGridPastePreflight preflight = CsvGridPastePreflight.Create(_document, rows,
+                startRow, startColumn, GetRecordIndex, PasteCellErrorProvider);
+            if (preflight.HasPartialApplicationConditions)
             {
-                CommitValue(rows[0][0], _selection.RecordIndex, _selection.Column,
-                    _document.GetCell(_selection.RecordIndex, _selection.Column));
-                return true;
+                PastePreflightRejected?.Invoke(preflight);
+                return false;
             }
 
-            List<CsvGridCellEdit> edits = new List<CsvGridCellEdit>();
+            List<CsvGridCellEdit> edits = new List<CsvGridCellEdit>(preflight.Cells.Count);
             int maxColumn = _columnCount;
-            for (int rowOffset = 0; rowOffset < rows.Count; rowOffset++)
+            for (int i = 0; i < preflight.Cells.Count; i++)
             {
-                int visualRow = startRow + rowOffset;
-                // A filtered grid's row map is the paste boundary. This deliberately prevents a
-                // paste from accidentally writing to a hidden/non-matching physical record.
-                int recordIndex = GetRecordIndex(visualRow);
-                if (recordIndex < 0) continue;
-                List<string> pastedRow = rows[rowOffset];
-                for (int columnOffset = 0; columnOffset < pastedRow.Count; columnOffset++)
-                {
-                    int column = startColumn + columnOffset;
-                    if (column < 0) continue;
-                    string oldValue = column < _document.Records[recordIndex].CellCount
-                        ? _document.GetCell(recordIndex, column) : string.Empty;
-                    string newValue = pastedRow[columnOffset] ?? string.Empty;
-                    maxColumn = Mathf.Max(maxColumn, column + 1);
-                    if (!string.Equals(oldValue, newValue, StringComparison.Ordinal))
-                        edits.Add(new CsvGridCellEdit(_document, recordIndex, column, oldValue, newValue));
-                }
+                CsvGridPasteCell cell = preflight.Cells[i];
+                if (!cell.HasChange) continue;
+                maxColumn = Mathf.Max(maxColumn, cell.ColumnIndex + 1);
+                edits.Add(new CsvGridCellEdit(_document, cell.RecordIndex, cell.ColumnIndex,
+                    cell.OldValue, cell.NewValue));
             }
 
             if (edits.Count == 0) return false;
+            if (edits.Count == 1 && rows.Count == 1 && rows[0].Count == 1)
+            {
+                CsvGridCellEdit edit = edits[0];
+                CommitValue(edit.NewValue, edit.RecordIndex, edit.ColumnIndex, edit.OldValue);
+                return true;
+            }
             CsvGridBatchEdit batch = new CsvGridBatchEdit(_document, edits, maxColumn > _columnCount);
             BatchEditCommitted?.Invoke(batch);
             PasteCommitted?.Invoke(batch);
@@ -1976,6 +1980,109 @@ namespace CsvTool.Editor
         public static CsvGridVisibleStats Empty
         {
             get { return new CsvGridVisibleStats { VisibleBodyRowStart = 0, VisibleColumnStart = 0 }; }
+        }
+    }
+
+    /// <summary>One physical destination considered by a non-mutating paste preflight.</summary>
+    public struct CsvGridPasteCell
+    {
+        public CsvGridPasteCell(int recordIndex, int columnIndex, string oldValue, string newValue)
+        {
+            RecordIndex = recordIndex;
+            ColumnIndex = columnIndex;
+            OldValue = oldValue ?? string.Empty;
+            NewValue = newValue ?? string.Empty;
+        }
+
+        public readonly int RecordIndex;
+        public readonly int ColumnIndex;
+        public readonly string OldValue;
+        public readonly string NewValue;
+        public bool HasChange { get { return !string.Equals(OldValue, NewValue, StringComparison.Ordinal); } }
+    }
+
+    /// <summary>
+    /// Describes every non-silent condition found before a paste can be emitted for mutation.
+    /// Coordinates in <see cref="Cells"/> are physical document coordinates.
+    /// </summary>
+    public sealed class CsvGridPastePreflight
+    {
+        private readonly List<CsvGridPasteCell> cells = new List<CsvGridPasteCell>();
+
+        public IReadOnlyList<CsvGridPasteCell> Cells { get { return cells; } }
+        public int OverflowRowCount { get; private set; }
+        public int OmittedDestinationCount { get; private set; }
+        public int ProtectedCellCount { get; private set; }
+        public int InvalidDestinationCount { get; private set; }
+        public bool HasPartialApplicationConditions
+        {
+            get
+            {
+                return OverflowRowCount > 0 || OmittedDestinationCount > 0 ||
+                    ProtectedCellCount > 0 || InvalidDestinationCount > 0;
+            }
+        }
+
+        public string Summary
+        {
+            get
+            {
+                List<string> conditions = new List<string>();
+                if (OverflowRowCount > 0) conditions.Add(OverflowRowCount + " overflow row(s)");
+                if (OmittedDestinationCount > 0) conditions.Add(OmittedDestinationCount + " omitted destination(s)");
+                if (ProtectedCellCount > 0) conditions.Add(ProtectedCellCount + " protected cell(s)");
+                if (InvalidDestinationCount > 0) conditions.Add(InvalidDestinationCount + " invalid destination(s)");
+                return conditions.Count == 0 ? "Paste can be applied." : "Paste was not applied: " + string.Join(", ", conditions.ToArray()) + ".";
+            }
+        }
+
+        public static CsvGridPastePreflight Create(CsvDocument document, IList<List<string>> rows,
+            int startVisualRow, int startColumn, Func<int, int> getPhysicalRecord,
+            Func<int, int, string> getCellError)
+        {
+            CsvGridPastePreflight result = new CsvGridPastePreflight();
+            if (document == null || rows == null || getPhysicalRecord == null)
+            {
+                result.InvalidDestinationCount = 1;
+                return result;
+            }
+
+            for (int rowOffset = 0; rowOffset < rows.Count; rowOffset++)
+            {
+                IList<string> pastedRow = rows[rowOffset] ?? new List<string>();
+                int recordIndex = getPhysicalRecord(startVisualRow + rowOffset);
+                if (recordIndex < 0 || recordIndex >= document.Records.Count)
+                {
+                    result.OverflowRowCount++;
+                    result.OmittedDestinationCount += pastedRow.Count;
+                    continue;
+                }
+
+                for (int columnOffset = 0; columnOffset < pastedRow.Count; columnOffset++)
+                {
+                    int columnIndex = startColumn + columnOffset;
+                    if (columnIndex < 0)
+                    {
+                        result.InvalidDestinationCount++;
+                        result.OmittedDestinationCount++;
+                        continue;
+                    }
+
+                    string error = getCellError == null ? string.Empty : getCellError(recordIndex, columnIndex);
+                    if (!string.IsNullOrEmpty(error))
+                    {
+                        result.ProtectedCellCount++;
+                        result.OmittedDestinationCount++;
+                        continue;
+                    }
+
+                    string oldValue = columnIndex < document.Records[recordIndex].CellCount
+                        ? document.GetCell(recordIndex, columnIndex) : string.Empty;
+                    result.cells.Add(new CsvGridPasteCell(recordIndex, columnIndex, oldValue,
+                        pastedRow[columnOffset] ?? string.Empty));
+                }
+            }
+            return result;
         }
     }
 }

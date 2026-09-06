@@ -718,7 +718,10 @@ private void DrawDetails(Rect rect)
 
         private int ResolveTableColumn(string name, int index)
         {
-            return CsvRecordFieldResolver.ResolveIndex(controller == null ? null : controller.Headers, index, name);
+            if (controller == null) return -1;
+            if (index >= 0) return index < controller.Headers.Count ? index : -1;
+            int physicalColumn;
+            return controller.TryResolvePhysicalColumn(name, out physicalColumn) ? physicalColumn : -1;
         }
 
         private CsvRecordField FindField(int columnIndex)

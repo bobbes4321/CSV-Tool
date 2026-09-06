@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace CsvTool.Schema
 {
@@ -188,6 +189,12 @@ namespace CsvTool.Schema
                 {
                     issues.Add(Error("REGEX_CAPTURE_GROUP_INVALID", "Regex capture group must be zero or a positive group number.", table.Name, columnName));
                 }
+                else if (column.TokenSyntax != null &&
+                    column.TokenSyntax.Mode == CsvTokenExtractionMode.RegexCapture &&
+                    !string.IsNullOrEmpty(column.TokenSyntax.RegexPattern))
+                {
+                    ValidateRegexCapture(table.Name, columnName, column.TokenSyntax, issues);
+                }
 
                 if (column.ValueKind == CsvValueKind.Enum && column.EnumValues.Count == 0)
                 {
@@ -216,6 +223,27 @@ namespace CsvTool.Schema
                         issues.Add(Warning("REFERENCE_KEY_DIFFERS_FROM_IDENTITY", "Reference target key differs from the target table identity column.", table.Name, columnName));
                     }
                 }
+            }
+        }
+
+        private static void ValidateRegexCapture(string tableName, string columnName,
+            CsvTokenSyntax syntax, List<CsvSchemaIssue> issues)
+        {
+            try
+            {
+                Regex regex = new Regex(syntax.RegexPattern, RegexOptions.CultureInvariant,
+                    CsvTokenSyntax.RegexMatchTimeout);
+                int[] groups = regex.GetGroupNumbers();
+                for (int i = 0; i < groups.Length; i++)
+                    if (groups[i] == syntax.RegexCaptureGroup) return;
+                issues.Add(Error("REGEX_CAPTURE_GROUP_MISSING",
+                    "Regex does not define the configured capture group " + syntax.RegexCaptureGroup + ".",
+                    tableName, columnName));
+            }
+            catch (ArgumentException exception)
+            {
+                issues.Add(Error("REGEX_PATTERN_INVALID", "Regex pattern is invalid: " + exception.Message,
+                    tableName, columnName));
             }
         }
 

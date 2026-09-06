@@ -22,6 +22,15 @@ The implementation already includes:
   compact Record inspector beside the Grid, all using physical coordinates;
 - explicit workspace/table/column metadata, typed validation, enum values,
   token extraction, and cross-table references;
+- a controller-owned physical selector resolver shared by references, autocomplete,
+  record display selection, and column navigation; presentation labels are never
+  selectors and ambiguous names remain unresolved;
+- a non-mutating dataset validator and coordinated save gate: configured values,
+  identity uniqueness, and explicit references are validated before a controller
+  can call the conflict-aware core save;
+- an Issues panel that presents shared configuration/data diagnostics at physical
+  cells with jump actions; status text makes visible-row counts, range selection,
+  and configured identities explicit;
 - lazy value indexes and autocomplete;
 - EditMode coverage for Core, Schema, Editor, Index, Record, Recovery, and
   workspace configuration behavior.
@@ -56,6 +65,16 @@ is not exposed in the window.
 9. Grid and Record editing have explicit, view-local edit sessions. When selection moves
    between surfaces, the outgoing session is finalized before the mirrored physical selection
    changes; autocomplete overlays may only exist for their owning session.
+10. Structural history changes are surfaced by `CsvTableController.StructuralRevision`.
+    The window consumes it to refresh schema/header/search state, grid layout and
+    value indexes together; grid row maps then retain a valid physical selection or
+    select the first visible physical record.
+11. Paste is all-or-nothing once it encounters an omitted, overflow, protected, or
+    invalid destination. The Grid plans physical destinations first and delegates
+    permission checks to its owning controller before it emits a mutation event.
+12. Optional unresolved references are validation warnings; required unresolved or
+    ambiguous references are errors and block the coordinated save gate. Configured
+    regex extraction uses a finite 100 ms evaluation budget.
 
 ## Known limitations
 
