@@ -19,8 +19,6 @@ namespace CsvTool.Editor
         private long observedLength;
         private string searchQuery = string.Empty;
         private int headerRecordIndex = -1;
-        private bool includeNonDataRows;
-        private bool allowStructuralRowEdits;
 
         public CsvTableController(string name, string absolutePath, CsvTableSchema schema,
             bool caseSensitiveNames = false)
@@ -29,9 +27,6 @@ namespace CsvTool.Editor
             AbsolutePath = Path.GetFullPath(absolutePath ?? string.Empty);
             Schema = schema;
             CaseSensitiveNames = caseSensitiveNames;
-            // Documentation, comments, sections, and blank separators remain
-            // visible by default; projects may opt into data-only views.
-            includeNonDataRows = true;
         }
 
         public string Name { get; private set; }
@@ -53,26 +48,6 @@ namespace CsvTool.Editor
         public bool CanUndo { get { return Document != null && Document.History.CanUndo; } }
         public bool CanRedo { get { return Document != null && Document.History.CanRedo; } }
         public bool HasExternalChange { get; private set; }
-        /// <summary>
-        /// Structural rows are read-only by default. This opt-in is useful for
-        /// projects that deliberately keep editable notes/section rows in CSV.
-        /// The header remains protected regardless of this setting.
-        /// </summary>
-        public bool AllowStructuralRowEdits
-        {
-            get { return allowStructuralRowEdits; }
-            set { allowStructuralRowEdits = value; }
-        }
-        public bool IncludeNonDataRows
-        {
-            get { return includeNonDataRows; }
-            set
-            {
-                if (includeNonDataRows == value) return;
-                includeNonDataRows = value;
-                RebuildSearch();
-            }
-        }
         public int HeaderRecordIndex { get { return headerRecordIndex; } }
         public int DataRowCount { get { return visibleRecords.Count; } }
         public int SearchMatchCount { get { return searchMatches.Count; } }
@@ -486,28 +461,6 @@ namespace CsvTool.Editor
                 throw new ArgumentOutOfRangeException("recordIndex", "The physical CSV record index is outside the loaded document.");
             if (columnIndex < 0)
                 throw new ArgumentOutOfRangeException("columnIndex", "The physical CSV column index cannot be negative.");
-
-            if (recordIndex == headerRecordIndex)
-                throw new InvalidOperationException("The CSV header row is read-only.");
-
-            CsvRecord record = Document.Records[recordIndex];
-            if (!allowStructuralRowEdits && record.Kind != CsvRecordKind.Data)
-                throw new InvalidOperationException("CSV record " + recordIndex + " is a " + record.Kind + " row and is read-only.");
-
-            if (IsReadOnlyColumn(columnIndex))
-                throw new InvalidOperationException("CSV column " + columnIndex + " (" + GetHeader(columnIndex) + ") is read-only by schema.");
-        }
-
-        private bool IsReadOnlyColumn(int columnIndex)
-        {
-            if (ResolvedSchema == null) return false;
-            for (int i = 0; i < ResolvedSchema.Columns.Count; i++)
-            {
-                CsvResolvedColumn column = ResolvedSchema.Columns[i];
-                if (column.IsResolved && column.PhysicalIndex == columnIndex &&
-                    column.Schema != null && column.Schema.ReadOnly) return true;
-            }
-            return false;
         }
 
         private bool HasIndexBasedSchemaAtOrAfter(int columnIndex)
@@ -530,7 +483,6 @@ namespace CsvTool.Editor
             {
                 if (recordIndex == headerRecordIndex) continue;
                 CsvRecord record = Document.Records[recordIndex];
-                if (!IncludeNonDataRows && record.Kind != CsvRecordKind.Data) continue;
                 bool rowMatches = string.IsNullOrEmpty(searchQuery);
                 for (int columnIndex = 0; columnIndex < columnCount; columnIndex++)
                 {

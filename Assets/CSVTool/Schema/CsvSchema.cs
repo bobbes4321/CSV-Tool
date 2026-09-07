@@ -377,3 +377,4 @@ namespace CsvTool.Schema
         }
     }
 }
+

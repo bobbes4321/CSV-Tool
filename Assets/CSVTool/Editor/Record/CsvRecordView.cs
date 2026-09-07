@@ -217,23 +217,6 @@ namespace CsvTool.Editor
         public bool TryCommitCell(int physicalRecordIndex, int columnIndex, string value)
         {
             if (controller == null) return false;
-            CsvRecordField resolvedField = FindField(columnIndex);
-            if (resolvedField != null && resolvedField.ReadOnly)
-            {
-                lastError = "This field is read-only.";
-                if (RepaintRequested != null) RepaintRequested();
-                return false;
-            }
-            if (resolvedField != null)
-            {
-                string validationError;
-                if (!CsvRecordValueParser.IsValid(resolvedField, value ?? string.Empty, out validationError))
-                {
-                    lastError = validationError;
-                    if (RepaintRequested != null) RepaintRequested();
-                    return false;
-                }
-            }
             string oldValue = controller.GetCell(physicalRecordIndex, columnIndex);
             try
             {
@@ -407,7 +390,7 @@ private void DrawDetails(Rect rect)
             bool valid;
             string validationError;
             valid = CsvRecordValueParser.IsValid(field, current, out validationError);
-            bool enabled = !field.ReadOnly && controller.IsRecordVisible(selectedRecordIndex);
+            bool enabled = controller.IsRecordVisible(selectedRecordIndex);
             EditorGUI.BeginDisabledGroup(!enabled);
             string next = current;
             bool usePopup = field.ValueKind == CsvValueKind.Enum && field.EnumValues != null && field.EnumValues.Count > 0 &&

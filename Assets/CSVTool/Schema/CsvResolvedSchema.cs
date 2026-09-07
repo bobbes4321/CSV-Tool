@@ -3,6 +3,23 @@ using System.Collections.Generic;
 
 namespace CsvTool.Schema
 {
+    public enum CsvSchemaIssueSeverity { Warning = 0, Error = 1 }
+
+    /// <summary>A resolution diagnostic; it does not validate CSV data or block edits.</summary>
+    public sealed class CsvSchemaIssue
+    {
+        public CsvSchemaIssue(CsvSchemaIssueSeverity severity, string code, string message, string tableName, string columnName)
+        {
+            Severity = severity; Code = code ?? string.Empty; Message = message ?? string.Empty;
+            TableName = tableName ?? string.Empty; ColumnName = columnName ?? string.Empty;
+        }
+        public CsvSchemaIssueSeverity Severity { get; private set; }
+        public string Code { get; private set; }
+        public string Message { get; private set; }
+        public string TableName { get; private set; }
+        public string ColumnName { get; private set; }
+    }
+
     /// <summary>The outcome of resolving a configured selector against a header row.</summary>
     public enum CsvSchemaResolutionStatus
     {

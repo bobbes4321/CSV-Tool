@@ -12,89 +12,7026 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ac83c72130b4f1bb995010cdef9e1f4, type: 3}
   m_Name: CsvWorkspace
   m_EditorClassIdentifier: CsvTool.Editor::CsvTool.Editor.Configuration.CsvWorkspaceAsset
+  rootDirectory: .
+  caseSensitiveNames: 0
+  includeUnconfiguredTables: 0
   tables:
   - name: abilities
     csvFile: {fileID: 4900000, guid: cc56c9baa2f16e641aa077a990dd8741, type: 3}
-    frozenColumns: [0]
-    frozenRows: [0]
-    columns: []
+    relativePath: 
+    description: 
+    enabled: 1
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
+    frozenColumnCount: 0
+    frozenColumns: 00000000
+    frozenRows: 00000000
+    columns:
+    - name: name
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: id
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: dlc
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: featureflag
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: icon
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: slot
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: elite
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: charge
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: chargeEffect
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: cooldown
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: duration
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: shots
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: group
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: stars
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: experience
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: requiresUnitType
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: unlockCost
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: executeCost
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: trigger
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: traits
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: order type
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: target
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: target restrictions
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: radius
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: effect
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: effect2
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: effect3
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: effect4
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: effect5
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: followup
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
   - name: categories
     csvFile: {fileID: 4900000, guid: 7134d82da40fdda41a6419093134dc80, type: 3}
-    frozenColumns: [0]
-    frozenRows: [0]
-    columns: []
+    relativePath: 
+    description: 
+    enabled: 1
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
+    frozenColumnCount: 0
+    frozenColumns: 00000000
+    frozenRows: 00000000
+    columns:
+    - name: name
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: id
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: traits
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
   - name: characters
     csvFile: {fileID: 4900000, guid: c81f4eeea3bc47d42bb472dfe498c1f1, type: 3}
-    frozenColumns: [0]
-    frozenRows: [0]
-    columns: []
+    relativePath: 
+    description: 
+    enabled: 1
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
+    frozenColumnCount: 0
+    frozenColumns: 00000000
+    frozenRows: 00000000
+    columns:
+    - name: name
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: id
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: robot
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: robot2
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: robot2_old
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: avatar
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
   - name: classes
     csvFile: {fileID: 4900000, guid: 59238c8bfbc38d44ca72594daf6d15df, type: 3}
-    frozenColumns: [0]
-    frozenRows: [0]
-    columns: []
+    relativePath: 
+    description: 
+    enabled: 1
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
+    frozenColumnCount: 0
+    frozenColumns: 00000000
+    frozenRows: 00000000
+    columns:
+    - name: name
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: id
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: traits
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: radiuscapturing
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: transform restrictions
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: attributes
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
   - name: costsTable
     csvFile: {fileID: 4900000, guid: 87964e3db23a4c2468c59ba5feba0ab5, type: 3}
-    frozenColumns: [0]
-    frozenRows: [0]
-    columns: []
+    relativePath: 
+    description: 
+    enabled: 1
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
+    frozenColumnCount: 0
+    frozenColumns: 00000000
+    frozenRows: 00000000
+    columns:
+    - name: cat
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: name
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: cost
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: reward
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: income
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: extra
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
   - name: dayTime
     csvFile: {fileID: 4900000, guid: 76541d2b6b21379478618f00350b010b, type: 3}
-    frozenColumns: [0]
-    frozenRows: [0]
-    columns: []
+    relativePath: 
+    description: 
+    enabled: 1
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
+    frozenColumnCount: 0
+    frozenColumns: 00000000
+    frozenRows: 00000000
+    columns:
+    - name: name
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: id
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: featureflag
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: horizon color
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: fog color
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: fog color far
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: fog range
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: fog split
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: skybox
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: wind
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: ambient
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: angle
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: direction
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: color
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: intensity
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: shadow
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: shroud
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: water refraction
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: water reflection
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: water specular
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: ui alpha
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: fow
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: range cap
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: weather
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: ambient occlusion
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: bloom
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: vignette
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: preview color
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
   - name: decorations
     csvFile: {fileID: 4900000, guid: 044ce24dc3532564ca8cb47a67471684, type: 3}
-    frozenColumns: [0]
-    frozenRows: [0]
-    columns: []
+    relativePath: 
+    description: 
+    enabled: 1
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
+    frozenColumnCount: 0
+    frozenColumns: 00000000
+    frozenRows: 00000000
+    columns:
+    - name: name
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: id
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: dlc
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: featureflag
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: group
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: size
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: level
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: variations
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: scale
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: facing
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: mask
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: autofloodfill
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: traits
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
   - name: edges
     csvFile: {fileID: 4900000, guid: aaf76918c0b77124b99d222de767a681, type: 3}
-    frozenColumns: [0]
-    frozenRows: [0]
-    columns: []
+    relativePath: 
+    description: 
+    enabled: 1
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
+    frozenColumnCount: 0
+    frozenColumns: 00000000
+    frozenRows: 00000000
+    columns:
+    - name: name
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: id
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: dlc
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: featureflag
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: hitpoints
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: traits
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
   - name: landscapes
     csvFile: {fileID: 4900000, guid: bc554cb811db3c94ebfdbf3b0595c93b, type: 3}
-    frozenColumns: [0]
-    frozenRows: [0]
-    columns: []
+    relativePath: 
+    description: 
+    enabled: 1
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
+    frozenColumnCount: 0
+    frozenColumns: 00000000
+    frozenRows: 00000000
+    columns:
+    - name: name
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: id
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: dlc
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: featureflag
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: daytimes
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: terrain
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: unitModelGroup
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: waterType
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: waterColor
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: fogType
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
   - name: propulsion
     csvFile: {fileID: 4900000, guid: ad4027f6f2453eb4bac7b642619223ff, type: 3}
-    frozenColumns: [0]
-    frozenRows: [0]
-    columns: []
+    relativePath: 
+    description: 
+    enabled: 1
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
+    frozenColumnCount: 0
+    frozenColumns: 00000000
+    frozenRows: 00000000
+    columns:
+    - name: name
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: id
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: traits
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
   - name: resources
     csvFile: {fileID: 4900000, guid: d2c90ef657220a649be036e50fd42264, type: 3}
-    frozenColumns: [0]
-    frozenRows: [0]
-    columns: []
+    relativePath: 
+    description: 
+    enabled: 1
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
+    frozenColumnCount: 0
+    frozenColumns: 00000000
+    frozenRows: 00000000
+    columns:
+    - name: name
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: id
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
   - name: sounds
     csvFile: {fileID: 4900000, guid: e63cd816f9c3190419b82ce5f6d70921, type: 3}
-    frozenColumns: [0]
-    frozenRows: [0]
-    columns: []
+    relativePath: 
+    description: 
+    enabled: 1
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
+    frozenColumnCount: 0
+    frozenColumns: 00000000
+    frozenRows: 00000000
+    columns:
+    - name: name
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: voices
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: select
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: confirm
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: attack
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: move
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: death
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: death2
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: traits
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
   - name: survival-DEV
     csvFile: {fileID: 4900000, guid: f210ad3aa68d0ad40b8faa978f7d3a05, type: 3}
-    frozenColumns: [0]
-    frozenRows: [0]
-    columns: []
+    relativePath: 
+    description: 
+    enabled: 1
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
+    frozenColumnCount: 0
+    frozenColumns: 00000000
+    frozenRows: 00000000
+    columns:
+    - name: name
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: id
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: cat
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: cost
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: reward
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: income
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: territoryPoint
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: extra
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: unlockTime
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: requireTech
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
   - name: technologies
     csvFile: {fileID: 4900000, guid: 45c3e09d50639484aa046428fbe64a11, type: 3}
-    frozenColumns: [0]
-    frozenRows: [0]
-    columns: []
+    relativePath: 
+    description: 
+    enabled: 1
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
+    frozenColumnCount: 0
+    frozenColumns: 00000000
+    frozenRows: 00000000
+    columns:
+    - name: name
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: id
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: icon
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: type
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: tier
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: factions
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: cost
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: obedience
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: time
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: traits
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: requires
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: disables
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: target
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: effect
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: 
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: 
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: 
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: 
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: 
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: comment
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
   - name: terrain
     csvFile: {fileID: 4900000, guid: b406eb7413271ca439229ab6e4691fdf, type: 3}
-    frozenColumns: [0]
-    frozenRows: [0]
-    columns: []
+    relativePath: 
+    description: 
+    enabled: 1
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
+    frozenColumnCount: 0
+    frozenColumns: 00000000
+    frozenRows: 00000000
+    columns:
+    - name: name
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: id
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: featureflag
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: bumps
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: bumpoffset
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: traits
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: splats
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: splats2
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
   - name: units
     csvFile: {fileID: 4900000, guid: fc7a78cb02299fd498278d38f42c3543, type: 3}
-    frozenColumns: [0]
-    frozenRows: [0]
-    columns: []
+    relativePath: 
+    description: 
+    enabled: 1
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
+    frozenColumnCount: 0
+    frozenColumns: 00000000
+    frozenRows: 00000000
+    columns:
+    - name: name
+      index: -1
+      displayName: test
+      helpText: this text is going to help?
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: id
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: dlc
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: featureflag
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: factions
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: category
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: class
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: propulsion
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: wiki
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: portrait
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: icon
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: minimap
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: tier
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: requires
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: formation
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: emblem
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: squad type
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: rank
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: members
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: steering type
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: music intensity
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: models
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: volume
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: tilesize
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: height
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: scale
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: level
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: tileBlockingLevel
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: sound
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: gender
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: weapon
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: power shot
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: abilities
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: lifetime
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: hitpoints
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: armor
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: armor type
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: supply
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: support
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: funds
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: materiel
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: cap
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: xp mod
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: build time
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: speed
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: rotation
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: turret
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: flight
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: LOS
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: cone
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: capture
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: cargo
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: garrison
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: switch
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: alternateUnitTypes
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: decoration
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: hit
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: death
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: death.blood
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: death.deathEffect
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: attributes
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: code
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: traits
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: transform restrictions
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: combat stance
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: target priority
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: climbing
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: hopperThings
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: // Animations
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: death variations
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: attack variations
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: dropship anim
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: bug mound
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: heal
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: carryableConfig
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: landingPad
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: transportConfig
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: spawnConfig
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: attachment
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: pupaeDefense
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: squadDefender
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: notification
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: carrying
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: radiuscapturing
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: invasionMarker
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: invasion
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: construction effect
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: step effect
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: constructor
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: constructable
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
   - name: weapons
     csvFile: {fileID: 4900000, guid: ee96fcf298f15a646a30241ed3d41e66, type: 3}
-    frozenColumns: [0]
-    frozenRows: [0]
-    columns: []
+    relativePath: 
+    description: 
+    enabled: 1
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
+    frozenColumnCount: 0
+    frozenColumns: 00000000
+    frozenRows: 00000000
+    columns:
+    - name: name
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: dlc
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: featureflag
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: model
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: projectile
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: air projectile
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: spawn
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: scale
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: width
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: sound
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: offset
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: charge effect
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: fire effect
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: fire effect AA
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: ignition effect
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: target hit
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: soft hit
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: hard hit
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: water hit
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: // target armor
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: // damage
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: // DPS
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: attack
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: anti armor
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: anti granite
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: anti air
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: shock
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: blast
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: timer
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: burst
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: delay
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: range
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: extended
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: min range
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: accuracy
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: speed
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: initialSpeed
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: timeUntilFullSpeed
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: charge
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: cooldown
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: timeBetweenAttacks
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: shake
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: fire strategy
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: targeting
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: cone
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: homing
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: invalid
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: valid
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: damageType
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: traits
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: pinning strategy
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: overheat
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: onSoldierHit
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: poison
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: allianceSwitch
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: mindControl
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: timelineShot
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: burstOffsets
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: notification
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []

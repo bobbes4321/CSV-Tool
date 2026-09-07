@@ -11,7 +11,7 @@ from **Window > CSV Tool** and edits CSV files directly. The workspace asset is
 The workspace contains only explicitly configured table entries. Each has a
 direct CSV `TextAsset` reference, physical frozen-column metadata, and
 optional explicit schema metadata (types, enums, references, and identity
-columns). The first parsed row is the read-only header.
+columns). The first parsed row supplies the displayed column labels.
 
 The window exposes a table sidebar, a virtualized grid, and an optional
 quick-record inspector for the selected row. It also supports range selection,
@@ -26,7 +26,8 @@ protection.
 1. CSV files are canonical. The workspace stores metadata and file references,
    never a second copy of records.
 2. Column and row references are physical zero-based indices.
-3. The first parsed row is the header and is read-only.
+3. Schema metadata is optional presentation/reference metadata; it never blocks
+   edits or runs dataset validation.
 4. Core and editor code remain separated; `CsvTool.Core` has no Unity dependency.
 5. Only configured tables are shown. There is no folder scan or implicit table
    discovery.

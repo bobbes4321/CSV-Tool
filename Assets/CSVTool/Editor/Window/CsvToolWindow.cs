@@ -268,15 +268,6 @@ namespace CsvTool.Editor
                 RefreshRecordView();
                 visibilityMessage = "Filter cleared to reveal row " + (physicalRecordIndex + 1) + ".";
             }
-            if (!current.IsRecordVisible(physicalRecordIndex) && !current.IncludeNonDataRows)
-            {
-                current.IncludeNonDataRows = true;
-                if (grid != null) grid.InvalidateVisibleRecordMap();
-                RefreshRecordView();
-                visibilityMessage = string.IsNullOrEmpty(visibilityMessage)
-                    ? "All rows enabled to reveal row " + (physicalRecordIndex + 1) + "."
-                    : visibilityMessage + " All rows was also enabled.";
-            }
 
             CsvGridRevealMode vertical;
             CsvGridRevealMode horizontal;
@@ -397,21 +388,6 @@ namespace CsvTool.Editor
             GUILayout.Label(matchLabel, NeoStyles.MiniDim, GUILayout.Width(74f));
             if (current != null)
             {
-                bool includeStructure = GUILayout.Toggle(current.IncludeNonDataRows, "All rows",
-                    EditorStyles.toolbarButton, GUILayout.Width(58f));
-                if (includeStructure != current.IncludeNonDataRows)
-                {
-                    CommitActiveEditing();
-                    current.IncludeNonDataRows = includeStructure;
-                    PreserveVisibleSelection();
-                    RefreshRecordView();
-                }
-                bool allowStructure = GUILayout.Toggle(current.AllowStructuralRowEdits,
-                    new GUIContent("Edit non-data rows",
-                        "Allows editing existing comment, section, and blank rows. Does not add or remove rows or columns; the CSV header remains read-only."),
-                    EditorStyles.toolbarButton, GUILayout.Width(118f));
-                if (allowStructure != current.AllowStructuralRowEdits)
-                    current.AllowStructuralRowEdits = allowStructure;
             }
             if (grid != null)
             {
@@ -441,11 +417,6 @@ namespace CsvTool.Editor
                     CommitActiveEditing();
                     showChanges = nextShowChanges;
                 }
-                int schemaIssueCount = GetSchemaIssueCount();
-                EditorGUI.BeginDisabledGroup(schemaIssueCount == 0);
-                if (GUILayout.Button(schemaIssueCount == 0 ? "Schema OK" : "Schema " + schemaIssueCount,
-                    EditorStyles.toolbarButton, GUILayout.Width(72f))) ShowSchemaIssues();
-                EditorGUI.EndDisabledGroup();
             }
             EditorGUILayout.EndHorizontal();
         }
@@ -701,7 +672,6 @@ namespace CsvTool.Editor
             {
                 CsvRecord record = current.Document.Records[i];
                 if (i == current.HeaderRecordIndex) continue;
-                if (!current.IncludeNonDataRows && record.Kind != CsvRecordKind.Data) continue;
                 count++;
             }
             return count;
@@ -1301,30 +1271,7 @@ namespace CsvTool.Editor
 
         private CsvRecordViewDefinition BuildRecordDefinition()
         {
-            CsvWorkspaceTableConfig config = GetCurrentTableConfig();
-            if (config == null || config.columns == null || config.columns.Count == 0) return null;
-            List<CsvWorkspaceColumnConfig> columns = new List<CsvWorkspaceColumnConfig>();
-            for (int i = 0; i < config.columns.Count; i++)
-                if (config.columns[i] != null) columns.Add(config.columns[i]);
-            columns.Sort((left, right) =>
-            {
-                int groupComparison = left.group.CompareTo(right.group);
-                return groupComparison != 0 ? groupComparison : left.order.CompareTo(right.order);
-            });
-            CsvRecordViewDefinition definition = new CsvRecordViewDefinition();
-            for (int i = 0; i < columns.Count; i++)
-            {
-                CsvWorkspaceColumnConfig column = columns[i];
-                if (column == null) continue;
-                string group = column.group <= 0 ? "General" : "Group " + column.group;
-                CsvRecordFieldDefinition field = column.index >= 0
-                    ? new CsvRecordFieldDefinition(column.index, group)
-                    : new CsvRecordFieldDefinition(column.name, group);
-                field.DisplayName = column.displayName;
-                field.HelpText = column.helpText;
-                definition.Fields.Add(field);
-            }
-            return definition;
+            return null;
         }
 
         private void EnsureRecordView()
@@ -1447,28 +1394,6 @@ namespace CsvTool.Editor
             EditorPrefs.SetBool(QuickInspectorPref, false);
             UnbindQuickInspector();
             Repaint();
-        }
-
-        private int GetSchemaIssueCount()
-        {
-            return current == null || current.ResolvedSchema == null ? 0 : current.ResolvedSchema.Diagnostics.Count;
-        }
-
-        private void ShowSchemaIssues()
-        {
-            if (current == null || current.ResolvedSchema == null ||
-                current.ResolvedSchema.Diagnostics.Count == 0) return;
-            System.Text.StringBuilder message = new System.Text.StringBuilder();
-            for (int i = 0; i < current.ResolvedSchema.Diagnostics.Count; i++)
-            {
-                CsvSchemaIssue issue = current.ResolvedSchema.Diagnostics[i];
-                if (message.Length > 0) message.AppendLine().AppendLine();
-                message.Append(issue.Severity).Append("  ").Append(issue.Code).AppendLine();
-                message.Append(issue.Message);
-                if (!string.IsNullOrEmpty(issue.ColumnName))
-                    message.AppendLine().Append("Column: ").Append(issue.ColumnName);
-            }
-            EditorUtility.DisplayDialog("Schema issues — " + current.Name, message.ToString(), "OK");
         }
 
         private IReadOnlyList<string> GetAutocompleteSuggestions(int physicalRecord, int columnIndex, string query)

@@ -174,7 +174,7 @@ namespace CsvTool.Editor
             result.HelpText = metadata == null ? string.Empty : (metadata.Description ?? string.Empty);
             result.ValueKind = metadata == null ? CsvValueKind.Text : metadata.ValueKind;
             result.Hidden = metadata != null && metadata.Hidden;
-            result.ReadOnly = metadata != null && metadata.ReadOnly;
+            result.ReadOnly = false;
             result.Required = metadata != null && metadata.Required;
             result.Minimum = metadata == null ? null : metadata.Minimum;
             result.Maximum = metadata == null ? null : metadata.Maximum;
@@ -188,7 +188,6 @@ namespace CsvTool.Editor
                 if (definition.HelpText != null) result.HelpText = definition.HelpText;
                 if (definition.ValueKindOverride.HasValue) result.ValueKind = definition.ValueKindOverride.Value;
                 if (definition.HiddenOverride.HasValue) result.Hidden = definition.HiddenOverride.Value;
-                if (definition.ReadOnlyOverride.HasValue) result.ReadOnly = definition.ReadOnlyOverride.Value;
                 if (definition.RequiredOverride.HasValue) result.Required = definition.RequiredOverride.Value;
             }
             if (result.ValueKind == CsvValueKind.Auto) result.ValueKind = CsvValueKind.Text;
