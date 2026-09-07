@@ -6,7 +6,6 @@ using CsvTool.Editor.Configuration;
 using CsvTool.Editor.Index;
 using CsvTool.Editor.Recovery;
 using CsvTool.Editor.Search;
-using CsvTool.Editor.Validation;
 using CsvTool.Schema;
 using Neo.EditorUI;
 using UnityEditor;
@@ -49,7 +48,6 @@ namespace CsvTool.Editor
         private Vector2 issuesScroll;
         private double nextExternalPoll;
         private bool showChanges;
-        private bool showIssues;
         private PendingCellNavigation pendingNavigation;
         private readonly HashSet<string> recoveryCheckedPaths = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         private string recoveryWarning = string.Empty;
@@ -101,7 +99,7 @@ namespace CsvTool.Editor
             grid.AutocompleteProvider = GetAutocompleteSuggestions;
             grid.PasteCellErrorProvider = GetPasteCellError;
             grid.Settings.AutocompleteWhileTyping = true;
-            recordMode = EditorPrefs.GetBool(ViewModePref, false);
+            recordMode = false;
             showQuickInspector = EditorPrefs.GetBool(QuickInspectorPref, false);
             if (workspaceAsset == null) workspaceAsset = LoadRememberedWorkspaceAsset();
             if (workspaceAsset != null)
@@ -426,18 +424,8 @@ namespace CsvTool.Editor
             }
             if (current != null)
             {
-                bool nextRecordMode = GUILayout.Toggle(recordMode, recordMode ? "Record" : "Grid",
-                    EditorStyles.toolbarButton, GUILayout.Width(58f));
-                if (nextRecordMode != recordMode)
-                {
-                    CommitActiveEditing();
-                    recordMode = nextRecordMode;
-                    EditorPrefs.SetBool(ViewModePref, recordMode);
-                }
-                EditorGUI.BeginDisabledGroup(recordMode);
                 bool nextQuickInspector = GUILayout.Toggle(showQuickInspector, "Inspector",
                     EditorStyles.toolbarButton, GUILayout.Width(62f));
-                EditorGUI.EndDisabledGroup();
                 if (nextQuickInspector != showQuickInspector)
                 {
                     CommitActiveEditing();
@@ -452,23 +440,12 @@ namespace CsvTool.Editor
                 {
                     CommitActiveEditing();
                     showChanges = nextShowChanges;
-                    if (showChanges) showIssues = false;
                 }
                 int schemaIssueCount = GetSchemaIssueCount();
                 EditorGUI.BeginDisabledGroup(schemaIssueCount == 0);
                 if (GUILayout.Button(schemaIssueCount == 0 ? "Schema OK" : "Schema " + schemaIssueCount,
                     EditorStyles.toolbarButton, GUILayout.Width(72f))) ShowSchemaIssues();
                 EditorGUI.EndDisabledGroup();
-                int datasetIssueCount = GetDatasetIssueCount();
-                bool nextShowIssues = GUILayout.Toggle(showIssues,
-                    datasetIssueCount == 0 ? "Issues OK" : "Issues " + datasetIssueCount,
-                    EditorStyles.toolbarButton, GUILayout.Width(72f));
-                if (nextShowIssues != showIssues)
-                {
-                    CommitActiveEditing();
-                    showIssues = nextShowIssues;
-                    if (showIssues) showChanges = false;
-                }
             }
             EditorGUILayout.EndHorizontal();
         }
@@ -521,7 +498,6 @@ namespace CsvTool.Editor
                 {
                     current.Open();
                     TryRecoverCurrent();
-                    EnsureRecordView();
                 }
                 catch (Exception exception)
                 {
@@ -529,7 +505,7 @@ namespace CsvTool.Editor
                     return;
                 }
             }
-            if (!showChanges && !showIssues)
+            if (!showChanges)
             {
                 DrawCurrentView(rect);
                 return;
@@ -539,43 +515,34 @@ namespace CsvTool.Editor
             Rect gridRect = new Rect(rect.x, rect.y, rect.width, Mathf.Max(80f, rect.height - panelHeight - 4f));
             Rect panelRect = new Rect(rect.x, gridRect.yMax + 4f, rect.width, Mathf.Max(60f, rect.yMax - gridRect.yMax - 4f));
             DrawCurrentView(gridRect);
-            if (showIssues) DrawIssuesPanel(panelRect);
-            else DrawChangesPanel(panelRect);
+            DrawChangesPanel(panelRect);
         }
 
         private void DrawCurrentView(Rect rect)
         {
-            if (!recordMode)
+            if (!showQuickInspector)
             {
-                if (!showQuickInspector)
-                {
-                    DrawGrid(rect);
-                    return;
-                }
-
-                EnsureQuickInspector();
-                float availableWidth = Mathf.Max(1f, rect.width - InspectorSplitterWidth);
-                float maxInspectorWidth = Mathf.Max(MinimumInspectorWidth,
-                    availableWidth - MinimumGridWidth);
-                float defaultInspectorWidth = Mathf.Min(DefaultInspectorWidth,
-                    Mathf.Max(MinimumInspectorWidth, rect.width * 0.4f));
-                float inspectorWidth = EditorPrefs.GetFloat(QuickInspectorWidthPref,
-                    defaultInspectorWidth);
-                inspectorWidth = Mathf.Clamp(inspectorWidth, MinimumInspectorWidth, maxInspectorWidth);
-                float gridWidth = Mathf.Max(MinimumGridWidth, availableWidth - inspectorWidth);
-                Rect gridRect = new Rect(rect.x, rect.y, gridWidth, rect.height);
-                Rect splitterRect = new Rect(gridRect.xMax, rect.y, InspectorSplitterWidth, rect.height);
-                Rect inspectorRect = new Rect(splitterRect.xMax, rect.y,
-                    Mathf.Max(1f, rect.xMax - splitterRect.xMax), rect.height);
-                DrawGrid(gridRect);
-                DrawInspectorSplitter(splitterRect, rect, inspectorWidth, maxInspectorWidth);
-                if (quickInspector != null) quickInspector.Draw(inspectorRect);
+                DrawGrid(rect);
                 return;
             }
-            EnsureRecordView();
-            Rect viewport = new Rect(rect.x + 4f, rect.y + 4f,
-                Mathf.Max(1f, rect.width - 8f), Mathf.Max(1f, rect.height - 8f));
-            recordView.Draw(viewport);
+
+            EnsureQuickInspector();
+            float availableWidth = Mathf.Max(1f, rect.width - InspectorSplitterWidth);
+            float maxInspectorWidth = Mathf.Max(MinimumInspectorWidth,
+                availableWidth - MinimumGridWidth);
+            float defaultInspectorWidth = Mathf.Min(DefaultInspectorWidth,
+                Mathf.Max(MinimumInspectorWidth, rect.width * 0.4f));
+            float inspectorWidth = EditorPrefs.GetFloat(QuickInspectorWidthPref,
+                defaultInspectorWidth);
+            inspectorWidth = Mathf.Clamp(inspectorWidth, MinimumInspectorWidth, maxInspectorWidth);
+            float gridWidth = Mathf.Max(MinimumGridWidth, availableWidth - inspectorWidth);
+            Rect gridRect = new Rect(rect.x, rect.y, gridWidth, rect.height);
+            Rect splitterRect = new Rect(gridRect.xMax, rect.y, InspectorSplitterWidth, rect.height);
+            Rect inspectorRect = new Rect(splitterRect.xMax, rect.y,
+                Mathf.Max(1f, rect.xMax - splitterRect.xMax), rect.height);
+            DrawGrid(gridRect);
+            DrawInspectorSplitter(splitterRect, rect, inspectorWidth, maxInspectorWidth);
+            if (quickInspector != null) quickInspector.Draw(inspectorRect);
         }
 
         private void DrawInspectorSplitter(Rect splitterRect, Rect contentRect,
@@ -682,45 +649,6 @@ namespace CsvTool.Editor
                     Repaint();
                     break;
                 }
-            }
-            GUI.EndScrollView();
-        }
-
-        private void DrawIssuesPanel(Rect rect)
-        {
-            GUI.Box(rect, GUIContent.none, EditorStyles.helpBox);
-            Rect inner = new Rect(rect.x + 5f, rect.y + 4f,
-                Mathf.Max(1f, rect.width - 10f), Mathf.Max(1f, rect.height - 8f));
-            const float headerHeight = 20f;
-            IReadOnlyList<CsvDatasetDiagnostic> issues = GetDatasetIssues();
-            GUI.Label(new Rect(inner.x, inner.y, inner.width, headerHeight),
-                "Issues " + issues.Count + " (configuration and data)", NeoStyles.SectionTitle);
-            if (issues.Count == 0)
-            {
-                GUI.Label(new Rect(inner.x, inner.y + headerHeight, inner.width, 18f),
-                    "No schema or data validation issues.", NeoStyles.MiniDim);
-                return;
-            }
-
-            Rect listRect = new Rect(inner.x, inner.y + headerHeight, inner.width,
-                Mathf.Max(1f, inner.height - headerHeight));
-            const float rowHeight = 22f;
-            float contentHeight = Mathf.Max(listRect.height, issues.Count * rowHeight);
-            Rect contentRect = new Rect(0f, 0f, Mathf.Max(1f, listRect.width - 16f), contentHeight);
-            issuesScroll = GUI.BeginScrollView(listRect, issuesScroll, contentRect);
-            for (int i = 0; i < issues.Count; i++)
-            {
-                CsvDatasetDiagnostic issue = issues[i];
-                string location = issue.PhysicalRecordIndex >= 0 && issue.PhysicalColumnIndex >= 0
-                    ? "Row " + (issue.PhysicalRecordIndex + 1) + ", " + current.GetHeader(issue.PhysicalColumnIndex)
-                    : "Configuration";
-                string label = issue.Severity + "  " + issue.Code + "  |  " + location + "  |  " + issue.Message;
-                Rect rowRect = new Rect(0f, i * rowHeight, contentRect.width, rowHeight);
-                bool canJump = issue.PhysicalRecordIndex >= 0 && issue.PhysicalColumnIndex >= 0;
-                EditorGUI.BeginDisabledGroup(!canJump);
-                if (GUI.Button(rowRect, new GUIContent(label, issue.ToString()), EditorStyles.miniButton))
-                    JumpToChange(issue.PhysicalRecordIndex, issue.PhysicalColumnIndex);
-                EditorGUI.EndDisabledGroup();
             }
             GUI.EndScrollView();
         }
@@ -1062,7 +990,7 @@ namespace CsvTool.Editor
             if (!current.IsDirty) { UpdateUnsavedState(); return true; }
             try
             {
-                current.Save(workspace == null ? null : workspace.Tables);
+                current.Save();
                 DeleteRecoveryJournal();
                 UpdateUnsavedState();
                 Repaint();
@@ -1358,7 +1286,15 @@ namespace CsvTool.Editor
             CsvWorkspaceTableConfig config = GetCurrentTableConfig();
             if (grid != null)
             {
-                int frozen = config == null ? EditorPrefs.GetInt(FrozenColumnsPref, 1) : config.FrozenColumnCount;
+                int frozen = EditorPrefs.GetInt(FrozenColumnsPref, 1);
+                if (config != null)
+                {
+                    frozen = config.FrozenColumnCount;
+                    // The grid freezes the leading physical columns.  Preserve the
+                    // explicit workspace indices when they form that prefix.
+                    while (config.FrozenColumns != null && config.FrozenColumns.Contains(frozen))
+                        frozen++;
+                }
                 grid.FrozenColumnCount = Mathf.Max(0, frozen);
             }
         }
@@ -1512,20 +1448,6 @@ namespace CsvTool.Editor
             UnbindQuickInspector();
             Repaint();
         }
-
-        private IReadOnlyList<CsvDatasetDiagnostic> GetDatasetIssues()
-        {
-            if (current == null || !current.IsLoaded) return EmptyDatasetIssues;
-            return current.ValidateDataset(workspace == null ? null : workspace.Tables);
-        }
-
-        private int GetDatasetIssueCount()
-        {
-            return GetDatasetIssues().Count;
-        }
-
-        private static readonly IReadOnlyList<CsvDatasetDiagnostic> EmptyDatasetIssues =
-            new CsvDatasetDiagnostic[0];
 
         private int GetSchemaIssueCount()
         {

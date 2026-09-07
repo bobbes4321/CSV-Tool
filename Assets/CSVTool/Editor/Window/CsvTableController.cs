@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using CsvTool.Core;
 using CsvTool.Schema;
-using CsvTool.Editor.Validation;
 
 namespace CsvTool.Editor
 {
@@ -371,13 +370,10 @@ namespace CsvTool.Editor
             Save(new[] { this });
         }
 
-        /// <summary>Performs shared dataset validation before the conflict-aware core save.</summary>
+        /// <summary>Saves with the core's conflict-aware atomic write.</summary>
         public void Save(IEnumerable<CsvTableController> validationTables)
         {
             EnsureLoaded();
-            IReadOnlyList<CsvDatasetDiagnostic> diagnostics = ValidateDataset(validationTables);
-            if (CsvDatasetValidationException.HasErrors(diagnostics))
-                throw new CsvDatasetValidationException(diagnostics);
             try
             {
                 Document.SaveToFile();
@@ -393,12 +389,6 @@ namespace CsvTool.Editor
             // subsequent poll does not report our own write as external.
             ObserveFile();
             HasExternalChange = false;
-        }
-
-        public IReadOnlyList<CsvDatasetDiagnostic> ValidateDataset(
-            IEnumerable<CsvTableController> validationTables = null)
-        {
-            return CsvDatasetValidator.Validate(validationTables ?? new[] { this });
         }
 
         public int FindNextMatch(int currentRecordIndex, int currentColumnIndex, bool backwards)
