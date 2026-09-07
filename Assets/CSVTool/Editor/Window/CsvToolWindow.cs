@@ -330,13 +330,7 @@ namespace CsvTool.Editor
             }
             string folderLabel = workspace == null || string.IsNullOrEmpty(workspace.Folder) ? "None selected" : workspace.Folder;
             GUILayout.Label(folderLabel, NeoStyles.MiniDim, GUILayout.ExpandWidth(true));
-            if (workspace != null && GUILayout.Button("Rescan", EditorStyles.toolbarButton, GUILayout.Width(55f)))
-                RescanWorkspace();
             if (current != null && GUILayout.Button("Reload", EditorStyles.toolbarButton, GUILayout.Width(55f))) ReloadCurrent();
-            EditorGUI.BeginDisabledGroup(current == null);
-            if (GUILayout.Button(new GUIContent("+ Row", "Insert a blank data row after the selected row"), EditorStyles.toolbarButton, GUILayout.Width(48f))) InsertRowAfterSelection();
-            if (GUILayout.Button(new GUIContent("+ Column", "Insert a column after the selected column"), EditorStyles.toolbarButton, GUILayout.Width(66f))) PromptInsertColumnAfterSelection();
-            EditorGUI.EndDisabledGroup();
             EditorGUI.BeginDisabledGroup(current == null || !current.CanUndo);
             if (GUILayout.Button("Undo", EditorStyles.toolbarButton, GUILayout.Width(42f))) UndoCurrent();
             EditorGUI.EndDisabledGroup();
@@ -349,8 +343,11 @@ namespace CsvTool.Editor
             EditorGUILayout.EndHorizontal();
 
             EditorGUILayout.BeginHorizontal();
+            GUILayout.Label(new GUIContent("Filter", "Filter rows by matching any cell value."),
+                NeoStyles.ToolbarLabel, GUILayout.Width(42f));
             GUI.SetNextControlName("CsvToolSearch");
-            string newSearch = EditorGUILayout.TextField(new GUIContent("Filter"), search, EditorStyles.toolbarSearchField);
+            string newSearch = EditorGUILayout.TextField(search, EditorStyles.toolbarSearchField,
+                GUILayout.MinWidth(120f), GUILayout.ExpandWidth(true));
             if (!string.Equals(newSearch, search, StringComparison.Ordinal))
             {
                 CommitActiveEditing();
@@ -362,7 +359,8 @@ namespace CsvTool.Editor
                     RefreshRecordView();
                 }
             }
-            if (GUILayout.Button("×", EditorStyles.toolbarButton, GUILayout.Width(22f)))
+            if (GUILayout.Button(new GUIContent("×", "Clear filter"), EditorStyles.toolbarButton,
+                GUILayout.Width(22f)))
             {
                 search = string.Empty;
                 if (current != null)
@@ -1033,17 +1031,6 @@ namespace CsvTool.Editor
                 EditorUtility.DisplayDialog("Unable to discard changes", exception.Message, "OK");
                 return false;
             }
-        }
-
-        private void RescanWorkspace()
-        {
-            if (workspace == null || !CanLeaveCurrent("rescan the workspace")) return;
-            workspace.Discover();
-            valueIndexes.Clear();
-            if (grid != null) grid.Reset();
-            UnbindRecordView();
-            SelectRememberedTable();
-            Repaint();
         }
 
         private bool HasActiveEditing

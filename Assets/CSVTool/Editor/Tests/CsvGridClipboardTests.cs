@@ -161,5 +161,38 @@ namespace CsvTool.Editor.Tests
                 GUIUtility.keyboardControl = previousFocus;
             }
         }
+
+        [Test]
+        public void RowAndColumnHeaderSelectionsCopyTheirCompleteVisibleBodyRange()
+        {
+            CsvDocument document = CsvDocument.Load(Encoding.UTF8.GetBytes(
+                "id,name\none,A\ntwo,B\nthree,C\n"));
+            CsvGrid grid = CreatePreparedGrid(document, new List<int> { 1, 3 });
+
+            grid.SelectRow(1, false);
+            Assert.AreEqual(CsvGridSelectionScope.Row, grid.SelectionScope);
+            Assert.AreEqual(3, grid.Selection.RecordIndex,
+                "A visual row selection must retain the physical record index from the filtered map.");
+            Assert.AreEqual("three\tC", grid.CopySelectionTsv());
+
+            grid.SelectColumn(1, false);
+            Assert.AreEqual(CsvGridSelectionScope.Column, grid.SelectionScope);
+            Assert.AreEqual(2, grid.RangeSelection.RowCount);
+            Assert.AreEqual(1, grid.RangeSelection.ColumnCount);
+            Assert.AreEqual("A\nC", grid.CopySelectionTsv());
+        }
+
+        private static CsvGrid CreatePreparedGrid(CsvDocument document, IReadOnlyList<int> visibleRecords)
+        {
+            CsvGrid grid = new CsvGrid();
+            BindingFlags flags = BindingFlags.Instance | BindingFlags.NonPublic;
+            MethodInfo ensureDocument = typeof(CsvGrid).GetMethod("EnsureDocument", flags);
+            MethodInfo ensureRowMap = typeof(CsvGrid).GetMethod("EnsureRowMap", flags);
+            Assert.IsNotNull(ensureDocument);
+            Assert.IsNotNull(ensureRowMap);
+            ensureDocument.Invoke(grid, new object[] { document });
+            ensureRowMap.Invoke(grid, new object[] { visibleRecords });
+            return grid;
+        }
     }
 }
