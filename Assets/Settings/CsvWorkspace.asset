@@ -12,28 +12,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ac83c72130b4f1bb995010cdef9e1f4, type: 3}
   m_Name: CsvWorkspace
   m_EditorClassIdentifier: CsvTool.Editor::CsvTool.Editor.Configuration.CsvWorkspaceAsset
-  rootDirectory: Assets/Data
+  rootDirectory: .
   caseSensitiveNames: 0
-  includeUnconfiguredTables: 1
+  includeUnconfiguredTables: 0
   tables:
   - name: abilities
-    relativePath: abilities.csv
+    csvFile: {fileID: 4900000, guid: cc56c9baa2f16e641aa077a990dd8741, type: 3}
+    relativePath: 
     description: 
     enabled: 1
-    identityColumn: name
-    identityColumnIndex: 0
-    displayColumn: name
-    displayColumnIndex: 0
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
     frozenColumnCount: 0
-    frozenColumns: []
+    frozenColumns: 00000000
+    frozenRows: 00000000
     columns:
     - name: name
-      index: 0
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -51,12 +52,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: id
-      index: 1
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -74,12 +74,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: dlc
-      index: 2
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -97,12 +96,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: featureflag
-      index: 3
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -120,12 +118,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: icon
-      index: 4
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -143,12 +140,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: slot
-      index: 5
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -166,12 +162,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: elite
-      index: 6
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -189,12 +184,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: charge
-      index: 7
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -212,12 +206,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: chargeEffect
-      index: 8
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -235,12 +228,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: cooldown
-      index: 9
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -258,12 +250,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: duration
-      index: 10
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -281,12 +272,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: shots
-      index: 11
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -304,12 +294,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: group
-      index: 12
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -327,12 +316,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: stars
-      index: 13
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -350,12 +338,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: experience
-      index: 14
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -373,12 +360,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: requiresUnitType
-      index: 15
+      index: -1
       displayName: 
       helpText: 
-      valueKind: 7
+      valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -394,18 +380,13 @@ MonoBehaviour:
         ignoreEmptyTokens: 1
         regexPattern: 
         regexCaptureGroup: 1
-      references:
-      - targetTable: units
-        targetKeyColumn: name
-        targetDisplayColumn: name
-        required: 0
+      references: []
     - name: unlockCost
-      index: 16
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -423,12 +404,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: executeCost
-      index: 17
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -446,12 +426,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: trigger
-      index: 18
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -469,12 +448,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: traits
-      index: 19
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -492,12 +470,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: order type
-      index: 20
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -515,12 +492,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: target
-      index: 21
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -538,12 +514,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: target restrictions
-      index: 22
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -561,12 +536,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: radius
-      index: 23
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -584,12 +558,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: effect
-      index: 24
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -607,12 +580,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: effect2
-      index: 25
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -630,12 +602,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: effect3
-      index: 26
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -653,12 +624,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: effect4
-      index: 27
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -676,12 +646,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: effect5
-      index: 28
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -699,12 +668,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: followup
-      index: 29
+      index: -1
       displayName: 
       helpText: 
-      valueKind: 7
+      valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -720,29 +688,26 @@ MonoBehaviour:
         ignoreEmptyTokens: 1
         regexPattern: 
         regexCaptureGroup: 1
-      references:
-      - targetTable: abilities
-        targetKeyColumn: name
-        targetDisplayColumn: name
-        required: 0
+      references: []
   - name: categories
-    relativePath: categories.csv
+    csvFile: {fileID: 4900000, guid: 7134d82da40fdda41a6419093134dc80, type: 3}
+    relativePath: 
     description: 
     enabled: 1
-    identityColumn: name
-    identityColumnIndex: 0
-    displayColumn: name
-    displayColumnIndex: 0
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
     frozenColumnCount: 0
-    frozenColumns: []
+    frozenColumns: 00000000
+    frozenRows: 00000000
     columns:
     - name: name
-      index: 0
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -760,12 +725,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: id
-      index: 1
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -783,12 +747,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: traits
-      index: 2
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -806,23 +769,24 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
   - name: characters
-    relativePath: characters.csv
+    csvFile: {fileID: 4900000, guid: c81f4eeea3bc47d42bb472dfe498c1f1, type: 3}
+    relativePath: 
     description: 
     enabled: 1
-    identityColumn: name
-    identityColumnIndex: 0
-    displayColumn: name
-    displayColumnIndex: 0
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
     frozenColumnCount: 0
-    frozenColumns: []
+    frozenColumns: 00000000
+    frozenRows: 00000000
     columns:
     - name: name
-      index: 0
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -840,12 +804,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: id
-      index: 1
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -863,12 +826,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: robot
-      index: 2
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -886,12 +848,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: robot2
-      index: 3
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -909,12 +870,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: robot2_old
-      index: 4
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -932,12 +892,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: avatar
-      index: 5
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -955,23 +914,24 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
   - name: classes
-    relativePath: classes.csv
+    csvFile: {fileID: 4900000, guid: 59238c8bfbc38d44ca72594daf6d15df, type: 3}
+    relativePath: 
     description: 
     enabled: 1
-    identityColumn: name
-    identityColumnIndex: 0
-    displayColumn: name
-    displayColumnIndex: 0
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
     frozenColumnCount: 0
-    frozenColumns: []
+    frozenColumns: 00000000
+    frozenRows: 00000000
     columns:
     - name: name
-      index: 0
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -989,12 +949,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: id
-      index: 1
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1012,12 +971,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: traits
-      index: 2
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1035,12 +993,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: radiuscapturing
-      index: 3
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1058,12 +1015,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: transform restrictions
-      index: 4
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1081,12 +1037,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: attributes
-      index: 5
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1104,23 +1059,24 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
   - name: costsTable
-    relativePath: costsTable.csv
+    csvFile: {fileID: 4900000, guid: 87964e3db23a4c2468c59ba5feba0ab5, type: 3}
+    relativePath: 
     description: 
     enabled: 1
     identityColumn: 
     identityColumnIndex: -1
-    displayColumn: name
-    displayColumnIndex: 1
+    displayColumn: 
+    displayColumnIndex: -1
     frozenColumnCount: 0
-    frozenColumns: []
+    frozenColumns: 00000000
+    frozenRows: 00000000
     columns:
     - name: cat
-      index: 0
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1138,12 +1094,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: name
-      index: 1
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1161,12 +1116,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: cost
-      index: 2
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1184,12 +1138,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: reward
-      index: 3
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1207,12 +1160,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: income
-      index: 4
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1230,12 +1182,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: extra
-      index: 5
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1253,23 +1204,24 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
   - name: dayTime
-    relativePath: dayTime.csv
+    csvFile: {fileID: 4900000, guid: 76541d2b6b21379478618f00350b010b, type: 3}
+    relativePath: 
     description: 
     enabled: 1
-    identityColumn: name
-    identityColumnIndex: 0
-    displayColumn: name
-    displayColumnIndex: 0
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
     frozenColumnCount: 0
-    frozenColumns: []
+    frozenColumns: 00000000
+    frozenRows: 00000000
     columns:
     - name: name
-      index: 0
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1287,12 +1239,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: id
-      index: 1
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1310,12 +1261,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: featureflag
-      index: 2
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1333,12 +1283,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: horizon color
-      index: 3
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1356,12 +1305,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: fog color
-      index: 4
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1379,12 +1327,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: fog color far
-      index: 5
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1402,12 +1349,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: fog range
-      index: 6
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1425,12 +1371,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: fog split
-      index: 7
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1448,12 +1393,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: skybox
-      index: 8
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1471,12 +1415,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: wind
-      index: 9
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1494,12 +1437,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: ambient
-      index: 10
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1517,12 +1459,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: angle
-      index: 11
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1540,12 +1481,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: direction
-      index: 12
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1563,12 +1503,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: color
-      index: 13
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1586,12 +1525,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: intensity
-      index: 14
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1609,12 +1547,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: shadow
-      index: 15
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1632,12 +1569,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: shroud
-      index: 16
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1655,12 +1591,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: water refraction
-      index: 17
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1678,12 +1613,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: water reflection
-      index: 18
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1701,12 +1635,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: water specular
-      index: 19
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1724,12 +1657,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: ui alpha
-      index: 20
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1747,12 +1679,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: fow
-      index: 21
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1770,12 +1701,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: range cap
-      index: 22
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1793,12 +1723,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: weather
-      index: 23
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1816,12 +1745,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: ambient occlusion
-      index: 24
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1839,12 +1767,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: bloom
-      index: 25
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1862,12 +1789,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: vignette
-      index: 26
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1885,12 +1811,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: preview color
-      index: 27
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1908,23 +1833,24 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
   - name: decorations
-    relativePath: decorations.csv
+    csvFile: {fileID: 4900000, guid: 044ce24dc3532564ca8cb47a67471684, type: 3}
+    relativePath: 
     description: 
     enabled: 1
-    identityColumn: name
-    identityColumnIndex: 0
-    displayColumn: name
-    displayColumnIndex: 0
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
     frozenColumnCount: 0
-    frozenColumns: []
+    frozenColumns: 00000000
+    frozenRows: 00000000
     columns:
     - name: name
-      index: 0
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1942,12 +1868,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: id
-      index: 1
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1965,12 +1890,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: dlc
-      index: 2
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -1988,12 +1912,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: featureflag
-      index: 3
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -2011,12 +1934,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: group
-      index: 4
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -2034,12 +1956,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: size
-      index: 5
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -2057,12 +1978,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: level
-      index: 6
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -2080,12 +2000,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: variations
-      index: 7
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -2103,12 +2022,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: scale
-      index: 8
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -2126,12 +2044,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: facing
-      index: 9
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -2149,12 +2066,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: mask
-      index: 10
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -2172,12 +2088,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: autofloodfill
-      index: 11
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -2195,12 +2110,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: traits
-      index: 12
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -2218,23 +2132,24 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
   - name: edges
-    relativePath: edges.csv
+    csvFile: {fileID: 4900000, guid: aaf76918c0b77124b99d222de767a681, type: 3}
+    relativePath: 
     description: 
     enabled: 1
-    identityColumn: name
-    identityColumnIndex: 0
-    displayColumn: name
-    displayColumnIndex: 0
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
     frozenColumnCount: 0
-    frozenColumns: []
+    frozenColumns: 00000000
+    frozenRows: 00000000
     columns:
     - name: name
-      index: 0
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -2252,12 +2167,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: id
-      index: 1
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -2275,12 +2189,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: dlc
-      index: 2
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -2298,12 +2211,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: featureflag
-      index: 3
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -2321,12 +2233,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: hitpoints
-      index: 4
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -2344,12 +2255,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: traits
-      index: 5
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -2367,23 +2277,24 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
   - name: landscapes
-    relativePath: landscapes.csv
+    csvFile: {fileID: 4900000, guid: bc554cb811db3c94ebfdbf3b0595c93b, type: 3}
+    relativePath: 
     description: 
     enabled: 1
-    identityColumn: name
-    identityColumnIndex: 0
-    displayColumn: name
-    displayColumnIndex: 0
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
     frozenColumnCount: 0
-    frozenColumns: []
+    frozenColumns: 00000000
+    frozenRows: 00000000
     columns:
     - name: name
-      index: 0
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -2401,12 +2312,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: id
-      index: 1
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -2424,12 +2334,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: dlc
-      index: 2
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -2447,12 +2356,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: featureflag
-      index: 3
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -2470,66 +2378,55 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: daytimes
-      index: 4
-      displayName: 
-      helpText: 
-      valueKind: 7
-      hidden: 0
-      readOnly: 0
-      required: 0
-      hasMinimum: 0
-      minimum: 0
-      hasMaximum: 0
-      maximum: 0
-      group: 0
-      order: 0
-      enumOptions: []
-      tokenSyntax:
-        mode: 1
-        separator: ;
-        trimWhitespace: 1
-        ignoreEmptyTokens: 1
-        regexPattern: 
-        regexCaptureGroup: 1
-      references:
-      - targetTable: dayTime
-        targetKeyColumn: name
-        targetDisplayColumn: name
-        required: 0
-    - name: terrain
-      index: 5
-      displayName: 
-      helpText: 
-      valueKind: 7
-      hidden: 0
-      readOnly: 0
-      required: 0
-      hasMinimum: 0
-      minimum: 0
-      hasMaximum: 0
-      maximum: 0
-      group: 0
-      order: 0
-      enumOptions: []
-      tokenSyntax:
-        mode: 1
-        separator: ;
-        trimWhitespace: 1
-        ignoreEmptyTokens: 1
-        regexPattern: 
-        regexCaptureGroup: 1
-      references:
-      - targetTable: terrain
-        targetKeyColumn: name
-        targetDisplayColumn: name
-        required: 0
-    - name: unitModelGroup
-      index: 6
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: terrain
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: unitModelGroup
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -2547,12 +2444,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: waterType
-      index: 7
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -2570,12 +2466,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: waterColor
-      index: 8
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -2593,12 +2488,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: fogType
-      index: 9
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -2616,23 +2510,24 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
   - name: propulsion
-    relativePath: propulsion.csv
+    csvFile: {fileID: 4900000, guid: ad4027f6f2453eb4bac7b642619223ff, type: 3}
+    relativePath: 
     description: 
     enabled: 1
-    identityColumn: name
-    identityColumnIndex: 0
-    displayColumn: name
-    displayColumnIndex: 0
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
     frozenColumnCount: 0
-    frozenColumns: []
+    frozenColumns: 00000000
+    frozenRows: 00000000
     columns:
     - name: name
-      index: 0
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -2650,12 +2545,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: id
-      index: 1
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -2673,12 +2567,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: traits
-      index: 2
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -2696,23 +2589,24 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
   - name: resources
-    relativePath: resources.csv
+    csvFile: {fileID: 4900000, guid: d2c90ef657220a649be036e50fd42264, type: 3}
+    relativePath: 
     description: 
     enabled: 1
-    identityColumn: name
-    identityColumnIndex: 0
-    displayColumn: name
-    displayColumnIndex: 0
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
     frozenColumnCount: 0
-    frozenColumns: []
+    frozenColumns: 00000000
+    frozenRows: 00000000
     columns:
     - name: name
-      index: 0
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -2730,12 +2624,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: id
-      index: 1
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -2753,23 +2646,24 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
   - name: sounds
-    relativePath: sounds.csv
+    csvFile: {fileID: 4900000, guid: e63cd816f9c3190419b82ce5f6d70921, type: 3}
+    relativePath: 
     description: 
     enabled: 1
-    identityColumn: name
-    identityColumnIndex: 0
-    displayColumn: name
-    displayColumnIndex: 0
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
     frozenColumnCount: 0
-    frozenColumns: []
+    frozenColumns: 00000000
+    frozenRows: 00000000
     columns:
     - name: name
-      index: 0
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -2787,12 +2681,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: voices
-      index: 1
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -2810,12 +2703,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: select
-      index: 2
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -2833,12 +2725,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: confirm
-      index: 3
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -2856,12 +2747,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: attack
-      index: 4
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -2879,12 +2769,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: move
-      index: 5
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -2902,12 +2791,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: death
-      index: 6
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -2925,12 +2813,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: death2
-      index: 7
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -2948,12 +2835,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: traits
-      index: 8
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -2971,23 +2857,24 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
   - name: survival-DEV
-    relativePath: survival-DEV.csv
+    csvFile: {fileID: 4900000, guid: f210ad3aa68d0ad40b8faa978f7d3a05, type: 3}
+    relativePath: 
     description: 
     enabled: 1
     identityColumn: 
     identityColumnIndex: -1
-    displayColumn: name
-    displayColumnIndex: 0
+    displayColumn: 
+    displayColumnIndex: -1
     frozenColumnCount: 0
-    frozenColumns: []
+    frozenColumns: 00000000
+    frozenRows: 00000000
     columns:
     - name: name
-      index: 0
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3005,12 +2892,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: id
-      index: 1
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3028,12 +2914,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: cat
-      index: 2
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3051,12 +2936,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: cost
-      index: 3
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3074,12 +2958,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: reward
-      index: 4
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3097,12 +2980,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: income
-      index: 5
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3120,12 +3002,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: territoryPoint
-      index: 6
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3143,12 +3024,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: extra
-      index: 7
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3166,12 +3046,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: unlockTime
-      index: 8
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3189,12 +3068,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: requireTech
-      index: 9
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3212,23 +3090,24 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
   - name: technologies
-    relativePath: technologies.csv
+    csvFile: {fileID: 4900000, guid: 45c3e09d50639484aa046428fbe64a11, type: 3}
+    relativePath: 
     description: 
     enabled: 1
-    identityColumn: name
-    identityColumnIndex: 0
-    displayColumn: name
-    displayColumnIndex: 0
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
     frozenColumnCount: 0
-    frozenColumns: []
+    frozenColumns: 00000000
+    frozenRows: 00000000
     columns:
     - name: name
-      index: 0
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3246,12 +3125,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: id
-      index: 1
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3269,12 +3147,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: icon
-      index: 2
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3292,12 +3169,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: type
-      index: 3
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3315,12 +3191,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: tier
-      index: 4
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3338,12 +3213,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: factions
-      index: 5
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3361,12 +3235,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: cost
-      index: 6
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3384,12 +3257,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: obedience
-      index: 7
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3407,12 +3279,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: time
-      index: 8
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3430,12 +3301,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: traits
-      index: 9
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3453,12 +3323,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: requires
-      index: 10
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3476,12 +3345,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: disables
-      index: 11
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3499,12 +3367,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: target
-      index: 12
+      index: -1
       displayName: 
       helpText: 
-      valueKind: 7
+      valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3520,22 +3387,13 @@ MonoBehaviour:
         ignoreEmptyTokens: 1
         regexPattern: 
         regexCaptureGroup: 1
-      references:
-      - targetTable: classes
-        targetKeyColumn: name
-        targetDisplayColumn: name
-        required: 0
-      - targetTable: units
-        targetKeyColumn: name
-        targetDisplayColumn: name
-        required: 0
+      references: []
     - name: effect
-      index: 13
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3553,12 +3411,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: 
-      index: 14
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3576,12 +3433,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: 
-      index: 15
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3599,12 +3455,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: 
-      index: 16
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3622,12 +3477,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: 
-      index: 17
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3645,12 +3499,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: 
-      index: 18
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3668,12 +3521,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: comment
-      index: 19
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3691,23 +3543,24 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
   - name: terrain
-    relativePath: terrain.csv
+    csvFile: {fileID: 4900000, guid: b406eb7413271ca439229ab6e4691fdf, type: 3}
+    relativePath: 
     description: 
     enabled: 1
-    identityColumn: name
-    identityColumnIndex: 0
-    displayColumn: name
-    displayColumnIndex: 0
+    identityColumn: 
+    identityColumnIndex: -1
+    displayColumn: 
+    displayColumnIndex: -1
     frozenColumnCount: 0
-    frozenColumns: []
+    frozenColumns: 00000000
+    frozenRows: 00000000
     columns:
     - name: name
-      index: 0
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3725,12 +3578,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: id
-      index: 1
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3748,12 +3600,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: featureflag
-      index: 2
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3771,12 +3622,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: bumps
-      index: 3
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3794,12 +3644,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: bumpoffset
-      index: 4
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3817,12 +3666,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: traits
-      index: 5
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3840,12 +3688,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: splats
-      index: 6
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3863,12 +3710,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: splats2
-      index: 7
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3886,23 +3732,24 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
   - name: units
-    relativePath: units.csv
+    csvFile: {fileID: 4900000, guid: fc7a78cb02299fd498278d38f42c3543, type: 3}
+    relativePath: 
     description: 
     enabled: 1
     identityColumn: 
     identityColumnIndex: -1
-    displayColumn: name
-    displayColumnIndex: 0
-    frozenColumnCount: 1
-    frozenColumns: []
+    displayColumn: 
+    displayColumnIndex: -1
+    frozenColumnCount: 0
+    frozenColumns: 00000000
+    frozenRows: 00000000
     columns:
     - name: name
-      index: 0
-      displayName: 
-      helpText: 
+      index: -1
+      displayName: test
+      helpText: this text is going to help?
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3920,12 +3767,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: id
-      index: 1
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3943,12 +3789,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: dlc
-      index: 2
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3966,12 +3811,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: featureflag
-      index: 3
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -3989,12 +3833,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: factions
-      index: 4
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -4012,93 +3855,77 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: category
-      index: 5
-      displayName: 
-      helpText: 
-      valueKind: 7
-      hidden: 0
-      readOnly: 0
-      required: 0
-      hasMinimum: 0
-      minimum: 0
-      hasMaximum: 0
-      maximum: 0
-      group: 0
-      order: 0
-      enumOptions: []
-      tokenSyntax:
-        mode: 0
-        separator: 
-        trimWhitespace: 1
-        ignoreEmptyTokens: 1
-        regexPattern: 
-        regexCaptureGroup: 1
-      references:
-      - targetTable: categories
-        targetKeyColumn: name
-        targetDisplayColumn: name
-        required: 0
-    - name: class
-      index: 6
-      displayName: 
-      helpText: 
-      valueKind: 7
-      hidden: 0
-      readOnly: 0
-      required: 0
-      hasMinimum: 0
-      minimum: 0
-      hasMaximum: 0
-      maximum: 0
-      group: 0
-      order: 0
-      enumOptions: []
-      tokenSyntax:
-        mode: 0
-        separator: 
-        trimWhitespace: 1
-        ignoreEmptyTokens: 1
-        regexPattern: 
-        regexCaptureGroup: 1
-      references:
-      - targetTable: classes
-        targetKeyColumn: name
-        targetDisplayColumn: name
-        required: 0
-    - name: propulsion
-      index: 7
-      displayName: 
-      helpText: 
-      valueKind: 7
-      hidden: 0
-      readOnly: 0
-      required: 0
-      hasMinimum: 0
-      minimum: 0
-      hasMaximum: 0
-      maximum: 0
-      group: 0
-      order: 0
-      enumOptions: []
-      tokenSyntax:
-        mode: 0
-        separator: 
-        trimWhitespace: 1
-        ignoreEmptyTokens: 1
-        regexPattern: 
-        regexCaptureGroup: 1
-      references:
-      - targetTable: propulsion
-        targetKeyColumn: name
-        targetDisplayColumn: name
-        required: 0
-    - name: wiki
-      index: 8
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: class
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: propulsion
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: wiki
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -4116,12 +3943,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: portrait
-      index: 9
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -4139,12 +3965,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: icon
-      index: 10
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -4162,12 +3987,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: minimap
-      index: 11
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -4185,12 +4009,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: tier
-      index: 12
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -4208,12 +4031,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: requires
-      index: 13
+      index: -1
       displayName: 
       helpText: 
-      valueKind: 7
+      valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -4223,24 +4045,19 @@ MonoBehaviour:
       order: 0
       enumOptions: []
       tokenSyntax:
-        mode: 3
+        mode: 0
         separator: 
         trimWhitespace: 1
         ignoreEmptyTokens: 1
-        regexPattern: (?<![A-Za-z0-9_#-])([A-Za-z][A-Za-z0-9_-]*)
+        regexPattern: 
         regexCaptureGroup: 1
-      references:
-      - targetTable: units
-        targetKeyColumn: name
-        targetDisplayColumn: name
-        required: 0
+      references: []
     - name: formation
-      index: 14
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -4258,12 +4075,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: emblem
-      index: 15
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -4281,12 +4097,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: squad type
-      index: 16
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -4304,12 +4119,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: rank
-      index: 17
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -4327,12 +4141,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: members
-      index: 18
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -4350,12 +4163,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: steering type
-      index: 19
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -4373,12 +4185,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: music intensity
-      index: 20
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -4396,12 +4207,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: models
-      index: 21
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -4419,12 +4229,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: volume
-      index: 22
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -4442,12 +4251,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: tilesize
-      index: 23
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -4465,12 +4273,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: height
-      index: 24
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -4488,12 +4295,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: scale
-      index: 25
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -4511,12 +4317,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: level
-      index: 26
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -4534,12 +4339,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: tileBlockingLevel
-      index: 27
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -4557,12 +4361,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: sound
-      index: 28
+      index: -1
       displayName: 
       helpText: 
-      valueKind: 7
+      valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -4572,24 +4375,19 @@ MonoBehaviour:
       order: 0
       enumOptions: []
       tokenSyntax:
-        mode: 3
+        mode: 0
         separator: 
         trimWhitespace: 1
         ignoreEmptyTokens: 1
-        regexPattern: (?<![A-Za-z0-9_#-])([A-Za-z][A-Za-z0-9_-]*)
+        regexPattern: 
         regexCaptureGroup: 1
-      references:
-      - targetTable: sounds
-        targetKeyColumn: name
-        targetDisplayColumn: name
-        required: 0
+      references: []
     - name: gender
-      index: 29
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -4607,93 +4405,77 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: weapon
-      index: 30
-      displayName: 
-      helpText: 
-      valueKind: 7
-      hidden: 0
-      readOnly: 0
-      required: 0
-      hasMinimum: 0
-      minimum: 0
-      hasMaximum: 0
-      maximum: 0
-      group: 0
-      order: 0
-      enumOptions: []
-      tokenSyntax:
-        mode: 3
-        separator: 
-        trimWhitespace: 1
-        ignoreEmptyTokens: 1
-        regexPattern: (?<![A-Za-z0-9_#-])([A-Za-z][A-Za-z0-9_-]*)
-        regexCaptureGroup: 1
-      references:
-      - targetTable: weapons
-        targetKeyColumn: name
-        targetDisplayColumn: name
-        required: 0
-    - name: power shot
-      index: 31
-      displayName: 
-      helpText: 
-      valueKind: 7
-      hidden: 0
-      readOnly: 0
-      required: 0
-      hasMinimum: 0
-      minimum: 0
-      hasMaximum: 0
-      maximum: 0
-      group: 0
-      order: 0
-      enumOptions: []
-      tokenSyntax:
-        mode: 3
-        separator: 
-        trimWhitespace: 1
-        ignoreEmptyTokens: 1
-        regexPattern: (?<![A-Za-z0-9_#-])([A-Za-z][A-Za-z0-9_-]*)
-        regexCaptureGroup: 1
-      references:
-      - targetTable: weapons
-        targetKeyColumn: name
-        targetDisplayColumn: name
-        required: 0
-    - name: abilities
-      index: 32
-      displayName: 
-      helpText: 
-      valueKind: 7
-      hidden: 0
-      readOnly: 0
-      required: 0
-      hasMinimum: 0
-      minimum: 0
-      hasMaximum: 0
-      maximum: 0
-      group: 0
-      order: 0
-      enumOptions: []
-      tokenSyntax:
-        mode: 3
-        separator: 
-        trimWhitespace: 1
-        ignoreEmptyTokens: 1
-        regexPattern: (?<![A-Za-z0-9_#-])([A-Za-z][A-Za-z0-9_-]*)
-        regexCaptureGroup: 1
-      references:
-      - targetTable: abilities
-        targetKeyColumn: name
-        targetDisplayColumn: name
-        required: 0
-    - name: lifetime
-      index: 33
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: power shot
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: abilities
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: lifetime
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -4711,12 +4493,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: hitpoints
-      index: 34
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -4734,12 +4515,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: armor
-      index: 35
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -4757,12 +4537,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: armor type
-      index: 36
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -4780,12 +4559,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: supply
-      index: 37
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -4803,12 +4581,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: support
-      index: 38
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -4826,12 +4603,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: funds
-      index: 39
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -4849,12 +4625,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: materiel
-      index: 40
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -4872,12 +4647,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: cap
-      index: 41
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -4895,12 +4669,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: xp mod
-      index: 42
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -4918,12 +4691,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: build time
-      index: 43
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -4941,12 +4713,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: speed
-      index: 44
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -4964,12 +4735,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: rotation
-      index: 45
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -4987,12 +4757,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: turret
-      index: 46
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -5010,12 +4779,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: flight
-      index: 47
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -5033,12 +4801,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: LOS
-      index: 48
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -5056,12 +4823,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: cone
-      index: 49
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -5079,12 +4845,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: capture
-      index: 50
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -5102,12 +4867,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: cargo
-      index: 51
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -5125,12 +4889,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: garrison
-      index: 52
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -5148,93 +4911,77 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: switch
-      index: 53
-      displayName: 
-      helpText: 
-      valueKind: 7
-      hidden: 0
-      readOnly: 0
-      required: 0
-      hasMinimum: 0
-      minimum: 0
-      hasMaximum: 0
-      maximum: 0
-      group: 0
-      order: 0
-      enumOptions: []
-      tokenSyntax:
-        mode: 3
-        separator: 
-        trimWhitespace: 1
-        ignoreEmptyTokens: 1
-        regexPattern: (?<![A-Za-z0-9_#-])([A-Za-z][A-Za-z0-9_-]*)
-        regexCaptureGroup: 1
-      references:
-      - targetTable: units
-        targetKeyColumn: name
-        targetDisplayColumn: name
-        required: 0
-    - name: alternateUnitTypes
-      index: 54
-      displayName: 
-      helpText: 
-      valueKind: 7
-      hidden: 0
-      readOnly: 0
-      required: 0
-      hasMinimum: 0
-      minimum: 0
-      hasMaximum: 0
-      maximum: 0
-      group: 0
-      order: 0
-      enumOptions: []
-      tokenSyntax:
-        mode: 1
-        separator: ;
-        trimWhitespace: 1
-        ignoreEmptyTokens: 1
-        regexPattern: 
-        regexCaptureGroup: 1
-      references:
-      - targetTable: units
-        targetKeyColumn: name
-        targetDisplayColumn: name
-        required: 0
-    - name: decoration
-      index: 55
-      displayName: 
-      helpText: 
-      valueKind: 7
-      hidden: 0
-      readOnly: 0
-      required: 0
-      hasMinimum: 0
-      minimum: 0
-      hasMaximum: 0
-      maximum: 0
-      group: 0
-      order: 0
-      enumOptions: []
-      tokenSyntax:
-        mode: 3
-        separator: 
-        trimWhitespace: 1
-        ignoreEmptyTokens: 1
-        regexPattern: (?<![A-Za-z0-9_#-])([A-Za-z][A-Za-z0-9_-]*)
-        regexCaptureGroup: 1
-      references:
-      - targetTable: decorations
-        targetKeyColumn: name
-        targetDisplayColumn: name
-        required: 0
-    - name: hit
-      index: 56
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: alternateUnitTypes
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: decoration
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: hit
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -5252,12 +4999,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: death
-      index: 57
+      index: -1
       displayName: 
       helpText: 
-      valueKind: 7
+      valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -5267,24 +5013,19 @@ MonoBehaviour:
       order: 0
       enumOptions: []
       tokenSyntax:
-        mode: 3
+        mode: 0
         separator: 
         trimWhitespace: 1
         ignoreEmptyTokens: 1
-        regexPattern: deathWeapon:\s*([A-Za-z0-9_-]+)
+        regexPattern: 
         regexCaptureGroup: 1
-      references:
-      - targetTable: weapons
-        targetKeyColumn: name
-        targetDisplayColumn: name
-        required: 0
+      references: []
     - name: death.blood
-      index: 58
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -5302,12 +5043,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: death.deathEffect
-      index: 59
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -5325,12 +5065,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: attributes
-      index: 60
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -5348,12 +5087,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: code
-      index: 61
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -5371,12 +5109,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: traits
-      index: 62
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -5394,12 +5131,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: transform restrictions
-      index: 63
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -5417,12 +5153,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: combat stance
-      index: 64
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -5440,12 +5175,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: target priority
-      index: 65
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -5463,12 +5197,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: climbing
-      index: 66
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -5486,12 +5219,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: hopperThings
-      index: 67
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -5509,12 +5241,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: // Animations
-      index: 68
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -5532,12 +5263,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: death variations
-      index: 69
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -5555,12 +5285,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: attack variations
-      index: 70
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -5578,12 +5307,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: dropship anim
-      index: 71
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -5601,12 +5329,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: bug mound
-      index: 72
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -5624,12 +5351,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: heal
-      index: 73
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -5647,12 +5373,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: carryableConfig
-      index: 74
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -5670,66 +5395,55 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: landingPad
-      index: 75
-      displayName: 
-      helpText: 
-      valueKind: 7
-      hidden: 0
-      readOnly: 0
-      required: 0
-      hasMinimum: 0
-      minimum: 0
-      hasMaximum: 0
-      maximum: 0
-      group: 0
-      order: 0
-      enumOptions: []
-      tokenSyntax:
-        mode: 3
-        separator: 
-        trimWhitespace: 1
-        ignoreEmptyTokens: 1
-        regexPattern: overrideTransportType:\s*([A-Za-z0-9_-]+)
-        regexCaptureGroup: 1
-      references:
-      - targetTable: units
-        targetKeyColumn: name
-        targetDisplayColumn: name
-        required: 0
-    - name: transportConfig
-      index: 76
-      displayName: 
-      helpText: 
-      valueKind: 7
-      hidden: 0
-      readOnly: 0
-      required: 0
-      hasMinimum: 0
-      minimum: 0
-      hasMaximum: 0
-      maximum: 0
-      group: 0
-      order: 0
-      enumOptions: []
-      tokenSyntax:
-        mode: 3
-        separator: 
-        trimWhitespace: 1
-        ignoreEmptyTokens: 1
-        regexPattern: preferredTransport:\s*([A-Za-z0-9_-]+)
-        regexCaptureGroup: 1
-      references:
-      - targetTable: units
-        targetKeyColumn: name
-        targetDisplayColumn: name
-        required: 0
-    - name: spawnConfig
-      index: 77
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: transportConfig
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: spawnConfig
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -5747,12 +5461,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: attachment
-      index: 78
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -5770,66 +5483,55 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: pupaeDefense
-      index: 79
-      displayName: 
-      helpText: 
-      valueKind: 7
-      hidden: 0
-      readOnly: 0
-      required: 0
-      hasMinimum: 0
-      minimum: 0
-      hasMaximum: 0
-      maximum: 0
-      group: 0
-      order: 0
-      enumOptions: []
-      tokenSyntax:
-        mode: 3
-        separator: 
-        trimWhitespace: 1
-        ignoreEmptyTokens: 1
-        regexPattern: unitType:\s*([A-Za-z0-9_-]+)
-        regexCaptureGroup: 1
-      references:
-      - targetTable: units
-        targetKeyColumn: name
-        targetDisplayColumn: name
-        required: 0
-    - name: squadDefender
-      index: 80
-      displayName: 
-      helpText: 
-      valueKind: 7
-      hidden: 0
-      readOnly: 0
-      required: 0
-      hasMinimum: 0
-      minimum: 0
-      hasMaximum: 0
-      maximum: 0
-      group: 0
-      order: 0
-      enumOptions: []
-      tokenSyntax:
-        mode: 3
-        separator: 
-        trimWhitespace: 1
-        ignoreEmptyTokens: 1
-        regexPattern: type:\s*([A-Za-z0-9_-]+)
-        regexCaptureGroup: 1
-      references:
-      - targetTable: units
-        targetKeyColumn: name
-        targetDisplayColumn: name
-        required: 0
-    - name: notification
-      index: 81
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: squadDefender
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
+      required: 0
+      hasMinimum: 0
+      minimum: 0
+      hasMaximum: 0
+      maximum: 0
+      group: 0
+      order: 0
+      enumOptions: []
+      tokenSyntax:
+        mode: 0
+        separator: 
+        trimWhitespace: 1
+        ignoreEmptyTokens: 1
+        regexPattern: 
+        regexCaptureGroup: 1
+      references: []
+    - name: notification
+      index: -1
+      displayName: 
+      helpText: 
+      valueKind: 0
+      hidden: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -5847,12 +5549,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: carrying
-      index: 82
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -5870,12 +5571,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: radiuscapturing
-      index: 83
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -5893,12 +5593,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: invasionMarker
-      index: 84
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -5916,12 +5615,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: invasion
-      index: 85
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -5939,12 +5637,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: construction effect
-      index: 86
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -5962,12 +5659,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: step effect
-      index: 87
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -5985,12 +5681,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: constructor
-      index: 88
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6008,12 +5703,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: constructable
-      index: 89
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6031,23 +5725,24 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
   - name: weapons
-    relativePath: weapons.csv
+    csvFile: {fileID: 4900000, guid: ee96fcf298f15a646a30241ed3d41e66, type: 3}
+    relativePath: 
     description: 
     enabled: 1
     identityColumn: 
     identityColumnIndex: -1
-    displayColumn: name
-    displayColumnIndex: 0
+    displayColumn: 
+    displayColumnIndex: -1
     frozenColumnCount: 0
-    frozenColumns: []
+    frozenColumns: 00000000
+    frozenRows: 00000000
     columns:
     - name: name
-      index: 0
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6065,12 +5760,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: dlc
-      index: 1
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6088,12 +5782,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: featureflag
-      index: 2
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6111,12 +5804,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: model
-      index: 3
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6134,12 +5826,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: projectile
-      index: 4
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6157,12 +5848,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: air projectile
-      index: 5
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6180,12 +5870,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: spawn
-      index: 6
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6203,12 +5892,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: scale
-      index: 7
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6226,12 +5914,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: width
-      index: 8
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6249,12 +5936,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: sound
-      index: 9
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6272,12 +5958,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: offset
-      index: 10
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6295,12 +5980,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: charge effect
-      index: 11
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6318,12 +6002,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: fire effect
-      index: 12
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6341,12 +6024,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: fire effect AA
-      index: 13
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6364,12 +6046,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: ignition effect
-      index: 14
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6387,12 +6068,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: target hit
-      index: 15
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6410,12 +6090,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: soft hit
-      index: 16
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6433,12 +6112,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: hard hit
-      index: 17
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6456,12 +6134,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: water hit
-      index: 18
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6479,12 +6156,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: // target armor
-      index: 19
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6502,12 +6178,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: // damage
-      index: 20
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6525,12 +6200,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: // DPS
-      index: 21
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6548,12 +6222,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: attack
-      index: 22
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6571,12 +6244,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: anti armor
-      index: 23
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6594,12 +6266,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: anti granite
-      index: 24
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6617,12 +6288,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: anti air
-      index: 25
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6640,12 +6310,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: shock
-      index: 26
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6663,12 +6332,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: blast
-      index: 27
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6686,12 +6354,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: timer
-      index: 28
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6709,12 +6376,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: burst
-      index: 29
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6732,12 +6398,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: delay
-      index: 30
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6755,12 +6420,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: range
-      index: 31
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6778,12 +6442,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: extended
-      index: 32
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6801,12 +6464,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: min range
-      index: 33
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6824,12 +6486,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: accuracy
-      index: 34
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6847,12 +6508,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: speed
-      index: 35
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6870,12 +6530,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: initialSpeed
-      index: 36
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6893,12 +6552,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: timeUntilFullSpeed
-      index: 37
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6916,12 +6574,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: charge
-      index: 38
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6939,12 +6596,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: cooldown
-      index: 39
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6962,12 +6618,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: timeBetweenAttacks
-      index: 40
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -6985,12 +6640,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: shake
-      index: 41
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -7008,12 +6662,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: fire strategy
-      index: 42
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -7031,12 +6684,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: targeting
-      index: 43
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -7054,12 +6706,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: cone
-      index: 44
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -7077,12 +6728,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: homing
-      index: 45
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -7100,12 +6750,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: invalid
-      index: 46
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -7123,12 +6772,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: valid
-      index: 47
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -7146,12 +6794,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: damageType
-      index: 48
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -7169,12 +6816,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: traits
-      index: 49
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -7192,12 +6838,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: pinning strategy
-      index: 50
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -7215,12 +6860,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: overheat
-      index: 51
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -7238,12 +6882,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: onSoldierHit
-      index: 52
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -7261,12 +6904,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: poison
-      index: 53
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -7284,12 +6926,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: allianceSwitch
-      index: 54
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -7307,12 +6948,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: mindControl
-      index: 55
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -7330,12 +6970,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: timelineShot
-      index: 56
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -7353,12 +6992,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: burstOffsets
-      index: 57
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0
@@ -7376,12 +7014,11 @@ MonoBehaviour:
         regexCaptureGroup: 1
       references: []
     - name: notification
-      index: 58
+      index: -1
       displayName: 
       helpText: 
       valueKind: 0
       hidden: 0
-      readOnly: 0
       required: 0
       hasMinimum: 0
       minimum: 0

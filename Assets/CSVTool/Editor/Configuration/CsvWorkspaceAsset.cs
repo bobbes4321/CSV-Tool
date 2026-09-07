@@ -51,14 +51,12 @@ namespace CsvTool.Editor.Configuration
         public string targetTable = string.Empty;
         public string targetKeyColumn = string.Empty;
         public string targetDisplayColumn = string.Empty;
-        public bool required = true;
 
         public CsvReferenceSpec ToSchema()
         {
             return new CsvReferenceSpec(targetTable, targetKeyColumn)
             {
-                TargetDisplayColumn = targetDisplayColumn ?? string.Empty,
-                Required = required
+                TargetDisplayColumn = targetDisplayColumn ?? string.Empty
             };
         }
 
@@ -69,7 +67,6 @@ namespace CsvTool.Editor.Configuration
             result.targetTable = reference.TargetTable ?? string.Empty;
             result.targetKeyColumn = reference.TargetKeyColumn ?? string.Empty;
             result.targetDisplayColumn = reference.TargetDisplayColumn ?? string.Empty;
-            result.required = reference.Required;
             return result;
         }
     }
@@ -83,19 +80,6 @@ namespace CsvTool.Editor.Configuration
     {
         public string name = string.Empty;
         public int index = -1;
-        public string displayName = string.Empty;
-        public string helpText = string.Empty;
-        public CsvValueKind valueKind = CsvValueKind.Auto;
-        public bool hidden;
-        public bool readOnly;
-        public bool required;
-        public bool hasMinimum;
-        public double minimum;
-        public bool hasMaximum;
-        public double maximum;
-        public int group;
-        public int order;
-        public List<string> enumOptions = new List<string>();
         public CsvWorkspaceTokenSyntaxConfig tokenSyntax = new CsvWorkspaceTokenSyntaxConfig();
         public List<CsvWorkspaceReferenceConfig> references = new List<CsvWorkspaceReferenceConfig>();
 
@@ -103,17 +87,6 @@ namespace CsvTool.Editor.Configuration
         // while public fields keep Unity's built-in inspector serialization simple.
         public string Name { get { return name; } set { name = value ?? string.Empty; } }
         public int Index { get { return index; } set { index = value; } }
-        public string DisplayName { get { return displayName; } set { displayName = value ?? string.Empty; } }
-        public string HelpText { get { return helpText; } set { helpText = value ?? string.Empty; } }
-        public CsvValueKind ValueKind { get { return valueKind; } set { valueKind = value; } }
-        public bool Hidden { get { return hidden; } set { hidden = value; } }
-        public bool ReadOnly { get { return readOnly; } set { readOnly = value; } }
-        public bool Required { get { return required; } set { required = value; } }
-        public double? Minimum { get { return hasMinimum ? (double?)minimum : null; } set { hasMinimum = value.HasValue; minimum = value.GetValueOrDefault(); } }
-        public double? Maximum { get { return hasMaximum ? (double?)maximum : null; } set { hasMaximum = value.HasValue; maximum = value.GetValueOrDefault(); } }
-        public int Group { get { return group; } set { group = value; } }
-        public int Order { get { return order; } set { order = value; } }
-        public IList<string> EnumValues { get { return enumOptions; } }
         public IList<CsvWorkspaceReferenceConfig> References { get { return references; } }
 
         public CsvColumnSchema ToSchema()
@@ -121,18 +94,8 @@ namespace CsvTool.Editor.Configuration
             CsvColumnSchema result = new CsvColumnSchema(name)
             {
                 Index = index,
-                DisplayName = displayName ?? string.Empty,
-                Description = helpText ?? string.Empty,
-                ValueKind = valueKind,
-                Hidden = hidden,
-                ReadOnly = readOnly,
-                Required = required,
                 TokenSyntax = tokenSyntax == null ? null : tokenSyntax.ToSchema()
             };
-            if (hasMinimum) result.Minimum = minimum;
-            if (hasMaximum) result.Maximum = maximum;
-            if (enumOptions != null)
-                for (int i = 0; i < enumOptions.Count; i++) result.EnumValues.Add(enumOptions[i] ?? string.Empty);
             if (references != null)
                 for (int i = 0; i < references.Count; i++)
                     result.References.Add(references[i] == null ? null : references[i].ToSchema());
@@ -145,17 +108,6 @@ namespace CsvTool.Editor.Configuration
             if (column == null) return result;
             result.name = column.Name ?? string.Empty;
             result.index = column.Index;
-            result.displayName = column.DisplayName ?? string.Empty;
-            result.helpText = column.Description ?? string.Empty;
-            result.valueKind = column.ValueKind;
-            result.hidden = column.Hidden;
-            result.readOnly = column.ReadOnly;
-            result.required = column.Required;
-            result.Minimum = column.Minimum;
-            result.Maximum = column.Maximum;
-            result.enumOptions.Clear();
-            if (column.EnumValues != null)
-                for (int i = 0; i < column.EnumValues.Count; i++) result.enumOptions.Add(column.EnumValues[i] ?? string.Empty);
             result.tokenSyntax = CsvWorkspaceTokenSyntaxConfig.FromSchema(column.TokenSyntax);
             result.references.Clear();
             if (column.References != null)
@@ -170,6 +122,8 @@ namespace CsvTool.Editor.Configuration
     public sealed class CsvWorkspaceTableConfig
     {
         public string name = string.Empty;
+        [Tooltip("The explicit CSV asset edited by this table. CSV files remain canonical.")]
+        public TextAsset csvFile;
         public string relativePath = string.Empty;
         public string description = string.Empty;
         public bool enabled = true;
@@ -178,7 +132,8 @@ namespace CsvTool.Editor.Configuration
         public string displayColumn = string.Empty;
         public int displayColumnIndex = -1;
         public int frozenColumnCount;
-        public List<string> frozenColumns = new List<string>();
+        public List<int> frozenColumns = new List<int>();
+        public List<int> frozenRows = new List<int>();
         public List<CsvWorkspaceColumnConfig> columns = new List<CsvWorkspaceColumnConfig>();
 
         public string Name { get { return name; } set { name = value ?? string.Empty; } }
@@ -190,7 +145,8 @@ namespace CsvTool.Editor.Configuration
         public string DisplayColumn { get { return displayColumn; } set { displayColumn = value ?? string.Empty; } }
         public int DisplayColumnIndex { get { return displayColumnIndex; } set { displayColumnIndex = value; } }
         public int FrozenColumnCount { get { return frozenColumnCount; } set { frozenColumnCount = Math.Max(0, value); } }
-        public IList<string> FrozenColumns { get { return frozenColumns; } }
+        public IList<int> FrozenColumns { get { return frozenColumns; } }
+        public IList<int> FrozenRows { get { return frozenRows; } }
         public IList<CsvWorkspaceColumnConfig> Columns { get { return columns; } }
 
         public CsvTableSchema ToSchema()
@@ -237,10 +193,10 @@ namespace CsvTool.Editor.Configuration
     public sealed class CsvWorkspaceAsset : ScriptableObject
     {
         [Tooltip("Project-relative (for example Assets/Data) or absolute directory containing the configured CSV files.")]
-        public string rootDirectory = "Assets/Data";
+        public string rootDirectory = ".";
         public bool caseSensitiveNames;
         [Tooltip("Also show CSV files under the root that are not listed below. They remain fully editable as plain-text tables.")]
-        public bool includeUnconfiguredTables = true;
+        public bool includeUnconfiguredTables;
         public List<CsvWorkspaceTableConfig> tables = new List<CsvWorkspaceTableConfig>();
 
         public string RootDirectory { get { return rootDirectory; } set { rootDirectory = value ?? string.Empty; } }
@@ -252,23 +208,24 @@ namespace CsvTool.Editor.Configuration
             CsvWorkspaceSchema result = new CsvWorkspaceSchema
             {
                 Name = string.IsNullOrWhiteSpace(name) ? "CSV Workspace" : name,
-                RootDirectory = rootDirectory ?? string.Empty,
+                // Explicit TextAsset references are authoritative. The project root is used
+                // only to turn their Unity asset paths into stable filesystem paths.
+                RootDirectory = ".",
                 CaseSensitiveNames = caseSensitiveNames
             };
             if (tables != null)
                 for (int i = 0; i < tables.Count; i++)
-                    if (tables[i] != null) result.Tables.Add(tables[i].ToSchema());
+                    if (tables[i] != null)
+                    {
+                        CsvTableSchema table = tables[i].ToSchema();
+                        if (tables[i].csvFile != null)
+                            table.RelativePath = AssetDatabase.GetAssetPath(tables[i].csvFile);
+                        result.Tables.Add(table);
+                    }
             return result;
         }
 
         public CsvWorkspaceSchema CreateSchema() { return ToSchema(); }
-
-        public IReadOnlyList<CsvSchemaIssue> Validate()
-        {
-            return CsvSchemaValidator.Validate(ToSchema());
-        }
-
-        public bool IsValid() { return CsvSchemaValidator.IsValid(ToSchema()); }
 
         public static CsvWorkspaceAsset FromSchema(CsvWorkspaceSchema schema)
         {
@@ -404,54 +361,7 @@ namespace CsvTool.Editor.Configuration
             serializedObject.ApplyModifiedProperties();
 
             CsvWorkspaceAsset asset = (CsvWorkspaceAsset)target;
-            if (GUILayout.Button("Populate Missing Tables From Root")) PopulateMissingTables(asset);
-            if (GUILayout.Button("Validate Workspace"))
-            {
-                IReadOnlyList<CsvSchemaIssue> issues = asset.Validate();
-                int errors = 0;
-                for (int i = 0; i < issues.Count; i++) if (issues[i].Severity == CsvSchemaIssueSeverity.Error) errors++;
-                if (issues.Count == 0) Debug.Log("CSV Tool: workspace configuration is valid.", asset);
-                else Debug.LogWarning("CSV Tool: workspace has " + errors + " error(s) and " + (issues.Count - errors) + " warning(s).", asset);
-            }
         }
 
-        private static void PopulateMissingTables(CsvWorkspaceAsset asset)
-        {
-            string root;
-            string error;
-            if (!CsvWorkspacePathResolver.TryResolveRootDirectory(asset.rootDirectory,
-                CsvWorkspacePathResolver.GetProjectRoot(), out root, out error) || !Directory.Exists(root))
-            {
-                EditorUtility.DisplayDialog("CSV Tool", string.IsNullOrEmpty(error)
-                    ? "The workspace root directory does not exist." : error, "OK");
-                return;
-            }
-            string[] files = Directory.GetFiles(root, "*.csv", SearchOption.AllDirectories);
-            Array.Sort(files, StringComparer.OrdinalIgnoreCase);
-            Undo.RecordObject(asset, "Populate CSV Workspace");
-            int added = 0;
-            for (int i = 0; i < files.Length; i++)
-            {
-                string relative = files[i].Substring(root.TrimEnd(Path.DirectorySeparatorChar,
-                    Path.AltDirectorySeparatorChar).Length).TrimStart(Path.DirectorySeparatorChar,
-                    Path.AltDirectorySeparatorChar).Replace('\\', '/');
-                bool exists = false;
-                for (int tableIndex = 0; tableIndex < asset.tables.Count; tableIndex++)
-                {
-                    CsvWorkspaceTableConfig table = asset.tables[tableIndex];
-                    if (table != null && string.Equals(table.relativePath, relative,
-                        StringComparison.OrdinalIgnoreCase)) { exists = true; break; }
-                }
-                if (exists) continue;
-                asset.tables.Add(new CsvWorkspaceTableConfig
-                {
-                    name = Path.ChangeExtension(relative, null).Replace('\\', '/'),
-                    relativePath = relative
-                });
-                added++;
-            }
-            if (added > 0) EditorUtility.SetDirty(asset);
-            Debug.Log("CSV Tool: added " + added + " table configuration(s).", asset);
-        }
     }
 }

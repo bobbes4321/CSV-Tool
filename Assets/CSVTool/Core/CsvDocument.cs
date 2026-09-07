@@ -18,6 +18,7 @@ namespace CsvTool.Core
         private string _sourcePath;
         private string _newline;
         private bool _hasFinalNewline;
+        private int _dirtyRecordCount;
 
         private CsvDocument(List<CsvRecord> records, List<CsvParseDiagnostic> diagnostics, CsvParseOptions options,
             CsvEncodingInfo encoding, byte[] originalBytes, string sourcePath, string newline, bool hasFinalNewline)
@@ -31,6 +32,7 @@ namespace CsvTool.Core
             _newline = newline;
             _hasFinalNewline = hasFinalNewline;
             History = new CsvEditHistory();
+            RecalculateDirtyRecordCount();
         }
 
         public CsvEncodingInfo EncodingInfo { get; private set; }
@@ -48,8 +50,7 @@ namespace CsvTool.Core
             get
             {
                 if (HasStructuralChanges) return true;
-                for (int i = 0; i < _records.Count; i++) if (_records[i].IsDirty) return true;
-                return false;
+                return _dirtyRecordCount > 0;
             }
         }
 
@@ -122,7 +123,9 @@ namespace CsvTool.Core
             int oldCellCount = record.CellCount;
             value = value ?? string.Empty;
             if (string.Equals(oldValue, value, StringComparison.Ordinal)) return false;
+            bool wasDirty = record.IsDirty;
             record.SetValue(columnIndex, value);
+            UpdateDirtyRecordCount(record, wasDirty);
             History.Record(new CsvCellEdit(recordIndex, columnIndex, oldValue, value, oldCellCount, record.CellCount));
             return true;
         }
@@ -138,6 +141,7 @@ namespace CsvTool.Core
             CsvRecord inserted = CsvRecord.CreateInserted(recordIndex, CsvRecordKind.Data, copied, ending);
             _records.Insert(recordIndex, inserted);
             RenumberRecords();
+            _dirtyRecordCount++;
             HasStructuralChanges = true;
             History.RecordOperation(new CsvInsertRecordOperation(recordIndex, copied, wasStructural));
             return true;
@@ -163,6 +167,7 @@ namespace CsvTool.Core
                 _records[targets[i]].InsertValue(columnIndex, targets[i] == FindHeaderRecordIndex() ? headerValue : string.Empty);
             }
             HasStructuralChanges = true;
+            RecalculateDirtyRecordCount();
             History.RecordOperation(new CsvInsertColumnOperation(columnIndex, targets, oldCellCounts, headerValue, wasStructural));
             return true;
         }
@@ -198,8 +203,10 @@ namespace CsvTool.Core
                 string value = assignment.Value ?? string.Empty;
                 string oldValue = record.GetValue(assignment.ColumnIndex);
                 if (string.Equals(oldValue, value, StringComparison.Ordinal)) continue;
+                bool wasDirty = record.IsDirty;
                 int oldCellCount = record.CellCount;
                 record.SetValue(assignment.ColumnIndex, value);
+                UpdateDirtyRecordCount(record, wasDirty);
                 edits.Add(new CsvCellEdit(assignment.RecordIndex, assignment.ColumnIndex, oldValue, value,
                     oldCellCount, record.CellCount));
             }
@@ -226,6 +233,7 @@ namespace CsvTool.Core
             for (int recordIndex = 0; recordIndex < _records.Count; recordIndex++)
             {
                 CsvRecord record = _records[recordIndex];
+                if (!record.IsDirty) continue;
                 int count = Math.Max(record.CellCount, record.OriginalCellCount);
                 for (int columnIndex = 0; columnIndex < count; columnIndex++)
                 {
@@ -251,7 +259,9 @@ namespace CsvTool.Core
 
             string oldValue = record.GetValue(columnIndex);
             int oldCellCount = record.CellCount;
+            bool wasDirty = record.IsDirty;
             record.RestoreCell(columnIndex, record.GetOriginalValue(columnIndex));
+            UpdateDirtyRecordCount(record, wasDirty);
             History.Record(new CsvCellEdit(recordIndex, columnIndex, oldValue,
                 record.GetValue(columnIndex), oldCellCount, record.CellCount));
             return true;
@@ -279,6 +289,7 @@ namespace CsvTool.Core
                     record.GetValue(change.ColumnIndex), oldCellCount, record.CellCount));
             }
             History.RecordBatch(edits);
+            RecalculateDirtyRecordCount();
             return true;
         }
 
@@ -294,8 +305,19 @@ namespace CsvTool.Core
             return _records[recordIndex].GetValue(columnIndex);
         }
 
-        public bool Undo() { return History.Undo(this); }
-        public bool Redo() { return History.Redo(this); }
+        public bool Undo()
+        {
+            bool changed = History.Undo(this);
+            if (changed) RecalculateDirtyRecordCount();
+            return changed;
+        }
+
+        public bool Redo()
+        {
+            bool changed = History.Redo(this);
+            if (changed) RecalculateDirtyRecordCount();
+            return changed;
+        }
 
         /// <summary>Returns bytes suitable for writing. An unchanged document returns its exact original bytes.</summary>
         public byte[] Serialize()
@@ -346,6 +368,7 @@ namespace CsvTool.Core
             for (int i = 0; i < _records.Count; i++) _records[i].MarkClean(_records[i].GetRawContent());
             History.Clear();
             HasStructuralChanges = false;
+            _dirtyRecordCount = 0;
         }
 
         /// <summary>Compares file paths using the platform's expected case rules for conflict detection.</summary>
@@ -365,7 +388,10 @@ namespace CsvTool.Core
         internal void ApplyHistoryValue(int recordIndex, int columnIndex, string value, int targetCellCount)
         {
             if (recordIndex < 0 || recordIndex >= _records.Count) throw new ArgumentOutOfRangeException("recordIndex");
-            _records[recordIndex].RestoreValue(columnIndex, value, targetCellCount);
+            CsvRecord record = _records[recordIndex];
+            bool wasDirty = record.IsDirty;
+            record.RestoreValue(columnIndex, value, targetCellCount);
+            UpdateDirtyRecordCount(record, wasDirty);
         }
 
         private int FindHeaderRecordIndex()
@@ -377,6 +403,19 @@ namespace CsvTool.Core
         private void RenumberRecords()
         {
             for (int i = 0; i < _records.Count; i++) _records[i].Index = i;
+        }
+
+        private void UpdateDirtyRecordCount(CsvRecord record, bool wasDirty)
+        {
+            if (wasDirty == record.IsDirty) return;
+            _dirtyRecordCount += record.IsDirty ? 1 : -1;
+        }
+
+        private void RecalculateDirtyRecordCount()
+        {
+            _dirtyRecordCount = 0;
+            for (int i = 0; i < _records.Count; i++)
+                if (_records[i].IsDirty) _dirtyRecordCount++;
         }
 
         private sealed class CsvInsertRecordOperation : ICsvEditOperation
@@ -486,6 +525,33 @@ namespace CsvTool.Core
 
         private static List<string> ParseFields(string raw, out bool malformed)
         {
+            int fieldCount = 1;
+            bool hasQuotes = false;
+            for (int i = 0; i < raw.Length; i++)
+            {
+                char c = raw[i];
+                if (c == '"')
+                {
+                    hasQuotes = true;
+                    break;
+                }
+                if (c == ',') fieldCount++;
+            }
+
+            if (!hasQuotes)
+            {
+                List<string> plainValues = new List<string>(fieldCount);
+                int start = 0;
+                for (int i = 0; i <= raw.Length; i++)
+                {
+                    if (i < raw.Length && raw[i] != ',') continue;
+                    plainValues.Add(raw.Substring(start, i - start));
+                    start = i + 1;
+                }
+                malformed = false;
+                return plainValues;
+            }
+
             List<string> values = new List<string>();
             StringBuilder field = new StringBuilder();
             bool inQuotes = false;

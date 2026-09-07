@@ -26,6 +26,7 @@ namespace CsvTool.Editor
         private static GUIStyle s_cellStyle;
         private static GUIStyle s_editCellStyle;
         private static GUIStyle s_headerStyle;
+        private static GUIStyle s_columnIdStyle;
         private static GUIStyle s_rowNumberStyle;
 
         private readonly CsvGridSettings _settings;
@@ -60,6 +61,7 @@ namespace CsvTool.Editor
         private int _lastResizeClickColumn = -1;
         private double _lastResizeClickTime = double.NegativeInfinity;
         private CsvGridSelection _selection;
+        private CsvGridSelectionScope _selectionScope = CsvGridSelectionScope.Cell;
         private int _selectedPhysicalRecordIndex = -1;
         private Vector2 _scrollPosition;
         private CsvGridVisibleStats _visibleStats;
@@ -98,6 +100,7 @@ namespace CsvTool.Editor
 
         public CsvGridSettings Settings { get { return _settings; } }
         public CsvGridSelection Selection { get { return _selection; } }
+        public CsvGridSelectionScope SelectionScope { get { return _selectionScope; } }
         public CsvGridVisibleStats VisibleStats { get { return _visibleStats; } }
         public Vector2 ScrollPosition { get { return _scrollPosition; } set { _scrollPosition = value; } }
         public bool IsEditing { get { return _isEditing; } }
@@ -193,6 +196,7 @@ namespace CsvTool.Editor
             _rowMapInitialized = false;
             _scrollPosition = Vector2.zero;
             _selection = CsvGridSelection.Invalid;
+            _selectionScope = CsvGridSelectionScope.Cell;
             _anchorRow = _anchorColumn = -1;
             _visibleStats = CsvGridVisibleStats.Empty;
             _resizingColumn = -1;
@@ -215,6 +219,40 @@ namespace CsvTool.Editor
             if (_isEditing && (_bodyRecordIndices[row] != _editingRecordIndex || column != _editingColumn))
                 CommitEdit();
             SetSelection(new CsvGridSelection(row, column, _bodyRecordIndices[row]), ensureVisible);
+        }
+
+        /// <summary>Selects an entire visible body row. The active record remains physical.</summary>
+        public void SelectRow(int row, bool ensureVisible = true)
+        {
+            if (_document == null || _bodyRecordIndices.Count == 0 || _columnCount == 0)
+            {
+                SetSelection(CsvGridSelection.Invalid);
+                return;
+            }
+
+            row = Mathf.Clamp(row, 0, _bodyRecordIndices.Count - 1);
+            if (_isEditing)
+                CommitEdit();
+            int column = _selection.IsValid ? Mathf.Clamp(_selection.Column, 0, _columnCount - 1) : 0;
+            SetActiveSelection(new CsvGridSelection(row, column, _bodyRecordIndices[row]),
+                ensureVisible, true, CsvGridSelectionScope.Row);
+        }
+
+        /// <summary>Selects an entire visible body column.</summary>
+        public void SelectColumn(int column, bool ensureVisible = true)
+        {
+            if (_document == null || _bodyRecordIndices.Count == 0 || _columnCount == 0)
+            {
+                SetSelection(CsvGridSelection.Invalid);
+                return;
+            }
+
+            column = Mathf.Clamp(column, 0, _columnCount - 1);
+            if (_isEditing)
+                CommitEdit();
+            int row = _selection.IsValid ? Mathf.Clamp(_selection.Row, 0, _bodyRecordIndices.Count - 1) : 0;
+            SetActiveSelection(new CsvGridSelection(row, column, _bodyRecordIndices[row]),
+                ensureVisible, true, CsvGridSelectionScope.Column);
         }
 
         /// <summary>
@@ -306,6 +344,10 @@ namespace CsvTool.Editor
             {
                 if (!_selection.IsValid || _anchorRow < 0 || _anchorColumn < 0)
                     return CsvGridRangeSelection.Invalid;
+                if (_selectionScope == CsvGridSelectionScope.Row)
+                    return new CsvGridRangeSelection(_anchorRow, 0, _selection.Row, _columnCount - 1);
+                if (_selectionScope == CsvGridSelectionScope.Column)
+                    return new CsvGridRangeSelection(0, _anchorColumn, _bodyRecordIndices.Count - 1, _selection.Column);
                 return new CsvGridRangeSelection(_anchorRow, _anchorColumn, _selection.Row, _selection.Column);
             }
         }
@@ -384,6 +426,7 @@ namespace CsvTool.Editor
         {
             _settings.RowHeight = Mathf.Max(1f, _settings.RowHeight);
             _settings.HeaderHeight = Mathf.Max(1f, _settings.HeaderHeight);
+            _settings.ColumnIdHeight = Mathf.Max(1f, _settings.ColumnIdHeight);
             _settings.RowNumberWidth = Mathf.Max(1f, _settings.RowNumberWidth);
             _settings.MinColumnWidth = Mathf.Max(1f, _settings.MinColumnWidth);
             _settings.MaxColumnWidth = Mathf.Max(_settings.MinColumnWidth, _settings.MaxColumnWidth);
@@ -402,6 +445,7 @@ namespace CsvTool.Editor
             _bodyRecordIndices.Clear();
             _headerRecordIndex = -1;
             _selection = CsvGridSelection.Invalid;
+            _selectionScope = CsvGridSelectionScope.Cell;
             _selectedPhysicalRecordIndex = -1;
             _rowMapSource = null;
             _rowMapInitialized = false;
@@ -471,7 +515,8 @@ namespace CsvTool.Editor
                 for (int i = 0; i < _bodyRecordIndices.Count; i++)
                     if (_bodyRecordIndices[i] == selectedPhysicalRecord) { visualRow = i; break; }
             if (visualRow >= 0)
-                SetSelection(new CsvGridSelection(visualRow, Mathf.Clamp(selectedColumn, 0, _columnCount - 1), selectedPhysicalRecord), false);
+                SetActiveSelection(new CsvGridSelection(visualRow, Mathf.Clamp(selectedColumn, 0, _columnCount - 1), selectedPhysicalRecord),
+                    false, true, _selectionScope);
             else
                 SelectCell(0, 0, false);
         }
@@ -506,9 +551,10 @@ namespace CsvTool.Editor
         private void CalculateViewport(Rect rect)
         {
             float width = Mathf.Max(1f, rect.width - _settings.RowNumberWidth - ScrollbarSize);
-            float height = Mathf.Max(1f, rect.height - _settings.HeaderHeight - ScrollbarSize);
-            _headerRect = new Rect(rect.x + _settings.RowNumberWidth, rect.y, width, _settings.HeaderHeight);
-            _bodyRect = new Rect(rect.x + _settings.RowNumberWidth, rect.y + _settings.HeaderHeight, width, height);
+            float headerHeight = _settings.ColumnIdHeight + _settings.HeaderHeight;
+            float height = Mathf.Max(1f, rect.height - headerHeight - ScrollbarSize);
+            _headerRect = new Rect(rect.x + _settings.RowNumberWidth, rect.y, width, headerHeight);
+            _bodyRect = new Rect(rect.x + _settings.RowNumberWidth, rect.y + headerHeight, width, height);
             _bodyWidth = width;
             _bodyHeight = height;
             _scrollableViewportWidth = Mathf.Max(1f, width - _frozenWidth);
@@ -603,7 +649,9 @@ namespace CsvTool.Editor
                     int column = gutter ? (_selection.IsValid ? _selection.Column : 0) : ColumnAtScreenX(current.mousePosition.x);
                     if (row >= 0 && column >= 0)
                     {
-                        SelectCell(row, column, false);
+                        if (header) SelectColumn(column, false);
+                        else if (gutter) SelectRow(row, false);
+                        else SelectCell(row, column, false);
                         StructureMenuRequested?.Invoke(_selection, header, current.mousePosition);
                         current.Use();
                         return;
@@ -756,8 +804,8 @@ namespace CsvTool.Editor
                     int row = RowAtScreenY(current.mousePosition.y);
                     if (row >= 0 && _columnCount > 0)
                     {
-                        if (current.shift) SetRangeCell(row, _selection.IsValid ? _selection.Column : 0);
-                        else SelectCell(row, _selection.IsValid ? _selection.Column : 0);
+                        if (current.shift) SetRowRange(row);
+                        else SelectRow(row);
                         GUIUtility.keyboardControl = _controlId;
                         current.Use();
                         return;
@@ -769,8 +817,8 @@ namespace CsvTool.Editor
                     int column = ColumnAtScreenX(current.mousePosition.x);
                     if (column >= 0 && _bodyRecordIndices.Count > 0)
                     {
-                        if (current.shift) SetRangeCell(_selection.IsValid ? _selection.Row : 0, column);
-                        else SelectCell(_selection.IsValid ? _selection.Row : 0, column);
+                        if (current.shift) SetColumnRange(column);
+                        else SelectColumn(column);
                         GUIUtility.keyboardControl = _controlId;
                         current.Use();
                         return;
@@ -1305,7 +1353,7 @@ namespace CsvTool.Editor
 
         private void SetSelection(CsvGridSelection value, bool ensureVisible = false)
         {
-            SetActiveSelection(value, ensureVisible, true);
+            SetActiveSelection(value, ensureVisible, true, CsvGridSelectionScope.Cell);
         }
 
         private void SetRangeCell(int row, int column, bool ensureVisible = false)
@@ -1329,13 +1377,50 @@ namespace CsvTool.Editor
 
             row = Mathf.Clamp(row, 0, _bodyRecordIndices.Count - 1);
             column = Mathf.Clamp(column, 0, _columnCount - 1);
-            SetActiveSelection(new CsvGridSelection(row, column, _bodyRecordIndices[row]), ensureVisible, false);
+            SetActiveSelection(new CsvGridSelection(row, column, _bodyRecordIndices[row]), ensureVisible, false,
+                CsvGridSelectionScope.Cell);
         }
 
-        private void SetActiveSelection(CsvGridSelection value, bool ensureVisible, bool resetAnchor)
+        private void SetRowRange(int row, bool ensureVisible = false)
+        {
+            if (_document == null || _bodyRecordIndices.Count == 0 || _columnCount == 0)
+            {
+                SetSelection(CsvGridSelection.Invalid, false);
+                return;
+            }
+
+            row = Mathf.Clamp(row, 0, _bodyRecordIndices.Count - 1);
+            if (_selectionScope != CsvGridSelectionScope.Row || _anchorRow < 0)
+                _anchorRow = _selection.IsValid ? _selection.Row : row;
+            if (_anchorColumn < 0) _anchorColumn = _selection.IsValid ? _selection.Column : 0;
+            int column = _selection.IsValid ? Mathf.Clamp(_selection.Column, 0, _columnCount - 1) : 0;
+            SetActiveSelection(new CsvGridSelection(row, column, _bodyRecordIndices[row]), ensureVisible, false,
+                CsvGridSelectionScope.Row);
+        }
+
+        private void SetColumnRange(int column, bool ensureVisible = false)
+        {
+            if (_document == null || _bodyRecordIndices.Count == 0 || _columnCount == 0)
+            {
+                SetSelection(CsvGridSelection.Invalid, false);
+                return;
+            }
+
+            column = Mathf.Clamp(column, 0, _columnCount - 1);
+            if (_selectionScope != CsvGridSelectionScope.Column || _anchorColumn < 0)
+                _anchorColumn = _selection.IsValid ? _selection.Column : column;
+            if (_anchorRow < 0) _anchorRow = _selection.IsValid ? _selection.Row : 0;
+            int row = _selection.IsValid ? Mathf.Clamp(_selection.Row, 0, _bodyRecordIndices.Count - 1) : 0;
+            SetActiveSelection(new CsvGridSelection(row, column, _bodyRecordIndices[row]), ensureVisible, false,
+                CsvGridSelectionScope.Column);
+        }
+
+        private void SetActiveSelection(CsvGridSelection value, bool ensureVisible, bool resetAnchor,
+            CsvGridSelectionScope scope = CsvGridSelectionScope.Cell)
         {
             if (_selection.Row == value.Row && _selection.Column == value.Column &&
-                _selection.RecordIndex == value.RecordIndex && _selection.IsValid == value.IsValid)
+                _selection.RecordIndex == value.RecordIndex && _selection.IsValid == value.IsValid &&
+                _selectionScope == scope)
             {
                 if (resetAnchor && value.IsValid)
                 {
@@ -1345,6 +1430,7 @@ namespace CsvTool.Editor
                 return;
             }
             _selection = value;
+            _selectionScope = scope;
             if (value.IsValid)
             {
                 _selectedPhysicalRecordIndex = value.RecordIndex;
@@ -1397,7 +1483,7 @@ namespace CsvTool.Editor
         {
             if (Event.current.type != EventType.Repaint) return;
             EditorGUI.DrawRect(_lastRect, NeoColors.GridBackground);
-            EditorGUI.DrawRect(new Rect(_lastRect.x, _lastRect.y, _settings.RowNumberWidth, _settings.HeaderHeight), NeoColors.GridHeaderBackground);
+            EditorGUI.DrawRect(new Rect(_lastRect.x, _lastRect.y, _settings.RowNumberWidth, _headerRect.height), NeoColors.GridHeaderBackground);
             EditorGUI.DrawRect(new Rect(_lastRect.x, _bodyRect.y, _settings.RowNumberWidth, _bodyRect.height), NeoColors.GridRowNumberBackground);
             EditorGUI.DrawRect(new Rect(_lastRect.x, _lastRect.yMax - ScrollbarSize, _lastRect.width, 1f), NeoColors.GridLine);
         }
@@ -1438,15 +1524,29 @@ namespace CsvTool.Editor
 
         private void DrawHeaderCell(int column, float x)
         {
-            Rect cell = new Rect(x, 0f, _columnWidths[column], _settings.HeaderHeight);
-            CsvGridRangeSelection range = RangeSelection;
-            if (range.IsValid && column >= range.LeftColumn && column <= range.RightColumn)
-                EditorGUI.DrawRect(cell, NeoColors.GridSelectionFill);
-            else if (_selection.IsValid && _selection.Column == column)
-                EditorGUI.DrawRect(cell, NeoColors.GridSelectionFill);
-            EditorGUI.DrawRect(new Rect(cell.x, cell.yMax - 1f, cell.width, 1f), NeoColors.GridLine);
+            float width = _columnWidths[column];
+            Rect columnIdCell = new Rect(x, 0f, width, _settings.ColumnIdHeight);
+            Rect headerCell = new Rect(x, _settings.ColumnIdHeight, width, _settings.HeaderHeight);
+            bool selected = IsHeaderColumnSelected(column);
+            if (selected)
+            {
+                EditorGUI.DrawRect(columnIdCell, NeoColors.GridSelectionFill);
+                EditorGUI.DrawRect(headerCell, NeoColors.GridSelectionFill);
+            }
+            EditorGUI.DrawRect(new Rect(columnIdCell.x, columnIdCell.yMax - 1f, columnIdCell.width, 1f), NeoColors.GridLine);
+            EditorGUI.DrawRect(new Rect(headerCell.x, headerCell.yMax - 1f, headerCell.width, 1f), NeoColors.GridLine);
+            SetTempContent(ColumnName(column));
+            GUI.Label(columnIdCell, s_tempContent, ColumnIdStyle);
             SetTempContent(GetHeaderValue(column));
-            GUI.Label(cell, s_tempContent, HeaderStyle);
+            GUI.Label(headerCell, s_tempContent, HeaderStyle);
+        }
+
+        private bool IsHeaderColumnSelected(int column)
+        {
+            CsvGridRangeSelection range = RangeSelection;
+            if (_selectionScope == CsvGridSelectionScope.Row) return false;
+            if (range.IsValid && column >= range.LeftColumn && column <= range.RightColumn) return true;
+            return _selection.IsValid && _selection.Column == column;
         }
 
         private string GetHeaderValue(int column)
@@ -1459,6 +1559,7 @@ namespace CsvTool.Editor
         private void DrawBody()
         {
             int frozen = Mathf.Clamp(_settings.FrozenColumnCount, 0, _columnCount);
+            CsvGridRangeSelection range = RangeSelection;
             if (frozen > 0)
             {
                 Rect fixedClip = new Rect(_bodyRect.x, _bodyRect.y, _frozenWidth, _bodyRect.height);
@@ -1468,11 +1569,17 @@ namespace CsvTool.Editor
                     for (int row = _firstVisibleRow; row < _lastVisibleRow; row++)
                     {
                         float y = row * _settings.RowHeight - _scrollPosition.y;
-                        if (Event.current.type == EventType.Repaint && _selection.IsValid && _selection.Row == row)
+                        if (Event.current.type == EventType.Repaint && _selectionScope == CsvGridSelectionScope.Cell &&
+                            _selection.IsValid && _selection.Row == row)
                             EditorGUI.DrawRect(new Rect(0f, y, fixedClip.width, _settings.RowHeight), NeoColors.GridCrosshairFill);
                         for (int column = 0; column < frozen; column++)
-                            DrawCell(row, column, _columnOffsets[column], y);
+                            DrawCell(row, column, _columnOffsets[column], y, range);
                     }
+                }
+                if (Event.current.type == EventType.Repaint)
+                {
+                    DrawGridLinesInClip(fixedClip.width, 0, frozen, true);
+                    DrawVisibleSelectionBorders(0, frozen, true);
                 }
                 GUI.EndClip();
             }
@@ -1485,24 +1592,29 @@ namespace CsvTool.Editor
                 for (int row = _firstVisibleRow; row < _lastVisibleRow; row++)
                 {
                     float y = row * _settings.RowHeight - _scrollPosition.y;
-                    if (Event.current.type == EventType.Repaint && _selection.IsValid && _selection.Row == row)
+                    if (Event.current.type == EventType.Repaint && _selectionScope == CsvGridSelectionScope.Cell &&
+                        _selection.IsValid && _selection.Row == row)
                         EditorGUI.DrawRect(new Rect(0f, y, scrollingClip.width, _settings.RowHeight), NeoColors.GridCrosshairFill);
                     for (int column = _firstVisibleColumn; column < _lastVisibleColumn; column++)
-                        DrawCell(row, column, _columnOffsets[column] - _scrollPosition.x - _frozenWidth, y);
+                        DrawCell(row, column, _columnOffsets[column] - _scrollPosition.x - _frozenWidth, y, range);
                 }
+            }
+            if (Event.current.type == EventType.Repaint)
+            {
+                DrawGridLinesInClip(scrollingClip.width, _firstVisibleColumn, _lastVisibleColumn, false);
+                DrawVisibleSelectionBorders(_firstVisibleColumn, _lastVisibleColumn, false);
             }
             GUI.EndClip();
 
             if (Event.current.type == EventType.Repaint)
             {
-                CsvGridRangeSelection range = RangeSelection;
                 for (int row = _firstVisibleRow; row < _lastVisibleRow; row++)
                 {
                     float y = _bodyRect.y + row * _settings.RowHeight - _scrollPosition.y;
                     Rect numberRect = new Rect(_lastRect.x, y, _settings.RowNumberWidth, _settings.RowHeight);
-                    if (range.IsValid && range.ContainsRow(row))
+                    if (_selectionScope != CsvGridSelectionScope.Column && range.IsValid && range.ContainsRow(row))
                         EditorGUI.DrawRect(numberRect, NeoColors.GridSelectionFill);
-                    else if (_selection.IsValid && _selection.Row == row)
+                    else if (_selectionScope != CsvGridSelectionScope.Column && _selection.IsValid && _selection.Row == row)
                         EditorGUI.DrawRect(numberRect, NeoColors.GridSelectionFill);
                     SetTempContent(_rowNumberTexts[row]);
                     GUI.Label(numberRect, s_tempContent, RowNumberStyle);
@@ -1513,20 +1625,18 @@ namespace CsvTool.Editor
             }
         }
 
-        private void DrawCell(int row, int column, float x, float y)
+        private void DrawCell(int row, int column, float x, float y, CsvGridRangeSelection range)
         {
             Rect cell = new Rect(x, y, _columnWidths[column], _settings.RowHeight);
             bool selected = _selection.IsValid && _selection.Row == row && _selection.Column == column;
-            CsvGridRangeSelection range = RangeSelection;
             bool rangeSelected = range.IsValid && range.Contains(row, column);
-            bool crosshair = _selection.IsValid && !rangeSelected && (_selection.Row == row || _selection.Column == column);
+            bool crosshair = _selectionScope == CsvGridSelectionScope.Cell && _selection.IsValid &&
+                !rangeSelected && (_selection.Row == row || _selection.Column == column);
             bool editing = _isEditing && _editingRecordIndex == _bodyRecordIndices[row] && _editingColumn == column;
             if (Event.current.type == EventType.Repaint)
             {
                 if (rangeSelected) EditorGUI.DrawRect(cell, selected ? NeoColors.GridSelectionFillStrong : NeoColors.GridSelectionFill);
                 else if (crosshair) EditorGUI.DrawRect(cell, NeoColors.GridCrosshairFill);
-                EditorGUI.DrawRect(new Rect(cell.xMax - 1f, cell.y, 1f, cell.height), NeoColors.GridLine);
-                EditorGUI.DrawRect(new Rect(cell.x, cell.yMax - 1f, cell.width, 1f), NeoColors.GridLine);
             }
 
             int recordIndex = _bodyRecordIndices[row];
@@ -1565,12 +1675,44 @@ namespace CsvTool.Editor
             else if (Event.current.type == EventType.Repaint)
             {
                 SetTempContent(_document.Records[recordIndex].GetValue(column));
-                GUI.Label(cell, s_tempContent, CellStyle);
+                CellStyle.Draw(cell, s_tempContent, false, false, false, false);
             }
-            if (Event.current.type == EventType.Repaint)
+        }
+
+        private void DrawGridLinesInClip(float clipWidth, int firstColumn, int lastColumn, bool frozen)
+        {
+            for (int row = _firstVisibleRow; row < _lastVisibleRow; row++)
             {
-                if (rangeSelected) DrawRangeBorder(cell, row, column, range);
-                else if (selected) DrawSelectionBorder(cell);
+                float y = row * _settings.RowHeight - _scrollPosition.y + _settings.RowHeight - 1f;
+                EditorGUI.DrawRect(new Rect(0f, y, clipWidth, 1f), NeoColors.GridLine);
+            }
+
+            for (int column = firstColumn; column < lastColumn; column++)
+            {
+                float x = frozen
+                    ? _columnOffsets[column] + _columnWidths[column] - 1f
+                    : _columnOffsets[column] - _scrollPosition.x - _frozenWidth + _columnWidths[column] - 1f;
+                EditorGUI.DrawRect(new Rect(x, 0f, 1f, _bodyHeight), NeoColors.GridLine);
+            }
+        }
+
+        private void DrawVisibleSelectionBorders(int firstColumn, int lastColumn, bool frozen)
+        {
+            CsvGridRangeSelection range = RangeSelection;
+            for (int row = _firstVisibleRow; row < _lastVisibleRow; row++)
+            {
+                float y = row * _settings.RowHeight - _scrollPosition.y;
+                for (int column = firstColumn; column < lastColumn; column++)
+                {
+                    float x = frozen
+                        ? _columnOffsets[column]
+                        : _columnOffsets[column] - _scrollPosition.x - _frozenWidth;
+                    Rect cell = new Rect(x, y, _columnWidths[column], _settings.RowHeight);
+                    bool selected = _selection.IsValid && _selection.Row == row && _selection.Column == column;
+                    bool rangeSelected = range.IsValid && range.Contains(row, column);
+                    if (rangeSelected) DrawRangeBorder(cell, row, column, range);
+                    else if (selected) DrawSelectionBorder(cell);
+                }
             }
         }
 
@@ -1687,6 +1829,24 @@ namespace CsvTool.Editor
                     };
                 }
                 return s_headerStyle;
+            }
+        }
+
+        private static GUIStyle ColumnIdStyle
+        {
+            get
+            {
+                if (s_columnIdStyle == null)
+                {
+                    s_columnIdStyle = new GUIStyle(EditorStyles.miniBoldLabel)
+                    {
+                        alignment = TextAnchor.MiddleCenter,
+                        clipping = TextClipping.Clip,
+                        padding = new RectOffset(2, 2, 0, 0),
+                        normal = { textColor = NeoColors.GridHeaderText }
+                    };
+                }
+                return s_columnIdStyle;
             }
         }
 
@@ -1893,6 +2053,8 @@ namespace CsvTool.Editor
     {
         public float RowHeight = 20f;
         public float HeaderHeight = 22f;
+        /// <summary>Height of the spreadsheet-style A, B, C column identifier band.</summary>
+        public float ColumnIdHeight = 18f;
         public float RowNumberWidth = 48f;
         public float DefaultColumnWidth = 120f;
         public float MinColumnWidth = 36f;
@@ -1902,6 +2064,13 @@ namespace CsvTool.Editor
         public int AutocompleteMaxSuggestions = 8;
         /// <summary>When enabled, refreshes suggestions as the active edit text changes.</summary>
         public bool AutocompleteWhileTyping;
+    }
+
+    public enum CsvGridSelectionScope
+    {
+        Cell,
+        Row,
+        Column
     }
 
     public struct CsvGridSelection

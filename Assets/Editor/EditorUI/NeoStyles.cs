@@ -13,6 +13,7 @@ namespace Neo.EditorUI
         private static GUIStyle s_headerSubtitle;
         private static GUIStyle s_sectionTitle;
         private static GUIStyle s_miniDim;
+        private static GUIStyle s_toolbarLabel;
         private static GUIStyle s_badge;
         private static GUIStyle s_popupItem;
         private static GUIStyle s_popupSearchHint;
@@ -45,6 +46,13 @@ namespace Neo.EditorUI
             s_miniDim ?? (s_miniDim = new GUIStyle(EditorStyles.miniLabel)
             {
                 normal = { textColor = NeoColors.TextDim }
+            });
+
+        public static GUIStyle ToolbarLabel =>
+            s_toolbarLabel ?? (s_toolbarLabel = new GUIStyle(EditorStyles.miniLabel)
+            {
+                alignment = TextAnchor.MiddleLeft,
+                normal = { textColor = NeoColors.TextSubtle }
             });
 
         public static GUIStyle Badge =>
