@@ -478,16 +478,22 @@ namespace CsvTool.Editor
             visibleRecords.Clear();
             searchMatches.Clear();
             if (Document == null) return;
+            if (string.IsNullOrEmpty(searchQuery))
+            {
+                for (int recordIndex = 0; recordIndex < Document.Records.Count; recordIndex++)
+                    if (recordIndex != headerRecordIndex) visibleRecords.Add(recordIndex);
+                return;
+            }
             int columnCount = Document.ColumnCount;
             for (int recordIndex = 0; recordIndex < Document.Records.Count; recordIndex++)
             {
                 if (recordIndex == headerRecordIndex) continue;
                 CsvRecord record = Document.Records[recordIndex];
-                bool rowMatches = string.IsNullOrEmpty(searchQuery);
+                bool rowMatches = false;
                 for (int columnIndex = 0; columnIndex < columnCount; columnIndex++)
                 {
                     string value = record.GetValue(columnIndex);
-                    if (!string.IsNullOrEmpty(searchQuery) && value.IndexOf(searchQuery, StringComparison.OrdinalIgnoreCase) >= 0)
+                    if (value.IndexOf(searchQuery, StringComparison.OrdinalIgnoreCase) >= 0)
                     {
                         rowMatches = true;
                         searchMatches.Add(new CsvSearchMatch(recordIndex, columnIndex));

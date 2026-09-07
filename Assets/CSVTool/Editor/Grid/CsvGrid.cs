@@ -1559,6 +1559,7 @@ namespace CsvTool.Editor
         private void DrawBody()
         {
             int frozen = Mathf.Clamp(_settings.FrozenColumnCount, 0, _columnCount);
+            CsvGridRangeSelection range = RangeSelection;
             if (frozen > 0)
             {
                 Rect fixedClip = new Rect(_bodyRect.x, _bodyRect.y, _frozenWidth, _bodyRect.height);
@@ -1572,8 +1573,13 @@ namespace CsvTool.Editor
                             _selection.IsValid && _selection.Row == row)
                             EditorGUI.DrawRect(new Rect(0f, y, fixedClip.width, _settings.RowHeight), NeoColors.GridCrosshairFill);
                         for (int column = 0; column < frozen; column++)
-                            DrawCell(row, column, _columnOffsets[column], y);
+                            DrawCell(row, column, _columnOffsets[column], y, range);
                     }
+                }
+                if (Event.current.type == EventType.Repaint)
+                {
+                    DrawGridLinesInClip(fixedClip.width, 0, frozen, true);
+                    DrawVisibleSelectionBorders(0, frozen, true);
                 }
                 GUI.EndClip();
             }
@@ -1590,14 +1596,18 @@ namespace CsvTool.Editor
                         _selection.IsValid && _selection.Row == row)
                         EditorGUI.DrawRect(new Rect(0f, y, scrollingClip.width, _settings.RowHeight), NeoColors.GridCrosshairFill);
                     for (int column = _firstVisibleColumn; column < _lastVisibleColumn; column++)
-                        DrawCell(row, column, _columnOffsets[column] - _scrollPosition.x - _frozenWidth, y);
+                        DrawCell(row, column, _columnOffsets[column] - _scrollPosition.x - _frozenWidth, y, range);
                 }
+            }
+            if (Event.current.type == EventType.Repaint)
+            {
+                DrawGridLinesInClip(scrollingClip.width, _firstVisibleColumn, _lastVisibleColumn, false);
+                DrawVisibleSelectionBorders(_firstVisibleColumn, _lastVisibleColumn, false);
             }
             GUI.EndClip();
 
             if (Event.current.type == EventType.Repaint)
             {
-                CsvGridRangeSelection range = RangeSelection;
                 for (int row = _firstVisibleRow; row < _lastVisibleRow; row++)
                 {
                     float y = _bodyRect.y + row * _settings.RowHeight - _scrollPosition.y;
@@ -1615,11 +1625,10 @@ namespace CsvTool.Editor
             }
         }
 
-        private void DrawCell(int row, int column, float x, float y)
+        private void DrawCell(int row, int column, float x, float y, CsvGridRangeSelection range)
         {
             Rect cell = new Rect(x, y, _columnWidths[column], _settings.RowHeight);
             bool selected = _selection.IsValid && _selection.Row == row && _selection.Column == column;
-            CsvGridRangeSelection range = RangeSelection;
             bool rangeSelected = range.IsValid && range.Contains(row, column);
             bool crosshair = _selectionScope == CsvGridSelectionScope.Cell && _selection.IsValid &&
                 !rangeSelected && (_selection.Row == row || _selection.Column == column);
@@ -1628,8 +1637,6 @@ namespace CsvTool.Editor
             {
                 if (rangeSelected) EditorGUI.DrawRect(cell, selected ? NeoColors.GridSelectionFillStrong : NeoColors.GridSelectionFill);
                 else if (crosshair) EditorGUI.DrawRect(cell, NeoColors.GridCrosshairFill);
-                EditorGUI.DrawRect(new Rect(cell.xMax - 1f, cell.y, 1f, cell.height), NeoColors.GridLine);
-                EditorGUI.DrawRect(new Rect(cell.x, cell.yMax - 1f, cell.width, 1f), NeoColors.GridLine);
             }
 
             int recordIndex = _bodyRecordIndices[row];
@@ -1668,12 +1675,44 @@ namespace CsvTool.Editor
             else if (Event.current.type == EventType.Repaint)
             {
                 SetTempContent(_document.Records[recordIndex].GetValue(column));
-                GUI.Label(cell, s_tempContent, CellStyle);
+                CellStyle.Draw(cell, s_tempContent, false, false, false, false);
             }
-            if (Event.current.type == EventType.Repaint)
+        }
+
+        private void DrawGridLinesInClip(float clipWidth, int firstColumn, int lastColumn, bool frozen)
+        {
+            for (int row = _firstVisibleRow; row < _lastVisibleRow; row++)
             {
-                if (rangeSelected) DrawRangeBorder(cell, row, column, range);
-                else if (selected) DrawSelectionBorder(cell);
+                float y = row * _settings.RowHeight - _scrollPosition.y + _settings.RowHeight - 1f;
+                EditorGUI.DrawRect(new Rect(0f, y, clipWidth, 1f), NeoColors.GridLine);
+            }
+
+            for (int column = firstColumn; column < lastColumn; column++)
+            {
+                float x = frozen
+                    ? _columnOffsets[column] + _columnWidths[column] - 1f
+                    : _columnOffsets[column] - _scrollPosition.x - _frozenWidth + _columnWidths[column] - 1f;
+                EditorGUI.DrawRect(new Rect(x, 0f, 1f, _bodyHeight), NeoColors.GridLine);
+            }
+        }
+
+        private void DrawVisibleSelectionBorders(int firstColumn, int lastColumn, bool frozen)
+        {
+            CsvGridRangeSelection range = RangeSelection;
+            for (int row = _firstVisibleRow; row < _lastVisibleRow; row++)
+            {
+                float y = row * _settings.RowHeight - _scrollPosition.y;
+                for (int column = firstColumn; column < lastColumn; column++)
+                {
+                    float x = frozen
+                        ? _columnOffsets[column]
+                        : _columnOffsets[column] - _scrollPosition.x - _frozenWidth;
+                    Rect cell = new Rect(x, y, _columnWidths[column], _settings.RowHeight);
+                    bool selected = _selection.IsValid && _selection.Row == row && _selection.Column == column;
+                    bool rangeSelected = range.IsValid && range.Contains(row, column);
+                    if (rangeSelected) DrawRangeBorder(cell, row, column, range);
+                    else if (selected) DrawSelectionBorder(cell);
+                }
             }
         }
 

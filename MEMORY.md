@@ -34,6 +34,22 @@ protection.
 6. The quick inspector is retained; the separate full record-view mode and
    dataset validation/Issues panel are intentionally not exposed.
 
+## Performance validation
+
+`CsvPerformanceTests.ProfileImportantCsvActions` measures load, filtering,
+distinct-value indexing, contextual search, dirty-change inspection, and
+one-cell serialization against `units.csv` plus a temporary synthetic
+20k-by-20 fixture. It also measures virtualized grid range calculation,
+physical-cell reveal/visibility checks, edit commit, and representative TSV
+parse/format/paste-preflight work. `CsvGridRenderProfileWindow` additionally
+profiles real IMGUI repaint frames; the grid render path was measured at about
+32.6 ms before rendering changes and about 24.8 ms after batching gridlines,
+caching the selection range, and using direct `GUIStyle.Draw` calls. The same
+repaint profile on the real `units.csv` measured about 9.8 ms. It is in the
+`Performance` category so the normal EditMode suite remains fast; run it
+separately through the already-open Unity editor or the batch runner when no
+Unity process is using the project.
+
 ## Validation
 
 The Unity EditMode suites cover Core, Schema, workspace configuration, grid

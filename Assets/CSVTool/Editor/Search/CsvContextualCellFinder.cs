@@ -105,6 +105,10 @@ namespace CsvTool.Editor.Search
 
             int headerRecordIndex = table.HeaderRecordIndex;
             int columnCount = document.ColumnCount;
+            string[] displayHeaders = new string[columnCount];
+            for (int columnIndex = 0; columnIndex < columnCount; columnIndex++)
+                displayHeaders[columnIndex] = table.GetHeader(columnIndex);
+            IReadOnlyList<string> rawHeaders = table.Headers;
             for (int recordIndex = 0; recordIndex < document.Records.Count; recordIndex++)
             {
                 if (recordIndex == headerRecordIndex) continue;
@@ -112,8 +116,8 @@ namespace CsvTool.Editor.Search
                 bool selected = recordIndex == selectedPhysicalRecordIndex;
                 for (int columnIndex = 0; columnIndex < columnCount; columnIndex++)
                 {
-                    string header = table.GetHeader(columnIndex);
-                    string rawHeader = columnIndex < table.Headers.Count ? table.Headers[columnIndex] : string.Empty;
+                    string header = displayHeaders[columnIndex];
+                    string rawHeader = columnIndex < rawHeaders.Count ? rawHeaders[columnIndex] : string.Empty;
                     string value = record.GetValue(columnIndex);
                     // A header describes the same physical column on every row. Returning that
                     // match once on the selected row keeps wide-table navigation useful without
